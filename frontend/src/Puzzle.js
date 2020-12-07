@@ -3,7 +3,7 @@ import Box from "./Box.js";
 export default class Puzzle extends PIXI.Container {
     constructor(puzzleData, textures) {
         super();
-        let yMargin = 40;
+        let yMargin = 100;
         for(let row = 0; row < puzzleData.data.length; row++) {
             for(let col = 0; col < puzzleData.data[row].length; col++) {
                 let newBox = new Box(textures);

@@ -1,39 +1,39 @@
 {
     "data": [
         [
-            {"filled":false, "color":"000000"},
-            {"filled":true, "color":"FF0000"},
-            {"filled":false, "color":"000000"},
-            {"filled":true, "color":"FF0000"},
-            {"filled":false, "color":"000000"}
+            {"filled":false, "color":"0xFFFFFF"},
+            {"filled":true, "color":"0xFF0000"},
+            {"filled":false, "color":"0xFFFFFF"},
+            {"filled":true, "color":"0xFF0000"},
+            {"filled":false, "color":"0xFFFFFF"}
         ],
         [
-            {"filled":true, "color":"FF0000"},
-            {"filled":true, "color":"FF0000"},
-            {"filled":true, "color":"FF0000"},
-            {"filled":true, "color":"FF0000"},
-            {"filled":true, "color":"FF0000"}
+            {"filled":true, "color":"0xFF0000"},
+            {"filled":true, "color":"0xFF0000"},
+            {"filled":true, "color":"0xFF0000"},
+            {"filled":true, "color":"0xFF0000"},
+            {"filled":true, "color":"0xFF0000"}
         ],
         [
-            {"filled":true, "color":"FF0000"},
-            {"filled":true, "color":"FF0000"},
-            {"filled":true, "color":"FF0000"},
-            {"filled":true, "color":"FF0000"},
-            {"filled":true, "color":"FF0000"}
+            {"filled":true, "color":"0xFF0000"},
+            {"filled":true, "color":"0xFF0000"},
+            {"filled":true, "color":"0xFF0000"},
+            {"filled":true, "color":"0xFF0000"},
+            {"filled":true, "color":"0xFF0000"}
         ],
         [
-            {"filled":false, "color":"000000"},
-            {"filled":true, "color":"FF0000"},
-            {"filled":true, "color":"FF0000"},
-            {"filled":true, "color":"FF0000"},
-            {"filled":false, "color":"000000"}
+            {"filled":false, "color":"0xFFFFFF"},
+            {"filled":true, "color":"0xFF0000"},
+            {"filled":true, "color":"0xFF0000"},
+            {"filled":true, "color":"0xFF0000"},
+            {"filled":false, "color":"0xFFFFFF"}
         ],
         [
-            {"filled":false, "color":"000000"},
-            {"filled":false, "color":"000000"},
-            {"filled":true, "color":"FF0000"},
-            {"filled":false, "color":"000000"},
-            {"filled":false, "color":"000000"}
+            {"filled":false, "color":"0xFFFFFF"},
+            {"filled":false, "color":"0xFFFFFF"},
+            {"filled":true, "color":"0xFF0000"},
+            {"filled":false, "color":"0xFFFFFF"},
+            {"filled":false, "color":"0xFFFFFF"}
         ]
     ]
 }

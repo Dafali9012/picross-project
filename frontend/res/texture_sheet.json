@@ -1,0 +1,19 @@
+{
+    "meta": {
+        "image": "texture_sheet.png"
+    },
+    "frames": {
+        "box_empty": {
+            "frame": {"x": 0, "y": 0, "w": 32, "h": 32}
+        },
+        "box_filled": {
+            "frame": {"x": 32, "y": 0, "w": 32, "h": 32}
+        },
+        "box_crossed": {
+            "frame": {"x": 64, "y": 0, "w": 32, "h": 32}
+        }
+    },
+    "animations": {
+
+    }
+}

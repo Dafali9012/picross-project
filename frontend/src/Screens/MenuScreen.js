@@ -1,23 +1,18 @@
 export default class MenuScreen extends PIXI.Sprite {
     constructor(textures) {
         super();
-        this.textures = textures["background"];
-        let red = new PIXI.Sprite(this.textures["red"]);
-        red.interactive = true;
-        red.x = (512-red.width)/2;
-        red.y = (288-red.height)/2;
-        this.addChild(red);
+        this.textures = textures;
+        this.background = new PIXI.Sprite(this.textures["background"]);
+        this.background.position.set(-32,-32);
+        this.addChild(this.background);
+    }
 
-        red.on("pointerdown", ()=>{
-            red.texture = textures["red2"];
-        });
-        
-        red.on("pointerup", ()=>{
-            red.texture = textures["red"];
-        });
-        
-        red.on("pointerout", ()=>{
-            red.texture = textures["red"];
-        });
+    scrollingBackground(delta) {
+        this.background.x = (this.background.x+0.4*delta<0)?this.background.x+0.4*delta:-32;
+        this.background.y = (this.background.y+0.2*delta<0)?this.background.y+0.2*delta:-32;
+    }
+
+    update(delta) {
+        this.scrollingBackground(delta);
     }
 }
