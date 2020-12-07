@@ -1,0 +1,124 @@
+{
+    "data": [
+        [
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"}
+        ],
+        [
+            {"filled":true, "color":"FF0000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"}
+        ],
+        [
+            {"filled":true, "color":"FF0000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"}
+        ],
+        [
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"}
+        ],
+        [
+            {"filled":false, "color":"000000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":false, "color":"000000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"}
+        ],
+        [
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"}
+        ],
+        [
+            {"filled":true, "color":"FF0000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"}
+        ],
+        [
+            {"filled":true, "color":"FF0000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"}
+        ],
+        [
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"}
+        ],
+        [
+            {"filled":false, "color":"000000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":false, "color":"000000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"},
+            {"filled":true, "color":"FF0000"},
+            {"filled":false, "color":"000000"}
+        ]
+    ]
+}

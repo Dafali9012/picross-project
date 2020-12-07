@@ -1,8 +1,8 @@
 export default class MenuScreen extends PIXI.Sprite {
     constructor(textures) {
         super();
-        this.texture = textures["background"];
-        let red = new PIXI.Sprite(textures["red"]);
+        this.textures = textures["background"];
+        let red = new PIXI.Sprite(this.textures["red"]);
         red.interactive = true;
         red.x = (512-red.width)/2;
         red.y = (288-red.height)/2;
