@@ -1,0 +1,19 @@
+{
+    "meta": {
+        "image": "sheet.png"
+    },
+    "frames": {
+        "background": {
+            "frame": {"x": 0, "y": 0, "w": 512, "h": 288}
+        },
+        "red": {
+            "frame": {"x": 0, "y": 288, "w": 64, "h": 32}
+        },
+        "red2": {
+            "frame": {"x": 64, "y": 288, "w": 64, "h": 32}
+        }
+    },
+    "animations": {
+
+    }
+}
