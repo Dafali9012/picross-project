@@ -10,10 +10,7 @@ export default class Game {
         loader.add("sheet", "./res/sheet.json").load((loader, resources)=>{
             let sheet = resources["sheet"].spritesheet;
             this.screens = {
-                mainmenu:new PicrossMenu({
-                    background: sheet.textures["background"], 
-                    play: sheet.textures["play"], 
-                    playFocus: sheet.textures["playFocus"],
+                mainmenu:new PicrossMenu({ 
                     solo: sheet.textures["solo"],
                     soloFocus: sheet.textures["soloFocus"],
                     online: sheet.textures["online"],

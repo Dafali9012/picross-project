@@ -3,32 +3,23 @@
         "image": "sheet.png"
     },
     "frames": {
-        "background": {
-            "frame": {"x": 0, "y": 0, "w": 512, "h": 288}
-        },
-        "play": {
-            "frame": {"x": 0, "y": 288, "w": 64, "h": 32}
-        },
-        "playFocus": {
-            "frame": {"x": 64, "y": 288, "w": 64, "h": 32}
-        },
         "solo": {
-            "frame": {"x": 128, "y": 288, "w": 64, "h": 32}
+            "frame": {"x": 0, "y": 0, "w": 64, "h": 32}
         },
         "soloFocus": {
-            "frame": {"x": 192, "y": 288, "w": 64, "h": 32}
+            "frame": {"x": 64, "y": 0, "w": 64, "h": 32}
         },
         "online": {
-            "frame": {"x": 256, "y": 288, "w": 64, "h": 32}
+            "frame": {"x": 128, "y": 0, "w": 64, "h": 32}
         },
         "onlineFocus": {
-            "frame": {"x": 320, "y": 288, "w": 64, "h": 32}
+            "frame": {"x": 192, "y": 0, "w": 64, "h": 32}
         },
         "build": {
-            "frame": {"x": 384, "y": 288, "w": 64, "h": 32}
+            "frame": {"x": 256, "y": 0, "w": 64, "h": 32}
         },
         "buildFocus": {
-            "frame": {"x": 448, "y": 288, "w": 64, "h": 32}
+            "frame": {"x": 320, "y": 0, "w": 64, "h": 32}
         }
     },
     "animations": {
