@@ -1,7 +1,9 @@
 import MenuScreen from "./Screens/MenuScreen.js";
+import Input from "./utils/Input.js"
 
 export default class Game {
     constructor() {
+        new Input;
         this.app = new PIXI.Application({width:512, height:288, resolution:window.innerHeight/288});
         PIXI.SCALE_MODES = PIXI.SCALE_MODES.NEAREST;
         document.body.appendChild(this.app.view);
@@ -19,3 +21,5 @@ export default class Game {
         this.app.stage.addChild(this.screens[screen]);
     }
 }
+
+document.addEventListener('contextmenu', event => event.preventDefault());
