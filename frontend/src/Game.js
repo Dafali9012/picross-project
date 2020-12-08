@@ -1,4 +1,5 @@
-import MenuScreen from "./Screens/MenuScreen.js";
+
+import PicrossMenu from "./Screens/PicrossMenu.js";
 import Input from "./utils/Input.js"
 
 export default class Game {
@@ -11,7 +12,16 @@ export default class Game {
         let loader = new PIXI.Loader();
         loader.add("sheet", "./res/sheet.json").load((loader, resources)=>{
             let sheet = resources["sheet"].spritesheet;
-            this.screens = {mainmenu:new MenuScreen({background: sheet.textures["background"], red: sheet.textures["red"], red2: sheet.textures["red2"]})}
+            this.screens = {
+                mainmenu:new PicrossMenu({ 
+                    solo: sheet.textures["solo"],
+                    soloFocus: sheet.textures["soloFocus"],
+                    online: sheet.textures["online"],
+                    onlineFocus: sheet.textures["onlineFocus"],
+                    build: sheet.textures["build"],
+                    buildFocus: sheet.textures["buildFocus"]
+                })
+            }
             this.app.stage.addChild(this.screens["mainmenu"]);
         });
     }
