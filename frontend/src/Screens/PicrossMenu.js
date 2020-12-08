@@ -27,8 +27,6 @@ export default class PicrossMenu extends PIXI.Sprite {
         text.x = (512-text.width)/2;
         text.y = (text.height);
 
-
-
         this.addChild(solo);
         this.addChild(online);
         this.addChild(build);
