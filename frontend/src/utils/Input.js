@@ -13,13 +13,6 @@ export default class Input {
         stage.on('rightdown', this.onRightHold.bind(this));
         stage.on('rightup', this.onRightRelease.bind(this));
     }
-    leftClick() {
-        console.log("leftclick");
-    }
-
-    rightClick() {
-        console.log("rightclick");
-    }
     onLeftHold() {
         this.leftClickHold = true;
         console.log("Left hold, " + this.leftClickHold)
