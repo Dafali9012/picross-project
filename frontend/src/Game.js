@@ -1,13 +1,10 @@
-
+import PuzzleSelectMenu from "./Screens/PuzzleSelectMenu.js";
 import PicrossMenu from "./Screens/PicrossMenu.js";
 import Input from "./utils/Input.js"
 
 export default class Game {
     constructor() {
         new Input;
-        this.app = new PIXI.Application({width:512, height:288, resolution:window.innerHeight/288});
-        PIXI.SCALE_MODES = PIXI.SCALE_MODES.NEAREST;
-        document.body.appendChild(this.app.view);
 
         let loader = new PIXI.Loader();
         loader.add("sheet", "./res/sheet.json").load((loader, resources)=>{
@@ -22,7 +19,14 @@ export default class Game {
                     buildFocus: sheet.textures["buildFocus"]
                 })
             }
-            this.app.stage.addChild(this.screens["mainmenu"]);
+            //this.app.stage.addChild(this.screens["mainmenu"]);
+
+            puzzlemenu:new PuzzleSelectMenu({
+                    levelBrowser: sheet.textures["levelBrowser"],
+                    levelBrowserFocus: sheet.textures["levelBrowserFocus"],
+                    random: sheet.textures["random"],
+                    randomFocus: sheet.textures["randomFocus"]
+                })
         });
     }
 

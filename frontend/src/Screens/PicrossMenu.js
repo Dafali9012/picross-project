@@ -1,36 +1,41 @@
+import ScreenManager from "../utils/ScreenManager.js";
+
 export default class PicrossMenu extends PIXI.Sprite {
     constructor(textures) {
         super();
-        this.texture = textures["background"];
 
         let solo = new PIXI.Sprite(textures["solo"]);
+        solo.x = (512-solo.width)/2;
+        solo.y = (288-solo.height)/3;
+        solo.interactive = true;
+
         let online = new PIXI.Sprite(textures["online"]);
+        online.x = (512-online.width)/2;
+        online.y = (288-online.height)/2;
+        online.interactive = true;
+
         let build = new PIXI.Sprite(textures["build"]);
+        build.x = (512-build.width)/2;
+        build.y = (solo.y*2);
+        build.interactive = true;
+
         let text = new PIXI.Text("P I C R O S S",{fontFamily : 'Rockwell', fontSize: 24, fill : 'white', align: 'center'});
+        text.x = (512-text.width)/2;
+        text.y = (text.height);
 
         let sound = PIXI.sound.Sound.from({
             url: '/picross-project/frontend/res/sound/select.mp3',
             autoPlay: true
             });
+        
+        const container = new PIXI.Container();
 
-        solo.interactive = true;
-        online.interactive = true;
-        build.interactive = true;
+        container.addChild(solo);
+        container.addChild(online);
+        container.addChild(build);
+        container.addChild(text);
 
-        solo.x = (512-solo.width)/2;
-        solo.y = (288-solo.height)/3;
-        online.x = (512-online.width)/2;
-        online.y = (288-online.height)/2;
-        build.x = (512-build.width)/2;
-        build.y = (solo.y*2);
-
-        text.x = (512-text.width)/2;
-        text.y = (text.height);
-
-        this.addChild(solo);
-        this.addChild(online);
-        this.addChild(build);
-        this.addChild(text);
+        new ScreenManager(container);
 
         solo.on("pointerdown", ()=>{
             solo.texture = textures["soloFocus"];
