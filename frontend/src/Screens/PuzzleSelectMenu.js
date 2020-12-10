@@ -1,5 +1,5 @@
 
-export default class PuzzleSelectMenu extends PIXI.Sprite {
+export default class PuzzleSelectMenu extends PIXI.Container {
     constructor(textures) {
         super();
 
