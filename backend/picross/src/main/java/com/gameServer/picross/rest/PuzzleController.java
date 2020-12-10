@@ -17,7 +17,6 @@ public class PuzzleController {
         return puzzleRepository.findAll();
     }
 
-
     @PostMapping
     public Puzzle addPuzzle(@RequestBody Puzzle newPuzzle){
         return puzzleRepository.save(newPuzzle);

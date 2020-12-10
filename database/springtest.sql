@@ -16,18 +16,33 @@
 CREATE DATABASE IF NOT EXISTS `springtest` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 USE `springtest`;
 
+-- Dumping structure for table springtest.puzzle
+CREATE TABLE IF NOT EXISTS `puzzle` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `data` longtext NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+-- Dumping data for table springtest.puzzle: ~0 rows (approximately)
+/*!40000 ALTER TABLE `puzzle` DISABLE KEYS */;
+INSERT INTO `puzzle` (`id`, `data`) VALUES
+	(0, '{\r\n    "data": [\r\n        [\r\n            {"filled":false, "color":"0xFFFFFF"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":false, "color":"0xFFFFFF"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":false, "color":"0xFFFFFF"}\r\n        ],\r\n        [\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":true, "color":"0xFF0000"}\r\n        ],\r\n        [\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":true, "color":"0xFF0000"}\r\n        ],\r\n        [\r\n            {"filled":false, "color":"0xFFFFFF"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":false, "color":"0xFFFFFF"}\r\n        ],\r\n        [\r\n            {"filled":false, "color":"0xFFFFFF"},\r\n            {"filled":false, "color":"0xFFFFFF"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":false, "color":"0xFFFFFF"},\r\n            {"filled":false, "color":"0xFFFFFF"}\r\n        ]\r\n    ]\r\n}'),
+	(2, '{\r\n    "data": [\r\n        [\r\n            {"filled":false, "color":"0xFFFFFF"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":false, "color":"0xFFFFFF"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":false, "color":"0xFFFFFF"}\r\n        ],\r\n        [\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":true, "color":"0xFF0000"}\r\n        ],\r\n        [\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":true, "color":"0xFF0000"}\r\n        ],\r\n        [\r\n            {"filled":false, "color":"0xFFFFFF"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":false, "color":"0xFFFFFF"}\r\n        ],\r\n        [\r\n            {"filled":false, "color":"0xFFFFFF"},\r\n            {"filled":false, "color":"0xFFFFFF"},\r\n            {"filled":true, "color":"0xFF0000"},\r\n            {"filled":false, "color":"0xFFFFFF"},\r\n            {"filled":false, "color":"0xFFFFFF"}\r\n        ]\r\n    ]\r\n}');
+/*!40000 ALTER TABLE `puzzle` ENABLE KEYS */;
+
 -- Dumping structure for table springtest.user
 CREATE TABLE IF NOT EXISTS `user` (
   `id` bigint(255) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table springtest.user: ~0 rows (approximately)
+-- Dumping data for table springtest.user: ~1 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `name`) VALUES
 	(1, 'jon@.com'),
-	(2, 'Bond');
+	(2, 'Bond'),
+	(3, 'Fan');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
