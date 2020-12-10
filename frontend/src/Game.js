@@ -14,35 +14,34 @@ export default class Game {
         loader.add("sheet", "./res/sheet.json").load((loader, resources)=>{
             let sheet = resources["sheet"].spritesheet;
             this.screens = {
-                mainmenu:new PicrossMenu({ 
+                picrossmenu:new PicrossMenu({ 
                     solo: sheet.textures["solo"],
                     soloFocus: sheet.textures["soloFocus"],
                     online: sheet.textures["online"],
                     onlineFocus: sheet.textures["onlineFocus"],
                     build: sheet.textures["build"],
                     buildFocus: sheet.textures["buildFocus"]
+                }),
+                puzzlemenu:new PuzzleSelectMenu({
+                    levelBrowser: sheet.textures["levelBrowser"],
+                    levelBrowserFocus: sheet.textures["levelBrowserFocus"],
+                    random: sheet.textures["random"],
+                    randomFocus: sheet.textures["randomFocus"]
+                }),
+                multiplayermenu:new MultiplayerMenu({
+                    host: sheet.textures["host"],
+                    hostFocus: sheet.textures["hostFocus"],
+                    join: sheet.textures["join"],
+                    joinFocus: sheet.textures["joinFocus"]
                 })
             }
+            this.changeScreen("picrossmenu");
 
-            this.app.stage.addChild(this.screens["mainmenu"]);
-
-            let puzzlemenu = new PuzzleSelectMenu({
-                levelBrowser: sheet.textures["levelBrowser"],
-                levelBrowserFocus: sheet.textures["levelBrowserFocus"],
-                random: sheet.textures["random"],
-                randomFocus: sheet.textures["randomFocus"]
-            })
-            let multiplayermenu = new MultiplayerMenu({
-                host: sheet.textures["host"],
-                hostFocus: sheet.textures["hostFocus"],
-                join: sheet.textures["join"],
-                joinFocus: sheet.textures["joinFocus"]
-            })
         });
     }
 
     changeScreen(screen) {
-        this.app.stage.removeChildAt(0);
+        if(this.app.stage.children[0]) this.app.stage.removeChildAt(0);
         this.app.stage.addChild(this.screens[screen]);
     }
 }
