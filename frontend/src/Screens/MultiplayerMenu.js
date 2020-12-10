@@ -1,4 +1,4 @@
-export default class MultiplayerMenu extends PIXI.Sprite {
+export default class MultiplayerMenu extends PIXI.Container {
     constructor(textures) {
         super();
 

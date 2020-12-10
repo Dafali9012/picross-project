@@ -1,8 +1,10 @@
-import Game from "../Game.js";
-
-export default class PicrossMenu extends PIXI.Sprite {
+export default class PicrossMenu extends PIXI.Container {
     constructor(textures) {
         super();
+        this.textures = textures;
+
+        this.background = new PIXI.Sprite(this.textures["background"]);
+        this.addChild(this.background);
 
         let solo = new PIXI.Sprite(textures["solo"]);
         solo.x = (512-solo.width)/2;
@@ -11,7 +13,7 @@ export default class PicrossMenu extends PIXI.Sprite {
         this.addChild(solo);
         solo.interactive = true;
         solo.on("pointerdown", ()=>{
-            solo.texture = textures["soloFocus"];
+            solo.texture = this.textures["soloFocus"];
             sound.play();
         });
         solo.on("pointerup", ()=>{
@@ -28,7 +30,7 @@ export default class PicrossMenu extends PIXI.Sprite {
         this.addChild(online);
         online.interactive = true;
         online.on("pointerdown", ()=>{
-            online.texture = textures["onlineFocus"];
+            online.texture = this.textures["onlineFocus"];
             sound.play();
         });
         online.on("pointerup", ()=>{
@@ -45,14 +47,16 @@ export default class PicrossMenu extends PIXI.Sprite {
         this.addChild(build);
         build.interactive = true;
         build.on("pointerdown", ()=>{
-            build.texture = textures["buildFocus"];
+            build.texture = this.textures["buildFocus"];
             sound.play();
         });
+
         build.on("pointerup", ()=>{
-            build.texture = textures["build"];
+            build.texture = this.textures["build"];
         });
+
         build.on("pointerout", ()=>{
-            build.texture = textures["build"];
+            build.texture = this.textures["build"];
         });
 
         let text = new PIXI.Text("P I C R O S S",{fontFamily : 'Rockwell', fontSize: 24, fill : 'white', align: 'center'});
@@ -64,8 +68,14 @@ export default class PicrossMenu extends PIXI.Sprite {
             url: '/picross-project/frontend/res/sound/select.mp3',
             autoPlay: true
             });
+    }
 
+    scrollBackground(delta) {
+        this.background.x = (this.background.x+0.4*delta<0)?this.background.x+0.4*delta:-32;
+        this.background.y = (this.background.y+0.2*delta<0)?this.background.y+0.2*delta:-32;
+    }
 
-
+    update(delta) {
+        this.scrollBackground(delta);
     }
 }

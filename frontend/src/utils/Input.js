@@ -1,4 +1,5 @@
 export default class Input {
+
     constructor(stage){
 
         this.leftClickHold = false;
