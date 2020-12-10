@@ -67,7 +67,7 @@ export default class PicrossMenu extends PIXI.Container {
         let sound = PIXI.sound.Sound.from({
             url: '/picross-project/frontend/res/sound/select.mp3',
             autoPlay: true
-            });
+        });
     }
 
     scrollBackground(delta) {

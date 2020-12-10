@@ -1,7 +1,8 @@
 import Puzzle from "./Puzzle.js";
-import PicrossMenu from "./Screens/PicrossMenu.js";
-import PuzzleSelectMenu from "./Screens/PuzzleSelectMenu.js";
-import MultiplayerMenu from "./Screens/MultiplayerMenu.js";
+import PicrossMenu from "./screens/PicrossMenu.js";
+import PuzzleSelectMenu from "./screens/PuzzleSelectMenu.js";
+import MultiplayerMenu from "./screens/MultiplayerMenu.js";
+import GameScreen from "./screens/GameScreen.js";
 import Input from "./utils/Input.js";
 
 
@@ -23,52 +24,38 @@ export default class Game {
         .add("bg_orange", "./res/bg_orange.png")
         .add("testdata", "./res/test_json/test15x.json")
         .load((loader, resources)=>{
-            let texture_sheet = resources["texture_sheet"].spritesheet;
+            let textureSheet = resources["texture_sheet"].spritesheet;
             Input.init(this.app.stage);
             this.screens = {
                 picrossmenu:new PicrossMenu({
                     background: resources["bg_orange"].texture,
-                    solo: texture_sheet.textures["solo"],
-                    soloFocus: texture_sheet.textures["soloFocus"],
-                    online: texture_sheet.textures["online"],
-                    onlineFocus: texture_sheet.textures["onlineFocus"],
-                    build: texture_sheet.textures["build"],
-                    buildFocus: texture_sheet.textures["buildFocus"]
+                    solo: textureSheet.textures["solo"],
+                    soloFocus: textureSheet.textures["soloFocus"],
+                    online: textureSheet.textures["online"],
+                    onlineFocus: textureSheet.textures["onlineFocus"],
+                    build: textureSheet.textures["build"],
+                    buildFocus: textureSheet.textures["buildFocus"]
                 }),
                 multiplayermenu: new MultiplayerMenu({
-                    host: texture_sheet.textures["host"],
-                    hostFocus: texture_sheet.textures["hostFocus"],
-                    join: texture_sheet.textures["join"],
-                    joinFocus: texture_sheet.textures["joinFocus"]
+                    host: textureSheet.textures["host"],
+                    hostFocus: textureSheet.textures["hostFocus"],
+                    join: textureSheet.textures["join"],
+                    joinFocus: textureSheet.textures["joinFocus"]
                 }),
                 puzzlemenu: new PuzzleSelectMenu({
-                    levelBrowser: texture_sheet.textures["levelBrowser"],
-                    levelBrowserFocus: texture_sheet.textures["levelBrowserFocus"],
-                    random: texture_sheet.textures["random"],
-                    randomFocus: texture_sheet.textures["randomFocus"]
+                    levelBrowser: textureSheet.textures["levelBrowser"],
+                    levelBrowserFocus: textureSheet.textures["levelBrowserFocus"],
+                    random: textureSheet.textures["random"],
+                    randomFocus: textureSheet.textures["randomFocus"]
+                }),
+                gamescreen: new GameScreen({
+                    textureSheet: textureSheet,
+                    background: resources["bg_orange"].texture,
+                    puzzleData: resources["testdata"].data
                 })
             }
 
-            // <testing>
-            let puzzle = new Puzzle( 
-                {empty: texture_sheet.textures["box_empty"],
-                filled: texture_sheet.textures["box_filled"],
-                crossed: texture_sheet.textures["box_crossed"],
-                number_0: texture_sheet.textures["number_0"],
-                number_1: texture_sheet.textures["number_1"],
-                number_2: texture_sheet.textures["number_2"],
-                number_3: texture_sheet.textures["number_3"],
-                number_4: texture_sheet.textures["number_4"],
-                number_5: texture_sheet.textures["number_5"],
-                number_6: texture_sheet.textures["number_6"],
-                number_7: texture_sheet.textures["number_7"],
-                number_8: texture_sheet.textures["number_8"],
-                number_9: texture_sheet.textures["number_9"]},
-                resources["testdata"].data,
-                this.app.stage);
-            puzzle.x = (512-puzzle.width)/2;
-            this.app.stage.addChild(puzzle);
-            // </testing>
+            this.changeScreen("gamescreen");
 
             this.app.ticker.add(delta=>this.update(delta));
         });

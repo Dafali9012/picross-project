@@ -1,31 +1,31 @@
 import Box from "./Box.js";
 
 export default class Puzzle extends PIXI.Container {
-    constructor(textures, puzzleData) {
+    constructor(data) {
         super();
-        console.log(puzzleData);
-        this.textures = textures
+        this.puzzleData = data.puzzleData;
+        this.textureSheet = data.textureSheet;
         this.topMargin = 60;
         this.bottomMargin = 20;
         this.textMargin = 4;
         this.boxStructure = [];
         this.boxBox = new PIXI.Container();
-        this.boxSize = 288/puzzleData.data.length-(this.topMargin+this.bottomMargin)/puzzleData.data.length;
-        this.buildBoxStructure(puzzleData);
+        this.boxSize = 288/this.puzzleData.data.length-(this.topMargin+this.bottomMargin)/this.puzzleData.data.length;
+        this.buildBoxStructure();
         this.buildHints();
     }
 
-    buildBoxStructure(puzzleData) {
-        for(let row = 0; row < puzzleData.data.length; row++) {
+    buildBoxStructure() {
+        for(let row = 0; row < this.puzzleData.data.length; row++) {
             this.boxStructure[row] = [];
-            for(let col = 0; col < puzzleData.data[row].length; col++) {
-                let newBox = new Box(this.textures);
+            for(let col = 0; col < this.puzzleData.data[row].length; col++) {
+                let newBox = new Box(this.textureSheet);
                 newBox.width = this.boxSize;
                 newBox.height = this.boxSize;
                 newBox.x = col * this.boxSize;
                 newBox.y = row * this.boxSize;
-                newBox.color = puzzleData.data[row][col]["color"];
-                newBox.solutionFilled = puzzleData.data[row][col]["filled"];
+                newBox.color = this.puzzleData.data[row][col]["color"];
+                newBox.solutionFilled = this.puzzleData.data[row][col]["filled"];
                 this.boxStructure[row][col] = newBox;
                 this.boxBox.addChild(newBox);
             }
@@ -65,7 +65,7 @@ export default class Puzzle extends PIXI.Container {
             let numberCounter = 0;
             hintData[x].forEach((y,i)=>{
                 for(let n = 0; n < y.toString().length; n++) {
-                    let char = new PIXI.Sprite(this.textures["number_"+y.toString()[n]]);
+                    let char = new PIXI.Sprite(this.textureSheet.textures["number_"+y.toString()[n]]);
                     char.width = (5);
                     char.height = (5);
                     if(x.match("row")) {
