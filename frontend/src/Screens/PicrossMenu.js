@@ -1,5 +1,3 @@
-import Game from "../Game.js";
-
 export default class PicrossMenu extends PIXI.Sprite {
     constructor(textures) {
         super();
