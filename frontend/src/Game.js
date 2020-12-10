@@ -2,6 +2,7 @@ import Puzzle from "./Puzzle.js";
 import PicrossMenu from "./Screens/PicrossMenu.js";
 import PuzzleSelectMenu from "./Screens/PuzzleSelectMenu.js";
 import MultiplayerMenu from "./Screens/MultiplayerMenu.js";
+import Input from "./utils/Input.js";
 
 
 export default class Game {
@@ -23,7 +24,7 @@ export default class Game {
         .add("testdata", "./res/test_json/test15x.json")
         .load((loader, resources)=>{
             let texture_sheet = resources["texture_sheet"].spritesheet;
-
+            Input.init(this.app.stage);
             this.screens = {
                 picrossmenu:new PicrossMenu({
                     background: resources["bg_orange"].texture,
