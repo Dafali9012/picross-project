@@ -59,6 +59,30 @@
         },
         "buildFocus": {
             "frame": {"x": 64, "y": 112, "w": 64, "h": 32}
+        },
+        "levelBrowser": {
+            "frame": {"x": 128, "y": 112, "w": 64, "h": 32}
+        },
+        "levelBrowserFocus": {
+            "frame": {"x":192, "y": 112, "w": 64, "h": 32}
+        },
+        "random": {
+            "frame": {"x": 0, "y": 80, "w": 64, "h": 32}
+        },
+        "randomFocus": {
+            "frame": {"x": 64, "y": 80, "w": 64, "h": 32}
+        },
+        "host": {
+            "frame": {"x": 128, "y": 80, "w": 64, "h": 32}
+        },
+        "hostFocus": {
+            "frame": {"x": 192, "y": 80, "w": 64, "h": 32}
+        },
+        "join": {
+            "frame": {"x": 0, "y": 144, "w": 64, "h": 32}
+        },
+        "joinFocus": {
+            "frame": {"x": 64, "y": 144, "w": 64, "h": 32}
         }
     },
     "animations": {

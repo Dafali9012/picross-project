@@ -1,5 +1,8 @@
 import Puzzle from "./Puzzle.js";
 import PicrossMenu from "./Screens/PicrossMenu.js";
+import PuzzleSelectMenu from "./Screens/PuzzleSelectMenu.js";
+import MultiplayerMenu from "./Screens/MultiplayerMenu.js";
+
 
 export default class Game {
     constructor() {
@@ -30,11 +33,22 @@ export default class Game {
                     onlineFocus: texture_sheet.textures["onlineFocus"],
                     build: texture_sheet.textures["build"],
                     buildFocus: texture_sheet.textures["buildFocus"]
+                }),
+                multiplayermenu: new MultiplayerMenu({
+                    host: texture_sheet.textures["host"],
+                    hostFocus: texture_sheet.textures["hostFocus"],
+                    join: texture_sheet.textures["join"],
+                    joinFocus: texture_sheet.textures["joinFocus"]
+                }),
+                puzzlemenu: new PuzzleSelectMenu({
+                    levelBrowser: texture_sheet.textures["levelBrowser"],
+                    levelBrowserFocus: texture_sheet.textures["levelBrowserFocus"],
+                    random: texture_sheet.textures["random"],
+                    randomFocus: texture_sheet.textures["randomFocus"]
                 })
             }
 
-            //this.changeScreen("picrossmenu");
-
+            // <testing>
             let puzzle = new Puzzle( 
                 {empty: texture_sheet.textures["box_empty"],
                 filled: texture_sheet.textures["box_filled"],
@@ -53,6 +67,7 @@ export default class Game {
                 this.app.stage);
             puzzle.x = (512-puzzle.width)/2;
             this.app.stage.addChild(puzzle);
+            // </testing>
 
             this.app.ticker.add(delta=>this.update(delta));
         });
