@@ -26,28 +26,28 @@ export default class Game {
             let texture_sheet = resources["texture_sheet"].spritesheet;
             Input.init(this.app.stage);
             this.screens = {
-                picrossmenu:new PicrossMenu({
-                    background: resources["bg_orange"].texture,
-                    solo: texture_sheet.textures["solo"],
-                    soloFocus: texture_sheet.textures["soloFocus"],
-                    online: texture_sheet.textures["online"],
-                    onlineFocus: texture_sheet.textures["onlineFocus"],
-                    build: texture_sheet.textures["build"],
-                    buildFocus: texture_sheet.textures["buildFocus"]
+                picrossmenu:new PicrossMenu({ 
+                    solo: sheet.textures["solo"],
+                    soloFocus: sheet.textures["soloFocus"],
+                    online: sheet.textures["online"],
+                    onlineFocus: sheet.textures["onlineFocus"],
+                    build: sheet.textures["build"],
+                    buildFocus: sheet.textures["buildFocus"]
                 }),
-                multiplayermenu: new MultiplayerMenu({
-                    host: texture_sheet.textures["host"],
-                    hostFocus: texture_sheet.textures["hostFocus"],
-                    join: texture_sheet.textures["join"],
-                    joinFocus: texture_sheet.textures["joinFocus"]
+                puzzlemenu:new PuzzleSelectMenu({
+                    levelBrowser: sheet.textures["levelBrowser"],
+                    levelBrowserFocus: sheet.textures["levelBrowserFocus"],
+                    random: sheet.textures["random"],
+                    randomFocus: sheet.textures["randomFocus"]
                 }),
-                puzzlemenu: new PuzzleSelectMenu({
-                    levelBrowser: texture_sheet.textures["levelBrowser"],
-                    levelBrowserFocus: texture_sheet.textures["levelBrowserFocus"],
-                    random: texture_sheet.textures["random"],
-                    randomFocus: texture_sheet.textures["randomFocus"]
+                multiplayermenu:new MultiplayerMenu({
+                    host: sheet.textures["host"],
+                    hostFocus: sheet.textures["hostFocus"],
+                    join: sheet.textures["join"],
+                    joinFocus: sheet.textures["joinFocus"]
                 })
             }
+            this.changeScreen("picrossmenu");
 
             // <testing>
             let puzzle = new Puzzle( 
