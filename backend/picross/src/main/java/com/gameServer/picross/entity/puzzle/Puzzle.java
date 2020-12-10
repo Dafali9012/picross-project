@@ -1,18 +1,18 @@
-package com.gameServer.picross.entity;
+package com.gameServer.picross.entity.puzzle;
 
 import javax.persistence.*;
 
 @Entity
-public class User {
+public class Puzzle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
-    private String name;
+    @Column
+    private String data;
 
-    public User(){}
+    public Puzzle() {}
 
     public long getId() {
         return id;
@@ -22,11 +22,11 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getData() {
+        return data;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setData(String data) {
+        this.data = data;
     }
 }
