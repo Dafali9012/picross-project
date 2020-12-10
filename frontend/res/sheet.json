@@ -3,14 +3,23 @@
         "image": "sheet.png"
     },
     "frames": {
-        "background": {
-            "frame": {"x": 0, "y": 0, "w": 512, "h": 288}
+        "solo": {
+            "frame": {"x": 0, "y": 0, "w": 64, "h": 32}
         },
-        "red": {
-            "frame": {"x": 0, "y": 288, "w": 64, "h": 32}
+        "soloFocus": {
+            "frame": {"x": 64, "y": 0, "w": 64, "h": 32}
         },
-        "red2": {
-            "frame": {"x": 64, "y": 288, "w": 64, "h": 32}
+        "online": {
+            "frame": {"x": 128, "y": 0, "w": 64, "h": 32}
+        },
+        "onlineFocus": {
+            "frame": {"x": 192, "y": 0, "w": 64, "h": 32}
+        },
+        "build": {
+            "frame": {"x": 256, "y": 0, "w": 64, "h": 32}
+        },
+        "buildFocus": {
+            "frame": {"x": 320, "y": 0, "w": 64, "h": 32}
         }
     },
     "animations": {
