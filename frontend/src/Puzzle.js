@@ -3,6 +3,7 @@ import Box from "./Box.js";
 export default class Puzzle extends PIXI.Container {
     constructor(textures, puzzleData) {
         super();
+        console.log(puzzleData);
         this.textures = textures
         this.topMargin = 60;
         this.bottomMargin = 20;
@@ -88,5 +89,9 @@ export default class Puzzle extends PIXI.Container {
         this.children.forEach(item=>{
             item.x += (hints.width+this.boxSize/2-this.boxSize*this.boxStructure.length)/2;
         });
+    }
+
+    update(delta) {
+        
     }
 }

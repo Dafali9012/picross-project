@@ -1,9 +1,9 @@
-import MenuScreen from "./Screens/MenuScreen.js";
 import Puzzle from "./Puzzle.js";
-import Input from "./utils/Input.js";
+import PicrossMenu from "./Screens/PicrossMenu.js";
 
 export default class Game {
     constructor() {
+
         this.app = new PIXI.Application({width:512, height:288, resolution:window.innerHeight/288});
         this.app.renderer.backgroundColor = "0xfd9168";
         PIXI.SCALE_MODES = PIXI.SCALE_MODES.NEAREST;
@@ -16,16 +16,24 @@ export default class Game {
         let loader = new PIXI.Loader();
         loader
         .add("texture_sheet", "./res/texture_sheet.json")
-        .add("menu_background", "./res/menu_bg.png")
+        .add("bg_orange", "./res/bg_orange.png")
         .add("testdata", "./res/test_json/test15x.json")
         .load((loader, resources)=>{
             let texture_sheet = resources["texture_sheet"].spritesheet;
 
             this.screens = {
-                picross_menu:new MenuScreen({"background": resources["menu_background"].texture})
+                picrossmenu:new PicrossMenu({
+                    background: resources["bg_orange"].texture,
+                    solo: texture_sheet.textures["solo"],
+                    soloFocus: texture_sheet.textures["soloFocus"],
+                    online: texture_sheet.textures["online"],
+                    onlineFocus: texture_sheet.textures["onlineFocus"],
+                    build: texture_sheet.textures["build"],
+                    buildFocus: texture_sheet.textures["buildFocus"]
+                })
             }
 
-            this.changeScreen("picross_menu");
+            //this.changeScreen("picrossmenu");
 
             let puzzle = new Puzzle( 
                 {empty: texture_sheet.textures["box_empty"],
@@ -45,8 +53,6 @@ export default class Game {
                 this.app.stage);
             puzzle.x = (512-puzzle.width)/2;
             this.app.stage.addChild(puzzle);
-
-            //this.input = new Input(this.app.stage);
 
             this.app.ticker.add(delta=>this.update(delta));
         });

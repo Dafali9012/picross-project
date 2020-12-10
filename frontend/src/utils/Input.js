@@ -1,18 +1,47 @@
 export default class Input {
-    constructor(stage) {
-        document.addEventListener("contextmenu", e => {
-            e.preventDefault();
-        });
+
+    constructor(stage){
+
+        this.leftClickHold = false;
+        this.rightClickHold = false;
+
+        document.addEventListener("contextmenu", e => {e.preventDefault();});
+
         stage.interactive = true;
-        stage.on("click", this.leftClick.bind(this));
-        stage.on("rightclick", this.rightClick.bind(this));
+
+        stage.on('mousedown', this.onLeftHold.bind(this));
+        stage.on('mouseup', this.onLeftRelease.bind(this));        
+        stage.on('rightdown', this.onRightHold.bind(this));
+        stage.on('rightup', this.onRightRelease.bind(this));
+    }
+    onLeftHold() {
+        this.leftClickHold = true;
+        console.log("Left hold, " + this.leftClickHold)
+    }
+    
+    onLeftRelease() {
+        this.leftClickHold = false;
+        console.log("Left release, " + this.leftClickHold)
     }
 
-    leftClick() {
-        console.log("leftclick");
+    onRightHold() {
+        this.rightClickHold = true;
+        console.log("Right hold, " + this.rightClickHold)
     }
-
-    rightClick() {
-        console.log("rightclick");
+    
+    onRightRelease() {
+        this.rightClickHold = false;
+        console.log("Right release, " + this.rightClickHold)
+    }
+    
+    onLeftClickMove() {
+        if (this.leftClickHold) {
+            
+        }
+    }
+    onRightClickMove() {
+        if (this.rightClickHold) {
+            
+        }
     }
 }
