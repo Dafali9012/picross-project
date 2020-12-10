@@ -20,6 +20,30 @@
         },
         "buildFocus": {
             "frame": {"x": 320, "y": 0, "w": 64, "h": 32}
+        },
+        "levelBrowser": {
+            "frame": {"x": 384, "y": 0, "w": 64, "h": 32}
+        },
+        "levelBrowserFocus": {
+            "frame": {"x":448, "y": 0, "w": 64, "h": 32}
+        },
+        "random": {
+            "frame": {"x": 0, "y": 32, "w": 64, "h": 32}
+        },
+        "randomFocus": {
+            "frame": {"x": 64, "y": 32, "w": 64, "h": 32}
+        },
+        "host": {
+            "frame": {"x": 128, "y": 32, "w": 64, "h": 32}
+        },
+        "hostFocus": {
+            "frame": {"x": 192, "y": 32, "w": 64, "h": 32}
+        },
+        "join": {
+            "frame": {"x": 256, "y": 32, "w": 64, "h": 32}
+        },
+        "joinFocus": {
+            "frame": {"x": 320, "y": 32, "w": 64, "h": 32}
         }
     },
     "animations": {

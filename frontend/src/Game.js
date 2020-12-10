@@ -1,6 +1,7 @@
-
+import PuzzleSelectMenu from "./Screens/PuzzleSelectMenu.js";
 import PicrossMenu from "./Screens/PicrossMenu.js";
 import Input from "./utils/Input.js"
+import MultiplayerMenu from "./Screens/MultiplayerMenu.js";
 
 export default class Game {
     constructor() {
@@ -21,7 +22,21 @@ export default class Game {
                     buildFocus: sheet.textures["buildFocus"]
                 })
             }
+
             this.app.stage.addChild(this.screens["mainmenu"]);
+
+            let puzzlemenu = new PuzzleSelectMenu({
+                levelBrowser: sheet.textures["levelBrowser"],
+                levelBrowserFocus: sheet.textures["levelBrowserFocus"],
+                random: sheet.textures["random"],
+                randomFocus: sheet.textures["randomFocus"]
+            })
+            let multiplayermenu = new MultiplayerMenu({
+                host: sheet.textures["host"],
+                hostFocus: sheet.textures["hostFocus"],
+                join: sheet.textures["join"],
+                joinFocus: sheet.textures["joinFocus"]
+            })
         });
         new Input(this.app.stage);
     }
