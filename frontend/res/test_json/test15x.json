@@ -1,4 +1,8 @@
 {
+    "meta": {
+        "title": "Potatosalad",
+        "dimensions": "15"
+    },
     "data": [
         [
             {"filled":false, "color":"0xFFFFFF"},

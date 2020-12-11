@@ -83,6 +83,12 @@
         },
         "joinFocus": {
             "frame": {"x": 64, "y": 144, "w": 64, "h": 32}
+        },
+        "menuButton_up": {
+            "frame": {"x": 128, "y": 144, "w": 64, "h": 32}
+        },
+        "menuButton_down": {
+            "frame": {"x": 192, "y": 144, "w": 64, "h": 32}
         }
     },
     "animations": {

@@ -48,4 +48,8 @@ export default class PuzzleSelectMenu extends PIXI.Container {
             random.texture = textures["random"];
         });
     }
+
+    update(delta) {
+        
+    }
 }

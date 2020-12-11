@@ -47,4 +47,9 @@ export default class MultiplayerMenu extends PIXI.Container {
             join.texture = textures["join"];
         });
     }
+
+    update(delta) {
+        
+
+    }
 }

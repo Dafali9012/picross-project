@@ -1,4 +1,8 @@
 {
+    "meta": {
+        "title": "Mishmash",
+        "dimensions": "10"
+    },
     "data": [
         [
             {"filled":false, "color":"0xFFFFFF"},
