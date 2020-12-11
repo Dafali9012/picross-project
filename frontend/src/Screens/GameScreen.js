@@ -11,6 +11,26 @@ export default class GameScreen extends PIXI.Container {
         this.addChild(this.puzzle);
         this.won = false;
 
+        this.menuButton = new PIXI.Sprite(this.textureSheet.textures["menuButton_up"]);
+        this.addChild(this.menuButton);
+        this.menuButton.position.set((512-this.puzzle.width)/2 + this.puzzle.width + (((512-this.puzzle.width)/2-this.menuButton.width)/2), this.puzzle.height-this.menuButton.height/2);
+        this.menuButton.interactive = true;
+        this.menuButton.buttonMode = true;
+
+        this.menuButton.on("click", ()=>{
+            console.log("GOTO: menu");
+        });
+        this.menuButton.on("mousedown", ()=>{
+            this.menuButton.texture = this.textureSheet.textures["menuButton_down"];
+        });
+        this.menuButton.on("mouseout", ()=> {
+            this.menuButton.texture = this.textureSheet.textures["menuButton_up"];
+        });
+        this.menuButton.on("mouseup", ()=> {
+            this.menuButton.texture = this.textureSheet.textures["menuButton_up"];
+        });
+        
+
         this.interactive = true;
         this.on("mouseup", ()=>{
             console.log("checking win");
