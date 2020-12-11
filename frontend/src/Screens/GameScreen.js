@@ -34,12 +34,12 @@ export default class GameScreen extends PIXI.Container {
         this.puzzle.boxBox.children.forEach(x=>{
             x.revealColor();
         });
+        this.puzzle.fadeOutHints();
+        this.puzzle.fadeInTitle();
     }
 
     update(delta) {
         this.scrollBackground(delta);
-        this.puzzle.update(delta);
-
         if(this.won) this.revealPicture();
     }
 }

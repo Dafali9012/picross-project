@@ -11,8 +11,15 @@ export default class Puzzle extends PIXI.Container {
         this.boxStructure = [];
         this.boxBox = new PIXI.Container();
         this.boxSize = 288/this.puzzleData.data.length-(this.topMargin+this.bottomMargin)/this.puzzleData.data.length;
+        
         this.buildBoxStructure();
         this.buildHints();
+
+        this.title = new PIXI.Text(this.puzzleData.meta.title, {fontFamily: "Calibri"});
+        this.title.position.set((this.boxBox.width-this.title.width)/2 + (this.hints.width+this.boxSize/2-this.boxSize*this.boxStructure.length)/2,
+                                (this.topMargin-this.title.height)/2);
+        this.title.alpha = 0;
+        this.addChild(this.title);
     }
 
     buildBoxStructure() {
@@ -35,7 +42,7 @@ export default class Puzzle extends PIXI.Container {
     }
 
     buildHints() {
-        let hints = new PIXI.Container();
+        this.hints = new PIXI.Container();
         let filledData = {};
         let hintData = {};
 
@@ -80,13 +87,21 @@ export default class Puzzle extends PIXI.Container {
             });
             if(x.match("row")) numberBlock.position.set(numberBlock.width*-1-this.textMargin,0);
             if(x.match("col")) numberBlock.position.set(0,numberBlock.height*-1-this.textMargin);
-            hints.y = this.topMargin;
-            hints.addChild(numberBlock);
+            this.hints.y = this.topMargin;
+            this.hints.addChild(numberBlock);
         });
-        this.addChild(hints);
+        this.addChild(this.hints);
         this.children.forEach(item=>{
-            item.x += (hints.width+this.boxSize/2-this.boxSize*this.boxStructure.length)/2;
+            item.x += (this.hints.width+this.boxSize/2-this.boxSize*this.boxStructure.length)/2;
         });
+    }
+
+    fadeOutHints() {
+        if(this.hints.alpha != 0) this.hints.alpha = Math.max(this.hints.alpha-0.04, 0);
+    }
+
+    fadeInTitle() {
+        if(this.title.alpha != 1) this.title.alpha = Math.min(this.title.alpha+0.02, 1);
     }
 
     checkWin() {
@@ -97,9 +112,5 @@ export default class Puzzle extends PIXI.Container {
             }
         }
         return true;
-    }
-
-    update(delta) {
-        
     }
 }

@@ -1,4 +1,8 @@
 {
+    "meta": {
+        "title": "Heart",
+        "dimensions": "5x5"
+    },
     "data": [
         [
             {"filled":false, "color":"0xFFFFFF"},
