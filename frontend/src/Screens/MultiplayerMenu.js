@@ -45,7 +45,9 @@ export default class MultiplayerMenu extends PIXI.Container {
             url: '/picross-project/frontend/res/sound/select.mp3',
             autoPlay: true
         });
+    }
 
+    update(delta) {
         
     }
 }

@@ -22,10 +22,10 @@ export default class Game {
         loader
         .add("texture_sheet", "./res/texture_sheet.json")
         .add("bg_orange", "./res/bg_orange.png")
-        .add("testdata", "./res/test_json/test15x.json")
+        .add("testdata", "./res/test_json/test5x.json")
         .load((loader, resources)=>{
             let textureSheet = resources["texture_sheet"].spritesheet;
-            Input.init(this.app.stage);
+            
             this.screens = {
                 picrossmenu:new PicrossMenu({
                     background: resources["bg_orange"].texture,
@@ -56,6 +56,8 @@ export default class Game {
             }
 
             this.changeScreen("gamescreen");
+
+            Input.init(this.app.stage);
 
             this.app.ticker.add(delta=>this.update(delta));
         });

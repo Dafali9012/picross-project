@@ -19,7 +19,7 @@ export default class Puzzle extends PIXI.Container {
         for(let row = 0; row < this.puzzleData.data.length; row++) {
             this.boxStructure[row] = [];
             for(let col = 0; col < this.puzzleData.data[row].length; col++) {
-                let newBox = new Box(this.textureSheet);
+                let newBox = new Box(this.textureSheet, this.boxSize);
                 newBox.width = this.boxSize;
                 newBox.height = this.boxSize;
                 newBox.x = col * this.boxSize;
@@ -48,14 +48,12 @@ export default class Puzzle extends PIXI.Container {
 
         Object.keys(filledData).forEach(x=>{
             let group = 0;
-            let yPrev = null;
             filledData[x].forEach((y,i)=>{
                 if(y==true) group++;
                 if((y==false || i==filledData[x].length-1) && group > 0) {
                     hintData[x] = hintData[x]?[...hintData[x], group]:[group];
                     group = 0;
                 }
-                yPrev = y;
             });
             if(!hintData[x]) hintData[x] = [group];
         });
@@ -89,6 +87,16 @@ export default class Puzzle extends PIXI.Container {
         this.children.forEach(item=>{
             item.x += (hints.width+this.boxSize/2-this.boxSize*this.boxStructure.length)/2;
         });
+    }
+
+    checkWin() {
+        for(let row = 0; row < this.boxStructure.length; row++) {
+            for(let col = 0; col < this.boxStructure[row].length; col++) {
+                if((this.boxStructure[row][col].solutionFilled && this.boxStructure[row][col].state != "filled") ||
+                (!this.boxStructure[row][col].solutionFilled && this.boxStructure[row][col].state == "filled")) return false;
+            }
+        }
+        return true;
     }
 
     update(delta) {
