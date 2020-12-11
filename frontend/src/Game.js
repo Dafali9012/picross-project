@@ -1,10 +1,9 @@
-import Puzzle from "./Puzzle.js";
 import PicrossMenu from "./screens/PicrossMenu.js";
 import PuzzleSelectMenu from "./screens/PuzzleSelectMenu.js";
 import MultiplayerMenu from "./screens/MultiplayerMenu.js";
 import GameScreen from "./screens/GameScreen.js";
-import Input from "./utils/Input.js";
 
+import Input from "./utils/Input.js";
 
 export default class Game {
     constructor() {
@@ -68,7 +67,7 @@ export default class Game {
         this.app.stage.addChild(this.screens[screen]);
     }
 
-    update(delta) {
-        this.app.stage.children[0].update(delta);
-    }
+  update(delta) {
+    this.app.stage.children[0].update(delta);
+  }
 }
