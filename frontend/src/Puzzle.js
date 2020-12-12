@@ -30,9 +30,9 @@ export default class Puzzle extends PIXI.Container {
         for(let i = 0; i<dimensions; i++){
             for(let col = 0; col<dimensions; col++){
                 let filled = Math.round(Math.random());
-                let color = "0xFF5e5e";
+                let color = "0xf2f2f2";
                 if(filled){
-                    color = "0x6abe30"
+                    color = "0x03adfc"
                 }
                 row = {filled: filled, color: color}
                 rowArray.push(row)
