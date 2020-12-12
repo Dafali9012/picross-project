@@ -35,12 +35,12 @@ export default class Puzzle extends PIXI.Container {
                     color = "0x6abe30"
                 }
                 row = {filled: filled, color: color}
+                rowArray.push(row)
             }
-            rowArray.push(row)
             data.push(rowArray)
+            rowArray = []
     }
         let randomPuzzle = {meta: {title, dimensions}, data};
-        console.log(randomPuzzle)
         return randomPuzzle;
     }
 
