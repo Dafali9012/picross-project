@@ -3,7 +3,8 @@ import Box from "./Box.js";
 export default class Puzzle extends PIXI.Container {
     constructor(data) {
         super();
-        this.puzzleData = data.puzzleData;
+        //this.puzzleData = data.puzzleData;
+        this.puzzleData = this.buildRandomPuzzle();
         this.textureSheet = data.textureSheet;
         this.topMargin = 60;
         this.bottomMargin = 20;
@@ -11,15 +12,36 @@ export default class Puzzle extends PIXI.Container {
         this.boxStructure = [];
         this.boxBox = new PIXI.Container();
         this.boxSize = 288/this.puzzleData.data.length-(this.topMargin+this.bottomMargin)/this.puzzleData.data.length;
-        
         this.buildBoxStructure();
         this.buildHints();
-
         this.title = new PIXI.Text(this.puzzleData.meta.title, {fontFamily: "Calibri"});
         this.title.position.set((this.boxBox.width-this.title.width)/2 + (this.hints.width+this.boxSize/2-this.boxSize*this.boxStructure.length)/2,
                                 (this.topMargin-this.title.height)/2);
         this.title.alpha = 0;
         this.addChild(this.title);
+    }
+
+    buildRandomPuzzle(){
+        let title = "Your life is a lie";
+        let dimensions = "5"
+        let data = []
+        let rowArray = []
+        let row;
+        for(let i = 0; i<dimensions; i++){
+            for(let col = 0; col<dimensions; col++){
+                let filled = Math.round(Math.random());
+                let color = "0xFF5e5e";
+                if(filled){
+                    color = "0x6abe30"
+                }
+                row = {filled: filled, color: color}
+                rowArray.push(row)
+            }
+            data.push(rowArray)
+            rowArray = []
+    }
+        let randomPuzzle = {meta: {title, dimensions}, data};
+        return randomPuzzle;
     }
 
     buildBoxStructure() {
