@@ -1,0 +1,97 @@
+{
+    "meta": {
+        "image": "texture_sheet.png"
+    },
+    "frames": {
+        "box_empty": {
+            "frame": {"x": 0, "y": 0, "w": 32, "h": 32}
+        },
+        "box_filled": {
+            "frame": {"x": 32, "y": 0, "w": 32, "h": 32}
+        },
+        "box_crossed": {
+            "frame": {"x": 64, "y": 0, "w": 32, "h": 32}
+        },
+        "number_0": {
+            "frame": {"x": 0, "y": 32, "w": 8, "h": 8}
+        },
+        "number_1": {
+            "frame": {"x": 8, "y": 32, "w": 8, "h": 8}
+        },
+        "number_2": {
+            "frame": {"x": 16, "y": 32, "w": 8, "h": 8}
+        },
+        "number_3": {
+            "frame": {"x": 24, "y": 32, "w": 8, "h": 8}
+        },
+        "number_4": {
+            "frame": {"x": 32, "y": 32, "w": 8, "h": 8}
+        },
+        "number_5": {
+            "frame": {"x": 40, "y": 32, "w": 8, "h": 8}
+        },
+        "number_6": {
+            "frame": {"x": 48, "y": 32, "w": 8, "h": 8}
+        },
+        "number_7": {
+            "frame": {"x": 56, "y": 32, "w": 8, "h": 8}
+        },
+        "number_8": {
+            "frame": {"x": 64, "y": 32, "w": 8, "h": 8}
+        },
+        "number_9": {
+            "frame": {"x": 72, "y": 32, "w": 8, "h": 8}
+        },
+        "solo": {
+            "frame": {"x": 0, "y": 48, "w": 64, "h": 32}
+        },
+        "soloFocus": {
+            "frame": {"x": 64, "y": 48, "w": 64, "h": 32}
+        },
+        "online": {
+            "frame": {"x": 128, "y": 48, "w": 64, "h": 32}
+        },
+        "onlineFocus": {
+            "frame": {"x": 192, "y": 48, "w": 64, "h": 32}
+        },
+        "build": {
+            "frame": {"x": 0, "y": 112, "w": 64, "h": 32}
+        },
+        "buildFocus": {
+            "frame": {"x": 64, "y": 112, "w": 64, "h": 32}
+        },
+        "levelBrowser": {
+            "frame": {"x": 128, "y": 112, "w": 64, "h": 32}
+        },
+        "levelBrowserFocus": {
+            "frame": {"x":192, "y": 112, "w": 64, "h": 32}
+        },
+        "random": {
+            "frame": {"x": 0, "y": 80, "w": 64, "h": 32}
+        },
+        "randomFocus": {
+            "frame": {"x": 64, "y": 80, "w": 64, "h": 32}
+        },
+        "host": {
+            "frame": {"x": 128, "y": 80, "w": 64, "h": 32}
+        },
+        "hostFocus": {
+            "frame": {"x": 192, "y": 80, "w": 64, "h": 32}
+        },
+        "join": {
+            "frame": {"x": 0, "y": 144, "w": 64, "h": 32}
+        },
+        "joinFocus": {
+            "frame": {"x": 64, "y": 144, "w": 64, "h": 32}
+        },
+        "menuButton_up": {
+            "frame": {"x": 128, "y": 144, "w": 64, "h": 32}
+        },
+        "menuButton_down": {
+            "frame": {"x": 192, "y": 144, "w": 64, "h": 32}
+        }
+    },
+    "animations": {
+
+    }
+}

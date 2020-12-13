@@ -1,0 +1,43 @@
+{
+    "meta": {
+        "title": "Heart",
+        "dimensions": "5"
+    },
+    "data": [
+        [
+            {"filled":false, "color":"0xcaf355"},
+            {"filled":true, "color":"0xef3737"},
+            {"filled":false, "color":"0xcaf355"},
+            {"filled":true, "color":"0xef3737"},
+            {"filled":false, "color":"0xcaf355"}
+        ],
+        [
+            {"filled":true, "color":"0xef3737"},
+            {"filled":true, "color":"0xFF8686"},
+            {"filled":true, "color":"0xFF5e5e"},
+            {"filled":true, "color":"0xef3737"},
+            {"filled":true, "color":"0xef3737"}
+        ],
+        [
+            {"filled":true, "color":"0xef3737"},
+            {"filled":true, "color":"0xFF5e5e"},
+            {"filled":true, "color":"0xFF5e5e"},
+            {"filled":true, "color":"0xef3737"},
+            {"filled":true, "color":"0xcf0f0f"}
+        ],
+        [
+            {"filled":false, "color":"0x99e550"},
+            {"filled":true, "color":"0xcf0f0f"},
+            {"filled":true, "color":"0xef3737"},
+            {"filled":true, "color":"0xcf0f0f"},
+            {"filled":false, "color":"0x99e550"}
+        ],
+        [
+            {"filled":false, "color":"0x6abe30"},
+            {"filled":false, "color":"0x6abe30"},
+            {"filled":true, "color":"0xcf0f0f"},
+            {"filled":false, "color":"0x6abe30"},
+            {"filled":false, "color":"0x6abe30"}
+        ]
+    ]
+}
