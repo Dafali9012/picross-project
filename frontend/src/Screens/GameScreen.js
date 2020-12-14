@@ -1,5 +1,6 @@
 import Puzzle from "../Puzzle.js";
 import ScreenManager from "../utils/ScreenManager.js";
+import Input from "../utils/Input.js";
 
 export default class GameScreen extends PIXI.Container {
     constructor(data) {
@@ -33,12 +34,15 @@ export default class GameScreen extends PIXI.Container {
         });
         this.menuButton.on("mouseup", ()=> {
             this.menuButton.texture = this.textureSheet.textures["menuButton_up"];
-            ScreenManager.changeScreen("picrossmenu")
+            ScreenManager.previousScreen();
             sound.play();
         });
         
-
         this.interactive = true;
+    }
+
+    newPuzzle(puzzleData) {
+        this.won = false;
         this.on("mouseup", ()=>{
             console.log("checking win");
             if(this.puzzle.checkWin()) {
@@ -48,8 +52,14 @@ export default class GameScreen extends PIXI.Container {
                     x.removeAllListeners();
                     x.buttonMode = false;
                 });
+                Input.operation = "";
             }
         });
+        this.removeChild(this.puzzle);
+        if(puzzleData) this.puzzle = new Puzzle({textureSheet:this.textureSheet, background:this.background, puzzleData:puzzleData});
+        else this.puzzle = new Puzzle({textureSheet:this.textureSheet, background:this.background});
+        this.puzzle.x = (512-this.puzzle.width)/2;
+        this.addChild(this.puzzle);
     }
 
     scrollBackground(delta) {

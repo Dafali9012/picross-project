@@ -40,11 +40,12 @@ export default class PuzzleSelectMenu extends PIXI.Container {
         levelBrowser.on("pointerup", ()=>{
             levelBrowser.texture = textures["levelBrowser"];
             sound.play();
+            ScreenManager.changeScreen("gamescreen").newPuzzle(textures.presentationPuzzle);
         });
         random.on("pointerup", ()=>{
             random.texture = textures["random"];
             sound.play();
-            ScreenManager.changeScreen("gamescreen");
+            ScreenManager.changeScreen("gamescreen").newPuzzle();
         });
 
         levelBrowser.on("pointerout", ()=>{

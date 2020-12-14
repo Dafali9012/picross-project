@@ -26,16 +26,14 @@ export default class Game {
         .load((loader, resources)=>{
             let textureSheet = resources["texture_sheet"].spritesheet;
         
-
             ScreenManager.init(this.app.stage);
             ScreenManager.addNewScreen("gamescreen", 
                 new GameScreen({
                     textureSheet: textureSheet,
-                    background: resources["bg_orange"].texture,
-                    puzzleData: resources["testdata"].data
+                    background: resources["bg_orange"].texture
                 })
             );
-            ScreenManager.addNewScreen("picrossmenu", 
+            ScreenManager.addNewScreen("picrossmenu",
             new PicrossMenu({
                 background: resources["bg_orange"].texture,
                 solo: textureSheet.textures["solo"],
@@ -44,8 +42,7 @@ export default class Game {
                 onlineFocus: textureSheet.textures["onlineFocus"],
                 build: textureSheet.textures["build"],
                 buildFocus: textureSheet.textures["buildFocus"]
-            })
-            );
+            }));
             ScreenManager.addNewScreen("multiplayermenu", 
             new MultiplayerMenu({
                 background: resources["bg_orange"].texture,
@@ -60,7 +57,8 @@ export default class Game {
                 levelBrowser: textureSheet.textures["levelBrowser"],
                 levelBrowserFocus: textureSheet.textures["levelBrowserFocus"],
                 random: textureSheet.textures["random"],
-                randomFocus: textureSheet.textures["randomFocus"]
+                randomFocus: textureSheet.textures["randomFocus"],
+                presentationPuzzle: resources["testdata"].data
             }));
 
             ScreenManager.changeScreen("picrossmenu");
