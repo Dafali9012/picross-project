@@ -20,8 +20,8 @@ export default class MultiplayerMenu extends PIXI.Container {
         host.y = (288 - host.height) / 3;
         join.x = (512 - join.width) / 2;
         join.y = (288 - join.height) / 2;
-        back.x = (back.width);
-        back.y = (288-(back.height)*2);
+        back.x = (512-back.width)/2;
+        back.y = (host.y*2);
         text.x = (512 - text.width) / 2;
         text.y = text.height;
 
@@ -55,6 +55,7 @@ export default class MultiplayerMenu extends PIXI.Container {
         back.on("pointerup", ()=>{
             back.texture = textures["back"];
             sound.play();
+            ScreenManager.previousScreen();
         });
 
         host.on("pointerout", () => {

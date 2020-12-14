@@ -95,6 +95,30 @@
         },
         "restartFocus": {
             "frame": {"x": 192, "y": 144, "w": 64, "h": 32}
+        },
+        "five": {
+            "frame": {"x": 0, "y": 176, "w": 128, "h": 32}
+        },
+        "fiveFocus": {
+            "frame": {"x": 128, "y": 176, "w": 128, "h": 32}
+        },
+        "ten": {
+            "frame": {"x": 0, "y": 208, "w": 128, "h": 32}
+        },
+        "tenFocus": {
+            "frame": {"x": 128, "y": 208, "w": 128, "h": 32}
+        },
+        "fifteen": {
+            "frame": {"x": 0, "y": 240, "w": 128, "h": 32}
+        },
+        "fifteenFocus": {
+            "frame": {"x": 128, "y": 240, "w": 128, "h": 32}
+        },
+        "mainmenu": {
+            "frame": {"x": 0, "y": 272, "w": 64, "h": 32}
+        },
+        "mainmenuFocus": {
+            "frame": {"x": 64, "y": 272, "w": 64, "h": 32}
         }
     },
     "animations": {

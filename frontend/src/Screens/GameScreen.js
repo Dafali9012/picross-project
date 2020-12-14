@@ -17,17 +17,17 @@ export default class GameScreen extends PIXI.Container {
             autoPlay: true,
         });
 
-        let back = new PIXI.Sprite(this.textureSheet.textures["back"]);
-        back.x = ((512-this.puzzle.width)/2 + this.puzzle.width + (((512-this.puzzle.width)/2-back.width)/2));
-        back.y = this.puzzle.height-back.height/2;
+        let mainmenu = new PIXI.Sprite(this.textureSheet.textures["mainmenu"]);
+        mainmenu.x = ((512-this.puzzle.width)/2 + this.puzzle.width + (((512-this.puzzle.width)/2-mainmenu.width)/2));
+        mainmenu.y = this.puzzle.height-mainmenu.height/2;
         this.restart = new PIXI.Sprite(this.textureSheet.textures["restart"]);
         this.addChild(this.restart);
         this.restart.position.set((512-this.puzzle.width)/2 + this.puzzle.width + (((512-this.puzzle.width)/2-this.restart.width)/2), (288-(this.restart.height)*3));
         this.restart.interactive = true;
         this.restart.buttonMode = true;
-        back.buttonMode = true;
-        back.interactive = true;
-        this.addChild(back)
+        mainmenu.buttonMode = true;
+        mainmenu.interactive = true;
+        this.addChild(mainmenu)
 
         this.restart.on("click", ()=>{
             console.log("restart");
@@ -52,19 +52,19 @@ export default class GameScreen extends PIXI.Container {
             this.newPuzzle();
         });
 
-        back.on("pointerdown", ()=>{
-            back.texture = this.textureSheet.textures["backFocus"];
+        mainmenu.on("pointerdown", ()=>{
+            mainmenu.texture = this.textureSheet.textures["mainmenuFocus"];
         });
 
-        back.on("pointerup", ()=>{
-            back.texture = this.textureSheet.textures["back"];
+        mainmenu.on("pointerup", ()=>{
+            mainmenu.texture = this.textureSheet.textures["mainmenu"];
             sound.play();
             ScreenManager.visitedScreens = [];
             ScreenManager.changeScreen("picrossmenu");
         });
 
-        back.on("pointerout", ()=>{
-            back.texture = this.textureSheet.textures["back"];
+        mainmenu.on("pointerout", ()=>{
+            mainmenu.texture = this.textureSheet.textures["mainmenu"];
         });
 
         this.interactive = true;

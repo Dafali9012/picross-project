@@ -52,7 +52,7 @@ export default class PuzzleSelectMenu extends PIXI.Container {
         random.on("pointerup", ()=>{
             random.texture = textures["random"];
             sound.play();
-            ScreenManager.changeScreen("gamescreen").newPuzzle();
+            ScreenManager.changeScreen("gamesizemenu");
         });
         back.on("pointerup", ()=>{
             back.texture = textures["back"];
