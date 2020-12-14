@@ -16,14 +16,19 @@ export default class GameScreen extends PIXI.Container {
             autoPlay: true,
         });
 
+        let back = new PIXI.Sprite(this.textureSheet.textures["back"]);
+        back.x = ((512-this.puzzle.width)/2 + this.puzzle.width + (((512-this.puzzle.width)/2-back.width)/2));
+        back.y = (288-(back.height)*3);
         this.restart = new PIXI.Sprite(this.textureSheet.textures["restart"]);
         this.addChild(this.restart);
         this.restart.position.set((512-this.puzzle.width)/2 + this.puzzle.width + (((512-this.puzzle.width)/2-this.restart.width)/2), this.puzzle.height-this.restart.height/2);
         this.restart.interactive = true;
         this.restart.buttonMode = true;
+        back.interactive = true;
+        this.addChild(back)
 
         this.restart.on("click", ()=>{
-            console.log("GOTO: menu");
+            console.log("restart");
         });
         this.restart.on("mousedown", ()=>{
             this.restart.texture = this.textureSheet.textures["restartFocus"];
@@ -35,7 +40,16 @@ export default class GameScreen extends PIXI.Container {
             this.restart.texture = this.textureSheet.textures["restart"];
             sound.play();
         });
-        
+        back.on("pointerdown", ()=>{
+            back.texture = this.textureSheet.textures["backFocus"];
+        });
+        back.on("pointerup", ()=>{
+            back.texture = this.textureSheet.textures["back"];
+            sound.play();
+        });
+        back.on("pointerout", ()=>{
+            back.texture = this.textureSheet.textures["back"];
+        });
 
         this.interactive = true;
         this.on("mouseup", ()=>{

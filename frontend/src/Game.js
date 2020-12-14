@@ -32,7 +32,9 @@ export default class Game {
                 new GameScreen({
                     textureSheet: textureSheet,
                     background: resources["bg_orange"].texture,
-                    puzzleData: resources["testdata"].data
+                    puzzleData: resources["testdata"].data,
+                    back: textureSheet.textures["back"],
+                    backFocus: textureSheet.textures["backFocus"]
                 })
             );
             ScreenManager.addNewScreen("picrossmenu", 
