@@ -5,4 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface PuzzleRepository extends CrudRepository< Puzzle, Integer> {
     Puzzle findById(long id);
+    Puzzle findByName(String name);
+
 }

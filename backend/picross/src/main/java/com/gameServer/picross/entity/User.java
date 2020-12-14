@@ -2,6 +2,7 @@ package com.gameServer.picross.entity;
 
 import javax.persistence.*;
 
+@Table(name = "user")
 @Entity
 public class User {
 

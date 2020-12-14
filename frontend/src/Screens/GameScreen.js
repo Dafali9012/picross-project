@@ -17,27 +17,55 @@ export default class GameScreen extends PIXI.Container {
             autoPlay: true,
         });
 
-        this.menuButton = new PIXI.Sprite(this.textureSheet.textures["menuButton_up"]);
-        this.addChild(this.menuButton);
-        this.menuButton.position.set((512-this.puzzle.width)/2 + this.puzzle.width + (((512-this.puzzle.width)/2-this.menuButton.width)/2), this.puzzle.height-this.menuButton.height/2);
-        this.menuButton.interactive = true;
-        this.menuButton.buttonMode = true;
+        let back = new PIXI.Sprite(this.textureSheet.textures["back"]);
+        back.x = ((512-this.puzzle.width)/2 + this.puzzle.width + (((512-this.puzzle.width)/2-back.width)/2));
+        back.y = this.puzzle.height-back.height/2;
+        this.restart = new PIXI.Sprite(this.textureSheet.textures["restart"]);
+        this.addChild(this.restart);
+        this.restart.position.set((512-this.puzzle.width)/2 + this.puzzle.width + (((512-this.puzzle.width)/2-this.restart.width)/2), (288-(this.restart.height)*3));
+        this.restart.interactive = true;
+        this.restart.buttonMode = true;
+        back.interactive = true;
+        this.addChild(back)
 
-        this.menuButton.on("click", ()=>{
-            console.log("GOTO: menu");
+        this.restart.on("click", ()=>{
+            console.log("restart");
         });
-        this.menuButton.on("mousedown", ()=>{
-            this.menuButton.texture = this.textureSheet.textures["menuButton_down"];
+
+        this.restart.on("mousedown", ()=>{
+            this.restart.texture = this.textureSheet.textures["restartFocus"];
         });
-        this.menuButton.on("mouseout", ()=> {
-            this.menuButton.texture = this.textureSheet.textures["menuButton_up"];
+
+        this.restart.on("mouseout", ()=> {
+            this.restart.texture = this.textureSheet.textures["restart"];
         });
-        this.menuButton.on("mouseup", ()=> {
-            this.menuButton.texture = this.textureSheet.textures["menuButton_up"];
-            ScreenManager.previousScreen();
+
+        this.restart.on("mouseup", ()=> {
+            this.restart.texture = this.textureSheet.textures["restart"];
             sound.play();
         });
         
+        this.restart.on("mouseup", ()=> {
+            this.restart.texture = this.textureSheet.textures["restart"];
+            sound.play();
+            this.newPuzzle();
+        });
+
+        back.on("pointerdown", ()=>{
+            back.texture = this.textureSheet.textures["backFocus"];
+        });
+
+        back.on("pointerup", ()=>{
+            back.texture = this.textureSheet.textures["back"];
+            sound.play();
+            ScreenManager.visitedScreens = [];
+            ScreenManager.changeScreen("picrossmenu");
+        });
+
+        back.on("pointerout", ()=>{
+            back.texture = this.textureSheet.textures["back"];
+        });
+
         this.interactive = true;
     }
 
