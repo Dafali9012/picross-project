@@ -9,7 +9,7 @@ export default class Input {
         stage.interactive = true;
 
         stage.on('pointerdown', this.onHold.bind(this));
-        stage.on('pointerup', this.onRelease.bind(this));        
+        stage.on('pointerup', this.onRelease.bind(this));
     }
 
     static onHold() {
