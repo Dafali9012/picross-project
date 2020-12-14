@@ -1,3 +1,5 @@
+import ScreenManager from "../utils/ScreenManager";
+
 export default class PicrossMenu extends PIXI.Container {
     constructor(textures) {
         super();
@@ -6,6 +8,7 @@ export default class PicrossMenu extends PIXI.Container {
         this.background = new PIXI.Sprite(this.textures["background"]);
         this.addChild(this.background);
 
+        let screen = new ScreenManager;
         let solo = new PIXI.Sprite(textures["solo"]);
         let online = new PIXI.Sprite(textures["online"]);
         let build = new PIXI.Sprite(textures["build"]);
@@ -36,14 +39,17 @@ export default class PicrossMenu extends PIXI.Container {
         solo.on("pointerdown", ()=>{
             solo.texture = this.textures["soloFocus"];
             sound.play();
+            screen.goToScene("puzzlemenu");
         });
         online.on("pointerdown", ()=>{
             online.texture = this.textures["onlineFocus"];
             sound.play();
+            screen.goToScene("multiplayermenu");
         });
         build.on("pointerdown", ()=>{
             build.texture = this.textures["buildFocus"];
             sound.play();
+
         });
 
         solo.on("pointerup", ()=>{

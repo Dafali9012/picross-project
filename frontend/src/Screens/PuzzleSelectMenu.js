@@ -32,6 +32,7 @@ export default class PuzzleSelectMenu extends PIXI.Container {
         random.on("pointerdown", ()=>{
             random.texture = textures["randomFocus"];
             sound.play();
+            screen.goToScene("gamescreen");
         });
 
         levelBrowser.on("pointerup", ()=>{
