@@ -49,41 +49,41 @@ export default class GameSizeMenu extends PIXI.Container {
             fifteen.texture = this.textures["fifteenFocus"];
         });
         back.on("pointerdown", ()=>{
-            back.texture = textures["backFocus"];
+            back.texture = this.textures["backFocus"];
         });
 
         five.on("pointerup", ()=>{
-            five.texture = textures["five"];
+            five.texture = this.textures["five"];
             sound.play();
-            ScreenManager.changeScreen(/* gameWith5x5(); */);
+            ScreenManager.changeScreen("gamescreen").newPuzzle(null, 5);
         });
         ten.on("pointerup", ()=>{
-            ten.texture = textures["ten"];
+            ten.texture = this.textures["ten"];
             sound.play();
-            ScreenManager.changeScreen(/* gameWith10x10(); */);
+            ScreenManager.changeScreen("gamescreen").newPuzzle(null, 10);
         });
         fifteen.on("pointerup", ()=>{
             fifteen.texture = this.textures["fifteen"];
             sound.play();
-            ScreenManager.changeScreen(/* gameWith15x15(); */);
+            ScreenManager.changeScreen("gamescreen").newPuzzle(null, 15);
         });
         back.on("pointerup", ()=>{
-            back.texture = textures["back"];
+            back.texture = this.textures["back"];
             ScreenManager.previousScreen();
             sound.play();
         });
 
         five.on("pointerout", ()=>{
-            five.texture = textures["five"];
+            five.texture = this.textures["five"];
         });
         ten.on("pointerout", ()=>{
-            ten.texture = textures["ten"];
+            ten.texture = this.textures["ten"];
         });
         fifteen.on("pointerout", ()=>{
             fifteen.texture = this.textures["fifteen"];
         });
         back.on("pointerout", ()=>{
-            back.texture = textures["back"];
+            back.texture = this.textures["back"];
         });
     }
 

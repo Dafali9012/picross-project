@@ -49,7 +49,7 @@ export default class GameScreen extends PIXI.Container {
         this.restart.on("mouseup", ()=> {
             this.restart.texture = this.textureSheet.textures["restart"];
             sound.play();
-            this.newPuzzle();
+            this.newPuzzle(null, this.puzzleSize);
         });
 
         mainmenu.on("pointerdown", ()=>{
@@ -70,7 +70,8 @@ export default class GameScreen extends PIXI.Container {
         this.interactive = true;
     }
 
-    newPuzzle(puzzleData) {
+    newPuzzle(puzzleData, puzzleSize) {
+        this.puzzleSize = puzzleSize;
         this.won = false;
         this.on("mouseup", ()=>{
             console.log("checking win");
@@ -86,7 +87,7 @@ export default class GameScreen extends PIXI.Container {
         });
         this.removeChild(this.puzzle);
         if(puzzleData) this.puzzle = new Puzzle({textureSheet:this.textureSheet, background:this.background, puzzleData:puzzleData});
-        else this.puzzle = new Puzzle({textureSheet:this.textureSheet, background:this.background});
+        else if(puzzleSize) this.puzzle = new Puzzle({textureSheet:this.textureSheet, background:this.background, puzzleSize:puzzleSize});
         this.puzzle.x = (512-this.puzzle.width)/2;
         this.addChild(this.puzzle);
     }
