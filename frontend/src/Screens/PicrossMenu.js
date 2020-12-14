@@ -1,4 +1,4 @@
-import ScreenManager from "../utils/ScreenManager";
+import ScreenManager from "../utils/ScreenManager.js";
 
 export default class PicrossMenu extends PIXI.Container {
     constructor(textures) {
@@ -8,14 +8,12 @@ export default class PicrossMenu extends PIXI.Container {
         this.background = new PIXI.Sprite(this.textures["background"]);
         this.addChild(this.background);
 
-        let screen = new ScreenManager;
         let solo = new PIXI.Sprite(textures["solo"]);
         let online = new PIXI.Sprite(textures["online"]);
         let build = new PIXI.Sprite(textures["build"]);
         let text = new PIXI.Text("P I C R O S S",{fontFamily : 'Rockwell', fontSize: 24, fill : 'white', align: 'center'});
         let sound = PIXI.sound.Sound.from({
-            url: '/picross-project/frontend/res/sound/select.mp3',
-            autoPlay: true
+            url: './res/sound/select.mp3'
         });
 
         solo.x = (512-solo.width)/2;
@@ -38,28 +36,27 @@ export default class PicrossMenu extends PIXI.Container {
         
         solo.on("pointerdown", ()=>{
             solo.texture = this.textures["soloFocus"];
-            sound.play();
-            screen.goToScene("puzzlemenu");
         });
         online.on("pointerdown", ()=>{
             online.texture = this.textures["onlineFocus"];
-            sound.play();
-            screen.goToScene("multiplayermenu");
         });
         build.on("pointerdown", ()=>{
             build.texture = this.textures["buildFocus"];
-            sound.play();
-
         });
 
         solo.on("pointerup", ()=>{
             solo.texture = textures["solo"];
+            sound.play();
+            ScreenManager.changeScreen("puzzlemenu");
         });
         online.on("pointerup", ()=>{
             online.texture = textures["online"];
+            sound.play();
+            ScreenManager.changeScreen("multiplayermenu");
         });
         build.on("pointerup", ()=>{
             build.texture = this.textures["build"];
+            sound.play();
         });
 
         solo.on("pointerout", ()=>{
