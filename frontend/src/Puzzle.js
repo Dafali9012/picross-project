@@ -3,8 +3,7 @@ import Box from "./Box.js";
 export default class Puzzle extends PIXI.Container {
     constructor(data) {
         super();
-        //this.puzzleData = data.puzzleData;
-        this.puzzleData = this.buildRandomPuzzle();
+        this.puzzleData = data.puzzleData?data.puzzleData:this.buildRandomPuzzle();
         this.textureSheet = data.textureSheet;
         this.topMargin = 60;
         this.bottomMargin = 20;
@@ -27,19 +26,20 @@ export default class Puzzle extends PIXI.Container {
         let data = []
         let rowArray = []
         let row;
+        let randomFinishedColor = "0x"+Math.floor(Math.random()*16777215).toString(16);
         for(let i = 0; i<dimensions; i++){
             for(let col = 0; col<dimensions; col++){
                 let filled = Math.round(Math.random());
                 let color = "0xf2f2f2";
                 if(filled){
-                    color = "0x03adfc"
+                    color = randomFinishedColor;
                 }
                 row = {filled: filled, color: color}
                 rowArray.push(row)
             }
             data.push(rowArray)
             rowArray = []
-    }
+        }
         let randomPuzzle = {meta: {title, dimensions}, data};
         return randomPuzzle;
     }

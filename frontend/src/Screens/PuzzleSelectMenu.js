@@ -20,8 +20,8 @@ export default class PuzzleSelectMenu extends PIXI.Container {
         levelBrowser.y = (288-levelBrowser.height)/3;
         random.x = (512-random.width)/2;
         random.y = (288-random.height)/2;
-        back.x = (back.width);
-        back.y = (288-(back.height)*2);
+        back.x = (512-back.width)/2;
+        back.y = (levelBrowser.y*2);
         text.x = (512-text.width)/2;
         text.y = (text.height);
 
@@ -47,14 +47,16 @@ export default class PuzzleSelectMenu extends PIXI.Container {
         levelBrowser.on("pointerup", ()=>{
             levelBrowser.texture = textures["levelBrowser"];
             sound.play();
+            ScreenManager.changeScreen("gamescreen").newPuzzle(textures.presentationPuzzle);
         });
         random.on("pointerup", ()=>{
             random.texture = textures["random"];
             sound.play();
-            ScreenManager.changeScreen("gamescreen");
+            ScreenManager.changeScreen("gamescreen").newPuzzle();
         });
         back.on("pointerup", ()=>{
             back.texture = textures["back"];
+            ScreenManager.previousScreen();
             sound.play();
         });
 
