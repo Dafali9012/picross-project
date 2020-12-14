@@ -41,10 +41,3 @@ export default class PuzzleRepository{
     }
 
 }
-
-console.log("PuzzleRepository")
-let puzzle = new PuzzleRepository();
-
-const list = puzzle.getPuzzleList();
-console.log(list);
-
