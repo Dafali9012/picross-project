@@ -52,7 +52,9 @@ export default class Game {
                 host: textureSheet.textures["host"],
                 hostFocus: textureSheet.textures["hostFocus"],
                 join: textureSheet.textures["join"],
-                joinFocus: textureSheet.textures["joinFocus"]
+                joinFocus: textureSheet.textures["joinFocus"],
+                back: textureSheet.textures["back"],
+                backFocus: textureSheet.textures["backFocus"]
             }));
             ScreenManager.addNewScreen("puzzlemenu", 
             new PuzzleSelectMenu({
@@ -60,7 +62,9 @@ export default class Game {
                 levelBrowser: textureSheet.textures["levelBrowser"],
                 levelBrowserFocus: textureSheet.textures["levelBrowserFocus"],
                 random: textureSheet.textures["random"],
-                randomFocus: textureSheet.textures["randomFocus"]
+                randomFocus: textureSheet.textures["randomFocus"],
+                back: textureSheet.textures["back"],
+                backFocus: textureSheet.textures["backFocus"]
             }));
 
             ScreenManager.changeScreen("picrossmenu");

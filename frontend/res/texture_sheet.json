@@ -42,6 +42,12 @@
         "number_9": {
             "frame": {"x": 72, "y": 32, "w": 8, "h": 8}
         },
+        "back": {
+            "frame": {"x": 128, "y": 16, "w": 64, "h": 32}
+        },
+        "backFocus": {
+            "frame": {"x": 192, "y": 16, "w": 64, "h": 32}
+        },
         "solo": {
             "frame": {"x": 0, "y": 48, "w": 64, "h": 32}
         },
@@ -84,10 +90,10 @@
         "joinFocus": {
             "frame": {"x": 64, "y": 144, "w": 64, "h": 32}
         },
-        "menuButton_up": {
+        "restart": {
             "frame": {"x": 128, "y": 144, "w": 64, "h": 32}
         },
-        "menuButton_down": {
+        "restartFocus": {
             "frame": {"x": 192, "y": 144, "w": 64, "h": 32}
         }
     },

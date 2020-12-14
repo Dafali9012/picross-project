@@ -10,31 +10,38 @@ export default class PuzzleSelectMenu extends PIXI.Container {
 
         let levelBrowser = new PIXI.Sprite(textures["levelBrowser"]);
         let random = new PIXI.Sprite(textures["random"]);
-        let text = new PIXI.Text("Puzzle select",{fontFamily : 'Rockwell', fontSize: 24, fill : 'white', align: 'center'});
+        let back = new PIXI.Sprite(textures["back"]);
+        let text = new PIXI.Text("P U Z Z L E   S E L E C T",{fontFamily : 'Rockwell', fontSize: 24, fill : 'white', align: 'center'});
         let sound = PIXI.sound.Sound.from({
-            url: './res/sound/select.mp3',
-            autoPlay: true
+            url: './res/sound/select.mp3'
         });
 
         levelBrowser.x = (512-levelBrowser.width)/2;
         levelBrowser.y = (288-levelBrowser.height)/3;
         random.x = (512-random.width)/2;
         random.y = (288-random.height)/2;
+        back.x = (back.width);
+        back.y = (288-(back.height)*2);
         text.x = (512-text.width)/2;
         text.y = (text.height);
 
         this.addChild(levelBrowser);
         this.addChild(random);
+        this.addChild(back);
         this.addChild(text);
 
         levelBrowser.interactive = true;
         random.interactive = true;
+        back.interactive = true;
 
         levelBrowser.on("pointerdown", ()=>{
             levelBrowser.texture = textures["levelBrowserFocus"];
         });
         random.on("pointerdown", ()=>{
             random.texture = textures["randomFocus"];
+        });
+        back.on("pointerdown", ()=>{
+            back.texture = textures["backFocus"];
         });
 
         levelBrowser.on("pointerup", ()=>{
@@ -46,12 +53,19 @@ export default class PuzzleSelectMenu extends PIXI.Container {
             sound.play();
             ScreenManager.changeScreen("gamescreen");
         });
+        back.on("pointerup", ()=>{
+            back.texture = textures["back"];
+            sound.play();
+        });
 
         levelBrowser.on("pointerout", ()=>{
             levelBrowser.texture = textures["levelBrowser"];
         });
         random.on("pointerout", ()=>{
             random.texture = textures["random"];
+        });
+        back.on("pointerout", ()=>{
+            back.texture = textures["back"];
         });
     }
 
