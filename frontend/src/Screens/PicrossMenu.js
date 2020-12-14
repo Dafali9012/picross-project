@@ -1,3 +1,5 @@
+import ScreenManager from "../utils/ScreenManager.js";
+
 export default class PicrossMenu extends PIXI.Container {
     constructor(textures) {
         super();
@@ -11,7 +13,7 @@ export default class PicrossMenu extends PIXI.Container {
         let build = new PIXI.Sprite(textures["build"]);
         let text = new PIXI.Text("P I C R O S S",{fontFamily : 'Rockwell', fontSize: 24, fill : 'white', align: 'center'});
         let sound = PIXI.sound.Sound.from({
-            url: '/picross-project/frontend/res/sound/select.mp3',
+            url: './res/sound/select.mp3',
             autoPlay: true
         });
 
@@ -35,25 +37,27 @@ export default class PicrossMenu extends PIXI.Container {
         
         solo.on("pointerdown", ()=>{
             solo.texture = this.textures["soloFocus"];
-            sound.play();
         });
         online.on("pointerdown", ()=>{
             online.texture = this.textures["onlineFocus"];
-            sound.play();
         });
         build.on("pointerdown", ()=>{
             build.texture = this.textures["buildFocus"];
-            sound.play();
         });
 
         solo.on("pointerup", ()=>{
             solo.texture = textures["solo"];
+            sound.play();
+            ScreenManager.changeScreen("puzzlemenu");
         });
         online.on("pointerup", ()=>{
             online.texture = textures["online"];
+            sound.play();
+            ScreenManager.changeScreen("multiplayermenu");
         });
         build.on("pointerup", ()=>{
             build.texture = this.textures["build"];
+            sound.play();
         });
 
         solo.on("pointerout", ()=>{

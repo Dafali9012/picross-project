@@ -1,4 +1,5 @@
 import Puzzle from "../Puzzle.js";
+import ScreenManager from "../utils/ScreenManager.js";
 
 export default class GameScreen extends PIXI.Container {
     constructor(data) {
@@ -10,6 +11,10 @@ export default class GameScreen extends PIXI.Container {
         this.puzzle.x = (512-this.puzzle.width)/2;
         this.addChild(this.puzzle);
         this.won = false;
+        let sound = PIXI.sound.Sound.from({
+            url: "./res/sound/select.mp3",
+            autoPlay: true,
+        });
 
         this.menuButton = new PIXI.Sprite(this.textureSheet.textures["menuButton_up"]);
         this.addChild(this.menuButton);
@@ -28,6 +33,8 @@ export default class GameScreen extends PIXI.Container {
         });
         this.menuButton.on("mouseup", ()=> {
             this.menuButton.texture = this.textureSheet.textures["menuButton_up"];
+            ScreenManager.changeScreen("picrossmenu")
+            sound.play();
         });
         
 

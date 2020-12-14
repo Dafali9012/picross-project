@@ -22,7 +22,7 @@ export default class Puzzle extends PIXI.Container {
     }
 
     buildRandomPuzzle(){
-        let title = "Your life is a lie";
+        let title = "Completed!";
         let dimensions = "5"
         let data = []
         let rowArray = []
