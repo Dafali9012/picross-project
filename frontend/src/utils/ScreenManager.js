@@ -1,6 +1,7 @@
 import MultiplayerMenu from "../Screens/MultiplayerMenu.js";
 import PicrossMenu from "../Screens/PicrossMenu.js";
 import PuzzleSelectMenu from "../Screens/PuzzleSelectMenu.js";
+import GameScreen from "../Screens/GameScreen.js";
 
 export default class ScreenManager {
     constructor() {
