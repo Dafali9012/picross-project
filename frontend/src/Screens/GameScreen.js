@@ -24,6 +24,7 @@ export default class GameScreen extends PIXI.Container {
         this.restart.position.set((512-this.puzzle.width)/2 + this.puzzle.width + (((512-this.puzzle.width)/2-this.restart.width)/2), this.puzzle.height-this.restart.height/2);
         this.restart.interactive = true;
         this.restart.buttonMode = true;
+        back.buttonMode = true;
         back.interactive = true;
         this.addChild(back)
 
