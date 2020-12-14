@@ -10,6 +10,12 @@ public class Puzzle {
     private long id;
 
     @Column
+    private String name;
+
+    @Column
+    private String author;
+
+    @Column
     private String data;
 
     public Puzzle() {}
@@ -28,5 +34,21 @@ public class Puzzle {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
