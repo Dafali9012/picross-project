@@ -9,14 +9,13 @@ export default class ScreenManager {
         PIXI.SCALE_MODES = PIXI.SCALE_MODES.NEAREST;
         document.body.appendChild(this.app.view);
 
-        createScenes();
-
         this.picrossmenu = new PIXI.Container;
         this.multiplayermenu = new PIXI.Container;
         this.puzzlemenu = new PIXI.Container;
         this.gamescreen = new PIXI.Container;
 
         this.goToScene("picrossmenu");
+        this.createScenes();
 
     }
     createScenes(){
