@@ -3,6 +3,7 @@ import Box from "./Box.js";
 export default class Puzzle extends PIXI.Container {
     constructor(data) {
         super();
+        this.puzzleSize = data.puzzleSize?data.puzzleSize:1;
         this.puzzleData = data.puzzleData?data.puzzleData:this.buildRandomPuzzle();
         this.textureSheet = data.textureSheet;
         this.topMargin = 60;
@@ -10,6 +11,7 @@ export default class Puzzle extends PIXI.Container {
         this.textMargin = 4;
         this.boxStructure = [];
         this.boxBox = new PIXI.Container();
+        console.log(this.puzzleData.data);
         this.boxSize = 288/this.puzzleData.data.length-(this.topMargin+this.bottomMargin)/this.puzzleData.data.length;
         this.buildBoxStructure();
         this.buildHints();
@@ -22,13 +24,12 @@ export default class Puzzle extends PIXI.Container {
 
     buildRandomPuzzle(){
         let title = "Completed!";
-        let dimensions = "5"
         let data = []
         let rowArray = []
         let row;
         let randomFinishedColor = "0x"+Math.floor(Math.random()*16777215).toString(16);
-        for(let i = 0; i<dimensions; i++){
-            for(let col = 0; col<dimensions; col++){
+        for(let i = 0; i<this.puzzleSize; i++){
+            for(let col = 0; col<this.puzzleSize; col++){
                 let filled = Math.round(Math.random());
                 let color = "0xf2f2f2";
                 if(filled){
@@ -40,7 +41,7 @@ export default class Puzzle extends PIXI.Container {
             data.push(rowArray)
             rowArray = []
         }
-        let randomPuzzle = {meta: {title, dimensions}, data};
+        let randomPuzzle = {meta: {title, dimensions:this.puzzleSize}, data};
         return randomPuzzle;
     }
 
