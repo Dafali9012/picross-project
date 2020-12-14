@@ -69,7 +69,7 @@ export default class Game {
             new GameSizeMenu({
                 background: resources["bg_orange"].texture,
                 five: textureSheet.textures["five"],
-                fiveBrowserFocus: textureSheet.textures["fiveFocus"],
+                fiveFocus: textureSheet.textures["fiveFocus"],
                 ten: textureSheet.textures["ten"],
                 tenFocus: textureSheet.textures["tenFocus"],
                 fifteen: textureSheet.textures["fifteen"],
