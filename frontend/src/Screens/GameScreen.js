@@ -46,7 +46,7 @@ export default class GameScreen extends PIXI.Container {
         audio.interactive = true;
         audio.buttonMode = true;
         this.addChild(mainmenu);
-        this.addChild(audio);
+        //this.addChild(audio);
         this.soundtrack.loop = true;
 
         this.restart.on("click", ()=>{
@@ -87,10 +87,10 @@ export default class GameScreen extends PIXI.Container {
             select.play();
             if(this.soundtrack.isPlaying) {
                 audio.texture = this.textureSheet.textures["audioSilent"];
-                this.soundtrack.pause();
+                //this.soundtrack.pause();
             } else {
                 audio.texture = this.textureSheet.textures["audio"];
-                this.soundtrack.resume();
+                //this.soundtrack.resume();
             }
         });
 
@@ -122,7 +122,7 @@ export default class GameScreen extends PIXI.Container {
         else if(puzzleSize) this.puzzle = new Puzzle({textureSheet:this.textureSheet, background:this.background, puzzleSize:puzzleSize});
         this.puzzle.x = (512-this.puzzle.width)/2;
         this.addChild(this.puzzle);
-        this.soundtrack.play();
+        //this.soundtrack.play();
     }
 
     scrollBackground(delta) {
