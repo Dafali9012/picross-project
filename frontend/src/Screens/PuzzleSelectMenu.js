@@ -15,6 +15,9 @@ export default class PuzzleSelectMenu extends PIXI.Container {
         let sound = PIXI.sound.Sound.from({
             url: './res/sound/select.mp3'
         });
+        let soundBack = PIXI.sound.Sound.from({
+            url: "./res/sound/back.mp3",
+        });
 
         levelBrowser.x = (512-levelBrowser.width)/2;
         levelBrowser.y = (288-levelBrowser.height)/3;
@@ -57,7 +60,7 @@ export default class PuzzleSelectMenu extends PIXI.Container {
         back.on("pointerup", ()=>{
             back.texture = textures["back"];
             ScreenManager.previousScreen();
-            sound.play();
+            soundBack.play();
         });
 
         levelBrowser.on("pointerout", ()=>{

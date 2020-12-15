@@ -119,6 +119,12 @@
         },
         "mainmenuFocus": {
             "frame": {"x": 64, "y": 272, "w": 64, "h": 32}
+        },
+        "audio": {
+            "frame": {"x": 128, "y": 286, "w": 17, "h": 18}
+        },
+        "audioSilent": {
+            "frame": {"x": 145, "y": 286, "w": 17, "h": 18}
         }
     },
     "animations": {

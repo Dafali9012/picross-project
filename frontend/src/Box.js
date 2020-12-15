@@ -13,6 +13,8 @@ export default class Box extends PIXI.Container {
         this.spriteComplete.height = boxSize;
         this.spriteComplete.alpha = 0;
         this.addChild(this.spriteComplete);
+        let sound = PIXI.sound.Sound.from({
+            url: "./res/sound/puzzle.mp3"});
         this.interactive = true;
         this.buttonMode = true;
         this.state = "empty";
@@ -21,11 +23,13 @@ export default class Box extends PIXI.Container {
                 this.state = "empty";
                 this.spriteProgress.texture = this.textureSheet.textures["box_empty"];
                 Input.operation = "remove";
+                sound.play();
             }
             else if(this.state == "empty") {
                 this.state = "filled";
                 this.spriteProgress.texture = this.textureSheet.textures["box_filled"];
                 Input.operation = "fill";
+                sound.play();
             }
         });
         this.on("rightdown", ()=>{
@@ -34,11 +38,13 @@ export default class Box extends PIXI.Container {
                 this.state = "empty";
                 this.spriteProgress.texture = this.textureSheet.textures["box_empty"];
                 Input.operation = "remove";
+                sound.play();
             }
             else if(this.state == "empty") {
                 this.state = "crossed";
                 this.spriteProgress.texture = this.textureSheet.textures["box_crossed"];
                 Input.operation = "cross";
+                sound.play();
             }
         });
         this.on("mouseover", ()=>{
@@ -47,18 +53,21 @@ export default class Box extends PIXI.Container {
                     if(this.state != "empty") {
                         this.spriteProgress.texture = this.textureSheet.textures["box_empty"];
                         this.state = "empty";
+                        sound.play();
                     }
                 }
                 if(Input.operation == "fill") {
                     if(this.state == "empty") {
                         this.spriteProgress.texture = this.textureSheet.textures["box_filled"];
                         this.state = "filled";
+                        sound.play();
                     }
                 }
                 if(Input.operation == "cross") {
                     if(this.state == "empty") {
                         this.spriteProgress.texture = this.textureSheet.textures["box_crossed"];
                         this.state = "crossed";
+                        sound.play();
                     }
                 }
             }

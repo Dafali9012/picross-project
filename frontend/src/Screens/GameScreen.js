@@ -12,12 +12,28 @@ export default class GameScreen extends PIXI.Container {
         this.puzzle.x = (512-this.puzzle.width)/2;
         this.addChild(this.puzzle);
         this.won = false;
-        let sound = PIXI.sound.Sound.from({
-            url: "./res/sound/select.mp3",
-            autoPlay: true,
+        let back = PIXI.sound.Sound.from({
+            url: "./res/sound/back.mp3"
+        });
+        let select = PIXI.sound.Sound.from({
+            url: "./res/sound/select.mp3"
+        });
+        let soundReload = PIXI.sound.Sound.from({
+            url: "./res/sound/reload.mp3",
+        });
+        this.soundFinish = PIXI.sound.Sound.from({
+            url: "./res/sound/finish.mp3",
+        });
+        this.soundtrack = PIXI.sound.Sound.from({
+            url: "./res/sound/soundtrackCalm.mp3",
+            autoPlay: false,
+            preload: true
         });
 
         let mainmenu = new PIXI.Sprite(this.textureSheet.textures["mainmenu"]);
+        let audio = new PIXI.Sprite(this.textureSheet.textures["audio"]);
+        audio.x = ((512-this.puzzle.width)/2 + this.puzzle.width + (((512-this.puzzle.width)/2-mainmenu.width)/2));
+        audio.y = mainmenu.height*2;
         mainmenu.x = ((512-this.puzzle.width)/2 + this.puzzle.width + (((512-this.puzzle.width)/2-mainmenu.width)/2));
         mainmenu.y = this.puzzle.height-mainmenu.height/2;
         this.restart = new PIXI.Sprite(this.textureSheet.textures["restart"]);
@@ -27,7 +43,11 @@ export default class GameScreen extends PIXI.Container {
         this.restart.buttonMode = true;
         mainmenu.buttonMode = true;
         mainmenu.interactive = true;
-        this.addChild(mainmenu)
+        audio.interactive = true;
+        audio.buttonMode = true;
+        this.addChild(mainmenu);
+        this.addChild(audio);
+        this.soundtrack.loop = true;
 
         this.restart.on("click", ()=>{
             console.log("restart");
@@ -43,24 +63,35 @@ export default class GameScreen extends PIXI.Container {
 
         this.restart.on("mouseup", ()=> {
             this.restart.texture = this.textureSheet.textures["restart"];
-            sound.play();
-        });
-        
-        this.restart.on("mouseup", ()=> {
-            this.restart.texture = this.textureSheet.textures["restart"];
-            sound.play();
+            soundReload.play();
+            this.soundtrack.stop();
             this.newPuzzle(null, this.puzzleSize);
+            audio.texture = this.textureSheet.textures["audio"];
         });
 
         mainmenu.on("pointerdown", ()=>{
             mainmenu.texture = this.textureSheet.textures["mainmenuFocus"];
         });
+        audio.on("pointerdown", ()=>{
+            audio.texture = this.textureSheet.textures["audioSilent"];
+        });
 
         mainmenu.on("pointerup", ()=>{
             mainmenu.texture = this.textureSheet.textures["mainmenu"];
-            sound.play();
+            back.play();
+            this.soundtrack.stop();
             ScreenManager.visitedScreens = [];
             ScreenManager.changeScreen("picrossmenu");
+        });
+        audio.on("click", ()=>{
+            select.play();
+            if(this.soundtrack.isPlaying) {
+                audio.texture = this.textureSheet.textures["audioSilent"];
+                this.soundtrack.pause();
+            } else {
+                audio.texture = this.textureSheet.textures["audio"];
+                this.soundtrack.resume();
+            }
         });
 
         mainmenu.on("pointerout", ()=>{
@@ -77,6 +108,7 @@ export default class GameScreen extends PIXI.Container {
             console.log("checking win");
             if(this.puzzle.checkWin()) {
                 this.won = true;
+                this.soundFinish.play();
                 this.removeListener("mouseup");
                 this.puzzle.boxBox.children.forEach(x=>{
                     x.removeAllListeners();
@@ -90,6 +122,7 @@ export default class GameScreen extends PIXI.Container {
         else if(puzzleSize) this.puzzle = new Puzzle({textureSheet:this.textureSheet, background:this.background, puzzleSize:puzzleSize});
         this.puzzle.x = (512-this.puzzle.width)/2;
         this.addChild(this.puzzle);
+        this.soundtrack.play();
     }
 
     scrollBackground(delta) {
