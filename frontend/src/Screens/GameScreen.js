@@ -13,21 +13,26 @@ export default class GameScreen extends PIXI.Container {
         this.addChild(this.puzzle);
         this.won = false;
         let back = PIXI.sound.Sound.from({
-            url: "./res/sound/back.mp3"
+            url: "./res/sound/back.mp3",
+            volume: 0.1
         });
         let select = PIXI.sound.Sound.from({
-            url: "./res/sound/select.mp3"
+            url: "./res/sound/select.mp3",
+            volume: 0.1
         });
         let soundReload = PIXI.sound.Sound.from({
             url: "./res/sound/reload.mp3",
+            volume: 0.1
         });
         this.soundFinish = PIXI.sound.Sound.from({
             url: "./res/sound/finish.mp3",
+            volume: 0.03
         });
         this.soundtrack = PIXI.sound.Sound.from({
             url: "./res/sound/soundtrackCalm.mp3",
             autoPlay: false,
-            preload: true
+            preload: true,
+            volume: 0.1
         });
 
         let mainmenu = new PIXI.Sprite(this.textureSheet.textures["mainmenu"]);

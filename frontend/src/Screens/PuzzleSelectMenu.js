@@ -13,10 +13,12 @@ export default class PuzzleSelectMenu extends PIXI.Container {
         let back = new PIXI.Sprite(textures["back"]);
         let text = new PIXI.Text("P U Z Z L E   S E L E C T",{fontFamily : 'Rockwell', fontSize: 24, fill : 'white', align: 'center'});
         let sound = PIXI.sound.Sound.from({
-            url: './res/sound/select.mp3'
+            url: './res/sound/select.mp3',
+            volume: 0.1
         });
         let soundBack = PIXI.sound.Sound.from({
             url: "./res/sound/back.mp3",
+            volume: 0.1
         });
 
         levelBrowser.x = (512-levelBrowser.width)/2;

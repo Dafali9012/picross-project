@@ -14,10 +14,12 @@ export default class GameSizeMenu extends PIXI.Container {
         let back = new PIXI.Sprite(textures["back"]);
         let text = new PIXI.Text("B O A R D   S I Z E",{fontFamily : 'Rockwell', fontSize: 24, fill : 'white', align: 'center'});
         let sound = PIXI.sound.Sound.from({
-            url: './res/sound/select.mp3'
+            url: './res/sound/select.mp3',
+            volume: 0.1
         });
         let soundBack = PIXI.sound.Sound.from({
             url: "./res/sound/back.mp3",
+            volume: 0.1
         });
 
         five.x = (512-five.width)/2;

@@ -13,7 +13,8 @@ export default class PicrossMenu extends PIXI.Container {
         let build = new PIXI.Sprite(textures["build"]);
         let text = new PIXI.Text("P I C R O S S",{fontFamily : 'Rockwell', fontSize: 24, fill : 'white', align: 'center'});
         let sound = PIXI.sound.Sound.from({
-            url: './res/sound/select.mp3'
+            url: './res/sound/select.mp3',
+            volume: 0.1
         });
 
         solo.x = (512-solo.width)/2;

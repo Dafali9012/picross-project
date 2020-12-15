@@ -14,9 +14,11 @@ export default class MultiplayerMenu extends PIXI.Container {
         let text = new PIXI.Text("M U L T I P L A Y E R", {fontFamily: "Rockwell", fontSize: 24, fill: "white", align: "center"});
         let sound = PIXI.sound.Sound.from({
             url: "./res/sound/select.mp3",
+            volume: 0.1
         });
         let soundBack = PIXI.sound.Sound.from({
             url: "./res/sound/back.mp3",
+            volume: 0.1
         });
         
 
