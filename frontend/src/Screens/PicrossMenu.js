@@ -26,8 +26,8 @@ export default class PicrossMenu extends PIXI.Container {
         text.y = (text.height);
 
         this.addChild(solo);
-        this.addChild(build);
-        this.addChild(online);
+        //this.addChild(build);
+        //this.addChild(online);
         this.addChild(text);
         
         solo.interactive = true;

@@ -15,6 +15,10 @@ export default class MultiplayerMenu extends PIXI.Container {
         let sound = PIXI.sound.Sound.from({
             url: "./res/sound/select.mp3",
         });
+        let soundBack = PIXI.sound.Sound.from({
+            url: "./res/sound/back.mp3",
+        });
+        
 
         host.x = (512 - host.width) / 2;
         host.y = (288 - host.height) / 3;
@@ -54,7 +58,7 @@ export default class MultiplayerMenu extends PIXI.Container {
         });
         back.on("pointerup", ()=>{
             back.texture = textures["back"];
-            sound.play();
+            soundBack.play();
             ScreenManager.previousScreen();
         });
 

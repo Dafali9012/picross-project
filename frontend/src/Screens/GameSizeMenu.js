@@ -16,6 +16,9 @@ export default class GameSizeMenu extends PIXI.Container {
         let sound = PIXI.sound.Sound.from({
             url: './res/sound/select.mp3'
         });
+        let soundBack = PIXI.sound.Sound.from({
+            url: "./res/sound/back.mp3",
+        });
 
         five.x = (512-five.width)/2;
         five.y = (288-five.height)/3;
@@ -70,7 +73,7 @@ export default class GameSizeMenu extends PIXI.Container {
         back.on("pointerup", ()=>{
             back.texture = this.textures["back"];
             ScreenManager.previousScreen();
-            sound.play();
+            soundBack.play();
         });
 
         five.on("pointerout", ()=>{
