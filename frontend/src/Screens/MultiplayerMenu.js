@@ -8,70 +8,86 @@ export default class MultiplayerMenu extends PIXI.Container {
         this.background = new PIXI.Sprite(this.textures["background"]);
         this.addChild(this.background);
 
-        let host = new PIXI.Sprite(textures["host"]);
-        let join = new PIXI.Sprite(textures["join"]);
-        let back = new PIXI.Sprite(textures["back"]);
-        let text = new PIXI.Text("M U L T I P L A Y E R", {fontFamily: "Rockwell", fontSize: 24, fill: "white", align: "center"});
-        let sound = PIXI.sound.Sound.from({
+        this.host = new PIXI.Sprite(textures["host"]);
+        this.join = new PIXI.Sprite(textures["join"]);
+        this.back = new PIXI.Sprite(textures["back"]);
+        this.text = new PIXI.Text("M U L T I P L A Y E R", {fontFamily: "Rockwell", fontSize: 24, fill: "white", align: "center"});
+        this.sound = PIXI.sound.Sound.from({
             url: "./res/sound/select.mp3",
-            volume: 0.1
+            volume: 0.05
         });
-        let soundBack = PIXI.sound.Sound.from({
+        this.soundBack = PIXI.sound.Sound.from({
             url: "./res/sound/back.mp3",
-            volume: 0.1
+            volume: 0.05
         });
         
 
-        host.x = (512 - host.width) / 2;
-        host.y = (288 - host.height) / 3;
-        join.x = (512 - join.width) / 2;
-        join.y = (288 - join.height) / 2;
-        back.x = (512-back.width)/2;
-        back.y = (host.y*2);
-        text.x = (512 - text.width) / 2;
-        text.y = text.height;
+        this.host.x = (512 - this.host.width) / 2;
+        this.host.y = (288 - this.host.height) / 3;
+        this.join.x = (512 - this.join.width) / 2;
+        this.join.y = (288 - this.join.height) / 2;
+        this.back.x = (512-this.back.width)/2;
+        this.back.y = (this.host.y*2);
+        this.text.x = (512 - this.text.width) / 2;
+        this.text.y = this.text.height;
 
-        this.addChild(host);
-        this.addChild(join);
-        this.addChild(text);
-        this.addChild(back);
+        this.addChild(this.host);
+        this.addChild(this.join);
+        this.addChild(this.text);
+        this.addChild(this.back);
         
-        host.interactive = true;
-        join.interactive = true;
-        back.interactive = true;
+        this.host.interactive = true;
+        this.join.interactive = true;
+        this.back.interactive = true;
+        this.host.buttonMode = true;
+        this.join.buttonMode = true;
+        this.back.buttonMode = true;
 
-        host.on("pointerdown", () => {
-            host.texture = textures["hostFocus"];
+        this.host.on("mouseover", ()=>{
+            this.host.alpha = 1.2;
         });
-        join.on("pointerdown", () => {
-            join.texture = textures["joinFocus"];
+        this.join.on("mouseover", ()=>{
+            this.join.alpha = 1.2;
         });
-        back.on("pointerdown", ()=>{
-            back.texture = textures["backFocus"];
+        this.back.on("mouseover", ()=>{
+            this.back.alpha = 1.2;
         });
 
-        host.on("pointerup", () => {
-            host.texture = textures["host"];
-            sound.play();
+        this.host.on("pointerdown", () => {
+            this.host.texture = textures["hostFocus"];
         });
-        join.on("pointerup", () => {
-            join.texture = textures["join"];
-            sound.play();
+        this.join.on("pointerdown", () => {
+            this.join.texture = textures["joinFocus"];
         });
-        back.on("pointerup", ()=>{
-            back.texture = textures["back"];
-            soundBack.play();
+        this.back.on("pointerdown", ()=>{
+            this.back.texture = textures["backFocus"];
+        });
+
+        this.host.on("pointerup", () => {
+            this.host.texture = textures["host"];
+            this.sound.play();
+        });
+        this.join.on("pointerup", () => {
+            this.join.texture = textures["join"];
+            this.sound.play();
+        });
+        this.back.on("pointerup", ()=>{
+            this.back.texture = textures["back"];
+            this.soundBack.play();
             ScreenManager.previousScreen();
         });
 
-        host.on("pointerout", () => {
-            host.texture = textures["host"];
+        this.host.on("pointerout", () => {
+            this.host.texture = textures["host"];
+            this.host.alpha = 1;
         });
-        join.on("pointerout", () => {
-            join.texture = textures["join"];
+        this.join.on("pointerout", () => {
+            this.join.texture = textures["join"];
+            this.join.alpha = 1;
         });
-        back.on("pointerout", ()=>{
-            back.texture = textures["back"];
+        this.back.on("pointerout", ()=>{
+            this.back.texture = textures["back"];
+            this.back.alpha = 1;
         });
     }
 
