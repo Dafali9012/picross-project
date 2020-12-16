@@ -27,11 +27,13 @@ export default class GameScreen extends PIXI.Container {
         this.soundFinish = PIXI.sound.Sound.from({
             url: "./res/sound/finish.mp3",
             volume: 0.05
+
         });
         this.soundtrack = PIXI.sound.Sound.from({
             url: "./res/sound/soundtrackCalm.mp3",
             autoPlay: false,
-            preload: true
+            preload: true,
+            volume: 0.1
         });
 
         this.mainmenu = new PIXI.Sprite(this.textureSheet.textures["mainmenu"]);
