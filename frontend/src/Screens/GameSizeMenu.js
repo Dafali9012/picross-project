@@ -9,87 +9,109 @@ export default class GameSizeMenu extends PIXI.Container {
         this.background = new PIXI.Sprite(data.background);
         this.addChild(this.background);
 
-        let five = new PIXI.Sprite(this.textureSheet.textures["button_sizeFive"]);
-        let ten = new PIXI.Sprite(this.textureSheet.textures["button_sizeTen"]);
-        let fifteen = new PIXI.Sprite(this.textureSheet.textures["button_sizeFifteen"]);
-        let back = new PIXI.Sprite(this.textureSheet.textures["button_back"]);
-        let text = new PIXI.Text("B O A R D   S I Z E",{fontFamily : 'Calibri', fontSize: 24, fill : 'white', align: 'center'});
-        let sound = PIXI.sound.Sound.from({
+        this.alpha = 0.8;
+        this.five = new PIXI.Sprite(this.textureSheet.textures["button_sizeFive"]);
+        this.ten = new PIXI.Sprite(this.textureSheet.textures["button_sizeTen"]);
+        this.fifteen = new PIXI.Sprite(this.textureSheet.textures["button_sizeFifteen"]);
+        this.back = new PIXI.Sprite(this.textureSheet.textures["button_back"]);
+        this.text = new PIXI.Text("B O A R D   S I Z E",{fontFamily : 'Rockwell', fontSize: 24, fill : 'white', align: 'center'});
+        this.sound = PIXI.sound.Sound.from({
             url: './res/sound/select.mp3',
-            volume: 0.1
+            volume: 0.05
         });
-        let soundBack = PIXI.sound.Sound.from({
+        this.soundBack = PIXI.sound.Sound.from({
             url: "./res/sound/back.mp3",
-            volume: 0.1
+            volume: 0.05
         });
 
-        five.x = (512-five.width)/2;
-        five.y = (288-five.height)/3;
-        ten.x = (512-ten.width)/2;
-        ten.y = (288-ten.height)/2;
-        fifteen.x = (512-fifteen.width)/2;
-        fifteen.y = (five.y*2);
-        back.x = (512-back.width)/2;
-        back.y = (304-back.width);
-        text.x = (512-text.width)/2;
-        text.y = (text.height);
+        this.five.x = (512-this.five.width)/2;
+        this.five.y = (288-this.five.height)/3;
+        this.ten.x = (512-this.ten.width)/2;
+        this.ten.y = (288-this.ten.height)/2;
+        this.fifteen.x = (512-this.fifteen.width)/2;
+        this.fifteen.y = (this.five.y*2);
+        this.back.x = (512-this.back.width)/2;
+        this.back.y = (304-this.back.width);
+        this.text.x = (512-this.text.width)/2;
+        this.text.y = (this.text.height);
 
-        this.addChild(five);
-        this.addChild(ten);
-        this.addChild(fifteen);
-        this.addChild(back);
-        this.addChild(text);
+        this.addChild(this.five);
+        this.addChild(this.ten);
+        this.addChild(this.fifteen);
+        this.addChild(this.back);
+        this.addChild(this.text);
         
-        five.interactive = true;
-        ten.interactive = true;
-        fifteen.interactive = true;
-        back.interactive = true;
+        this.five.interactive = true;
+        this.ten.interactive = true;
+        this.fifteen.interactive = true;
+        this.back.interactive = true;
+        this.five.buttonMode = true;
+        this.ten.buttonMode = true;
+        this.fifteen.buttonMode = true;
+        this.back.buttonMode = true;
         
-        five.on("pointerdown", ()=>{
-            five.texture = this.textureSheet.textures["button_sizeFive_down"];
+        this.five.on("mouseover", ()=>{
+            this.five.alpha = 1.2;
         });
-        ten.on("pointerdown", ()=>{
-            ten.texture = this.textureSheet.textures["button_sizeTen_down"];
+        this.ten.on("mouseover", ()=>{
+            this.ten.alpha = 1.2;
         });
-        fifteen.on("pointerdown", ()=>{
-            fifteen.texture = this.textureSheet.textures["button_sizeFifteen_down"];
+        this.fifteen.on("mouseover", ()=>{
+            this.fifteen.alpha = 1.2;
         });
-        back.on("pointerdown", ()=>{
-            back.texture = this.textureSheet.textures["button_back_down"];
+        this.back.on("mouseover", ()=>{
+            this.back.alpha = 1.2;
         });
 
-        five.on("pointerup", ()=>{
-            five.texture = this.textureSheet.textures["button_sizeFive"];
-            sound.play();
-            ScreenManager.changeScreen("gamescreen").newPuzzle();
+        this.five.on("pointerdown", ()=>{
+            this.five.texture = this.textureSheet.textures["button_sizeFive_down"];
         });
-        ten.on("pointerup", ()=>{
-            ten.texture = this.textureSheet.textures["button_sizeTen"];
-            sound.play();
-            ScreenManager.changeScreen("gamescreen").newPuzzle({puzzleSize:10});
+        this.ten.on("pointerdown", ()=>{
+            this.ten.texture = this.textureSheet.textures["button_sizeTen_down"];
         });
-        fifteen.on("pointerup", ()=>{
-            fifteen.texture = this.textureSheet.textures["button_sizeFifteen"];
-            sound.play();
-            ScreenManager.changeScreen("gamescreen").newPuzzle({puzzleSize:15});
+        this.fifteen.on("pointerdown", ()=>{
+            this.fifteen.texture = this.textureSheet.textures["button_sizeFifteen_down"];
         });
-        back.on("pointerup", ()=>{
-            back.texture = this.textureSheet.textures["button_back"];
+        this.back.on("pointerdown", ()=>{
+            this.back.texture = this.textureSheet.textures["button_back_down"];
+        });
+
+        this.five.on("pointerup", ()=>{
+            this.five.texture = this.textureSheet.textures["button_sizeFive"];
+            this.sound.play();
+            ScreenManager.changeScreen("gamescreen").newPuzzle({puzzleSize: 5});
+        });
+        this.ten.on("pointerup", ()=>{
+            this.ten.texture = this.textureSheet.textures["button_sizeTen"];
+            this.sound.play();
+            ScreenManager.changeScreen("gamescreen").newPuzzle({puzzleSize: 10});
+        });
+        this.fifteen.on("pointerup", ()=>{
+            this.fifteen.texture = this.textureSheet.textures["button_sizeFifteen"];
+            this.sound.play();
+            ScreenManager.changeScreen("gamescreen").newPuzzle({puzzleSize: 15});
+        });
+        this.back.on("pointerup", ()=>{
+            this.back.texture = this.textureSheet.textures["button_back"];
             ScreenManager.previousScreen();
-            soundBack.play();
+            this.soundBack.play();
         });
 
-        five.on("pointerout", ()=>{
-            five.texture = this.textureSheet.textures["button_sizeFive"];
+        this.five.on("pointerout", ()=>{
+            this.five.texture = this.textureSheet.textures["button_sizeFive"];
+            this.five.alpha = 1;
         });
-        ten.on("pointerout", ()=>{
-            ten.texture = this.textureSheet.textures["button_sizeTen"];
+        this.ten.on("pointerout", ()=>{
+            this.ten.texture = this.textureSheet.textures["button_sizeTen"];
+            this.ten.alpha = 1;
         });
-        fifteen.on("pointerout", ()=>{
-            fifteen.texture = this.textureSheet.textures["button_sizeFifteen"];
+        this.fifteen.on("pointerout", ()=>{
+            this.fifteen.texture = this.textureSheet.textures["button_sizeFifteen"];
+            this.fifteen.alpha = 1;
         });
-        back.on("pointerout", ()=>{
-            back.texture = this.textureSheet.textures["button_back"];
+        this.back.on("pointerout", ()=>{
+            this.back.texture = this.textureSheet.textures["button_back"];
+            this.back.alpha = 1;
         });
     }
 

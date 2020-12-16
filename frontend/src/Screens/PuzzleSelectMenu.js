@@ -3,76 +3,93 @@ import ScreenManager from "../utils/ScreenManager.js";
 export default class PuzzleSelectMenu extends PIXI.Container {
     constructor(data) {
         super();
+        
         this.textureSheet = data.textureSheet;
 
         this.background = new PIXI.Sprite(data.background);
         this.addChild(this.background);
 
-        let levelBrowser = new PIXI.Sprite(this.textureSheet.textures["button_puzzleBrowser"]);
-        let random = new PIXI.Sprite(this.textureSheet.textures["button_random"]);
-        let back = new PIXI.Sprite(this.textureSheet.textures["button_back"]);
-        let text = new PIXI.Text("P U Z Z L E   S E L E C T",{fontFamily : 'Rockwell', fontSize: 24, fill : 'white', align: 'center'});
-        let sound = PIXI.sound.Sound.from({
+        this.alpha = 0.8;
+        this.levelBrowser = new PIXI.Sprite(this.textureSheet.textures["button_puzzleBrowser"]);
+        this.random = new PIXI.Sprite(this.textureSheet.textures["button_random"]);
+        this.back = new PIXI.Sprite(this.textureSheet.textures["button_back"]);
+        this.text = new PIXI.Text("P U Z Z L E   S E L E C T",{fontFamily : 'Rockwell', fontSize: 24, fill : 'white', align: 'center'});
+        this.sound = PIXI.sound.Sound.from({
             url: './res/sound/select.mp3',
-            volume: 0.1
+            volume: 0.05
         });
-        let soundBack = PIXI.sound.Sound.from({
+        this.soundBack = PIXI.sound.Sound.from({
             url: "./res/sound/back.mp3",
-            volume: 0.1
+            volume: 0.05
         });
 
-        levelBrowser.x = (512-levelBrowser.width)/2;
-        levelBrowser.y = (288-levelBrowser.height)/3;
-        random.x = (512-random.width)/2;
-        random.y = (288-random.height)/2;
-        back.x = (512-back.width)/2;
-        back.y = (levelBrowser.y*2);
-        text.x = (512-text.width)/2;
-        text.y = (text.height);
+        this.levelBrowser.x = (512-this.levelBrowser.width)/2;
+        this.levelBrowser.y = (288-this.levelBrowser.height)/3;
+        this.random.x = (512-this.random.width)/2;
+        this.random.y = (288-this.random.height)/2;
+        this.back.x = (512-this.back.width)/2;
+        this.back.y = (this.levelBrowser.y*2);
+        this.text.x = (512-this.text.width)/2;
+        this.text.y = (this.text.height);
 
-        this.addChild(levelBrowser);
-        this.addChild(random);
-        this.addChild(back);
-        this.addChild(text);
+        this.addChild(this.levelBrowser);
+        this.addChild(this.random);
+        this.addChild(this.back);
+        this.addChild(this.text);
 
-        levelBrowser.interactive = true;
-        random.interactive = true;
-        back.interactive = true;
+        this.levelBrowser.interactive = true;
+        this.random.interactive = true;
+        this.back.interactive = true;
+        this.levelBrowser.buttonMode = true;
+        this.random.buttonMode = true;
+        this.back.buttonMode = true;
 
-        levelBrowser.on("pointerdown", ()=>{
-            levelBrowser.texture = this.textureSheet.textures["button_puzzleBrowser_down"];
+        this.levelBrowser.on("mouseover", ()=>{
+            this.levelBrowser.alpha = 1.2;
         });
-        random.on("pointerdown", ()=>{
-            random.texture = this.textureSheet.textures["button_random_down"];
+        this.random.on("mouseover", ()=>{
+            this.random.alpha = 1.2;
         });
-        back.on("pointerdown", ()=>{
-            back.texture = this.textureSheet.textures["button_back_down"];
+        this.back.on("mouseover", ()=>{
+            this.back.alpha = 1.2;
+        });
+        this.levelBrowser.on("pointerdown", ()=>{
+            this.levelBrowser.texture = this.textureSheet.textures["button_puzzleBrowser_down"];
+        });
+        this.random.on("pointerdown", ()=>{
+            this.random.texture = this.textureSheet.textures["button_random_down"];
+        });
+        this.back.on("pointerdown", ()=>{
+            this.back.texture = this.textureSheet.textures["button_back_down"];
         });
 
-        levelBrowser.on("pointerup", ()=>{
-            levelBrowser.texture = this.textureSheet.textures["button_puzzleBrowser"];
-            sound.play();
+        this.levelBrowser.on("pointerup", ()=>{
+            this.levelBrowser.texture = this.textureSheet.textures["button_puzzleBrowser"];
+            this.sound.play();
             ScreenManager.changeScreen("gamescreen").newPuzzle({puzzleData:data.presentationPuzzle});
         });
-        random.on("pointerup", ()=>{
-            random.texture = this.textureSheet.textures["button_random"];
-            sound.play();
+        this.random.on("pointerup", ()=>{
+            this.random.texture = this.textureSheet.textures["button_random"];
+            this.sound.play();
             ScreenManager.changeScreen("gamesizemenu");
         });
-        back.on("pointerup", ()=>{
-            back.texture = this.textureSheet.textures["button_back"];
+        this.back.on("pointerup", ()=>{
+            this.back.texture = this.textureSheet.textures["button_back"];
             ScreenManager.previousScreen();
-            soundBack.play();
+            this.soundBack.play();
         });
 
-        levelBrowser.on("pointerout", ()=>{
-            levelBrowser.texture = this.textureSheet.textures["button_puzzleBrowser"];
+        this.levelBrowser.on("pointerout", ()=>{
+            this.levelBrowser.texture = this.textureSheet.textures["button_puzzleBrowser"];
+            this.levelBrowser.alpha = 1;
         });
-        random.on("pointerout", ()=>{
-            random.texture = this.textureSheet.textures["button_random"];
+        this.random.on("pointerout", ()=>{
+            this.random.texture = this.textureSheet.textures["button_random"];
+            this.random.alpha = 1;
         });
-        back.on("pointerout", ()=>{
-            back.texture = this.textureSheet.textures["button_back"];
+        this.back.on("pointerout", ()=>{
+            this.back.texture = this.textureSheet.textures["button_back"];
+            this.back.alpha = 1;
         });
     }
 

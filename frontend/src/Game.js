@@ -34,26 +34,30 @@ export default class Game {
                 })
             );
             ScreenManager.addScreen("picrossmenu",
-            new PicrossMenu({
-                textureSheet: textureSheet,
-                background: resources["bg_orange"].texture
-            }));
+                new PicrossMenu({
+                    textureSheet: textureSheet,
+                    background: resources["bg_orange"].texture
+                })
+            );
             ScreenManager.addScreen("multiplayermenu", 
-            new MultiplayerMenu({
-                textureSheet: textureSheet,
-                background: resources["bg_orange"].texture,
-            }));
+                new MultiplayerMenu({
+                    textureSheet: textureSheet,
+                    background: resources["bg_orange"].texture,
+                })
+            );
             ScreenManager.addScreen("puzzlemenu", 
-            new PuzzleSelectMenu({
-                textureSheet: textureSheet,
-                background: resources["bg_orange"].texture,
-                presentationPuzzle: resources["testdata"].data
-            }));
+                new PuzzleSelectMenu({
+                    textureSheet: textureSheet,
+                    background: resources["bg_orange"].texture,
+                    presentationPuzzle: resources["testdata"].data
+                })
+            );
             ScreenManager.addScreen("gamesizemenu", 
-            new GameSizeMenu({
-                textureSheet: textureSheet,
-                background: resources["bg_orange"].texture
-            }));
+                new GameSizeMenu({
+                    textureSheet: textureSheet,
+                    background: resources["bg_orange"].texture
+                })
+            );
 
             ScreenManager.changeScreen("picrossmenu");
             Input.init(this.app.stage);

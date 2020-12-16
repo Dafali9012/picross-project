@@ -3,71 +3,88 @@ import ScreenManager from "../utils/ScreenManager.js";
 export default class PicrossMenu extends PIXI.Container {
     constructor(data) {
         super();
+
         this.textureSheet = data.textureSheet;
 
         this.background = new PIXI.Sprite(data.background);
         this.addChild(this.background);
 
-        let solo = new PIXI.Sprite(this.textureSheet.textures["button_solo"]);
-        let online = new PIXI.Sprite(this.textureSheet.textures["button_online"]);
-        let build = new PIXI.Sprite(this.textureSheet.textures["button_build"]);
-        let text = new PIXI.Text("P I C R O S S",{fontFamily : 'Rockwell', fontSize: 24, fill : 'white', align: 'center'});
-        let sound = PIXI.sound.Sound.from({
+        this.alpha = 0.8;
+        this.solo = new PIXI.Sprite(this.textureSheet.textures["button_solo"]);
+        this.online = new PIXI.Sprite(this.textureSheet.textures["button_online"]);
+        this.build = new PIXI.Sprite(this.textureSheet.textures["button_build"]);
+        this.text = new PIXI.Text("P I C R O S S",{fontFamily : 'Rockwell', fontSize: 24, fill : 'white', align: 'center'});
+        this.sound = PIXI.sound.Sound.from({
             url: './res/sound/select.mp3',
-            volume: 0.1
+            volume: 0.05
         });
 
-        solo.x = (512-solo.width)/2;
-        solo.y = (288-solo.height)/3;
-        online.x = (512-online.width)/2;
-        online.y = (288-online.height)/2;
-        build.x = (512-build.width)/2;
-        build.y = (solo.y*2);
-        text.x = (512-text.width)/2;
-        text.y = (text.height);
+        this.solo.x = (512-this.solo.width)/2;
+        this.solo.y = (288-this.solo.height)/3;
+        this.online.x = (512-this.online.width)/2;
+        this.online.y = (288-this.online.height)/2;
+        this.build.x = (512-this.build.width)/2;
+        this.build.y = (this.solo.y*2);
+        this.text.x = (512-this.text.width)/2;
+        this.text.y = (this.text.height);
 
-        this.addChild(solo);
+        this.addChild(this.solo);
         //this.addChild(build);
         //this.addChild(online);
-        this.addChild(text);
+        this.addChild(this.text);
         
-        solo.interactive = true;
-        build.interactive = true;
-        online.interactive = true;
+        this.solo.interactive = true;
+        this.build.interactive = true;
+        this.online.interactive = true;
+        this.solo.buttonMode = true;
+        this.build.buttonMode = true;
+        this.online.buttonMode = true;
         
-        solo.on("pointerdown", ()=>{
-            solo.texture = this.textureSheet.textures["button_solo_down"];
+        this.solo.on("pointerdown", ()=>{
+            this.solo.texture = this.textureSheet.textures["button_solo_down"];
         });
-        online.on("pointerdown", ()=>{
+        this.solo.on("mouseover", ()=>{
+            this.solo.alpha = 1.2;
+        });
+        this.online.on("mouseover", ()=>{
+            this.online.alpha = 1.2;
+        });
+        this.build.on("mouseover", ()=>{
+            this.build.alpha = 1.2;
+        });
+        this.online.on("pointerdown", ()=>{
             online.texture = this.textureSheet.textures["button_online_down"];
         });
-        build.on("pointerdown", ()=>{
-            build.texture = this.textureSheet.textures["button_build_down"];
+        this.build.on("pointerdown", ()=>{
+            this.build.texture = this.textureSheet.textures["button_build_down"];
         });
 
-        solo.on("pointerup", ()=>{
-            solo.texture = this.textureSheet.textures["button_solo"];
-            sound.play();
+        this.solo.on("pointerup", ()=>{
+            this.solo.texture = this.textureSheet.textures["button_solo"];
+            this.sound.play();
             ScreenManager.changeScreen("puzzlemenu");
         });
-        online.on("pointerup", ()=>{
-            online.texture = this.textureSheet.textures["button_online"];
-            sound.play();
+        this.online.on("pointerup", ()=>{
+            this.online.texture = this.textureSheet.textures["button_online"];
+            this.sound.play();
             ScreenManager.changeScreen("multiplayermenu");
         });
-        build.on("pointerup", ()=>{
-            build.texture = this.textureSheet.textures["button_build"];
-            sound.play();
+        this.build.on("pointerup", ()=>{
+            this.build.texture = this.textureSheet.textures["button_build"];
+            this.sound.play();
         });
 
-        solo.on("pointerout", ()=>{
-            solo.texture = this.textureSheet.textures["button_solo"];
+        this.solo.on("pointerout", ()=>{
+            this.solo.texture = this.textureSheet.textures["button_solo"];
+            this.solo.alpha = 1;
         });
-        online.on("pointerout", ()=>{
-            online.texture = this.textureSheet.textures["button_online"];
+        this.online.on("pointerout", ()=>{
+            this.online.texture = this.textureSheet.textures["button_online"];
+            this.online.alpha = 1;
         });
-        build.on("pointerout", ()=>{
-            build.texture = this.textureSheet.textures["button_build"];
+        this.build.on("pointerout", ()=>{
+            this.build.texture = this.textureSheet.textures["button_build"];
+            this.build.alpha = 1;
         });
     }
 
