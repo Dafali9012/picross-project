@@ -16,6 +16,7 @@ export default class Box extends PIXI.Container {
         this.sound = PIXI.sound.Sound.from({
             url: "./res/sound/puzzle.mp3",
             volume: 0.02});
+
         this.interactive = true;
         this.buttonMode = true;
         this.state = "empty";
