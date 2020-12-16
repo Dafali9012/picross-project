@@ -1,16 +1,16 @@
 import ScreenManager from "../utils/ScreenManager.js";
 
 export default class MultiplayerMenu extends PIXI.Container {
-    constructor(textures) {
+    constructor(data) {
         super();
-        this.textures = textures;
+        this.textureSheet = data.textureSheet;
 
-        this.background = new PIXI.Sprite(this.textures["background"]);
+        this.background = new PIXI.Sprite(data.background);
         this.addChild(this.background);
 
-        let host = new PIXI.Sprite(textures["host"]);
-        let join = new PIXI.Sprite(textures["join"]);
-        let back = new PIXI.Sprite(textures["back"]);
+        let host = new PIXI.Sprite(this.textureSheet["host"]);
+        let join = new PIXI.Sprite(this.textureSheet["join"]);
+        let back = new PIXI.Sprite(this.textureSheet["back"]);
         let text = new PIXI.Text("M U L T I P L A Y E R", {fontFamily: "Rockwell", fontSize: 24, fill: "white", align: "center"});
         let sound = PIXI.sound.Sound.from({
             url: "./res/sound/select.mp3",
@@ -41,37 +41,37 @@ export default class MultiplayerMenu extends PIXI.Container {
         back.interactive = true;
 
         host.on("pointerdown", () => {
-            host.texture = textures["hostFocus"];
+            host.texture = this.textureSheet["hostFocus"];
         });
         join.on("pointerdown", () => {
-            join.texture = textures["joinFocus"];
+            join.texture = this.textureSheet["joinFocus"];
         });
         back.on("pointerdown", ()=>{
-            back.texture = textures["backFocus"];
+            back.texture = this.textureSheet["backFocus"];
         });
 
         host.on("pointerup", () => {
-            host.texture = textures["host"];
+            host.texture = this.textureSheet["host"];
             sound.play();
         });
         join.on("pointerup", () => {
-            join.texture = textures["join"];
+            join.texture = this.textureSheet["join"];
             sound.play();
         });
         back.on("pointerup", ()=>{
-            back.texture = textures["back"];
+            back.texture = this.textureSheet["back"];
             soundBack.play();
             ScreenManager.previousScreen();
         });
 
         host.on("pointerout", () => {
-            host.texture = textures["host"];
+            host.texture = this.textureSheet["host"];
         });
         join.on("pointerout", () => {
-            join.texture = textures["join"];
+            join.texture = this.textureSheet["join"];
         });
         back.on("pointerout", ()=>{
-            back.texture = textures["back"];
+            back.texture = this.textureSheet["back"];
         });
     }
 

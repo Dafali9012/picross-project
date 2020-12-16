@@ -1,18 +1,19 @@
 import ScreenManager from "../utils/ScreenManager.js";
 
 export default class GameSizeMenu extends PIXI.Container {
-    constructor(textures) {
+    constructor(data) {
         super();
-        this.textures = textures;
 
-        this.background = new PIXI.Sprite(this.textures["background"]);
+        this.textureSheet = data.textureSheet;
+
+        this.background = new PIXI.Sprite(data.background);
         this.addChild(this.background);
 
-        let five = new PIXI.Sprite(textures["five"]);
-        let ten = new PIXI.Sprite(textures["ten"]);
-        let fifteen = new PIXI.Sprite(textures["fifteen"]);
-        let back = new PIXI.Sprite(textures["back"]);
-        let text = new PIXI.Text("B O A R D   S I Z E",{fontFamily : 'Rockwell', fontSize: 24, fill : 'white', align: 'center'});
+        let five = new PIXI.Sprite(this.textureSheet.textures["button_sizeFive"]);
+        let ten = new PIXI.Sprite(this.textureSheet.textures["button_sizeTen"]);
+        let fifteen = new PIXI.Sprite(this.textureSheet.textures["button_sizeFifteen"]);
+        let back = new PIXI.Sprite(this.textureSheet.textures["button_back"]);
+        let text = new PIXI.Text("B O A R D   S I Z E",{fontFamily : 'Calibri', fontSize: 24, fill : 'white', align: 'center'});
         let sound = PIXI.sound.Sound.from({
             url: './res/sound/select.mp3',
             volume: 0.1
@@ -45,50 +46,50 @@ export default class GameSizeMenu extends PIXI.Container {
         back.interactive = true;
         
         five.on("pointerdown", ()=>{
-            five.texture = this.textures["fiveFocus"];
+            five.texture = this.textureSheet.textures["button_sizeFive_down"];
         });
         ten.on("pointerdown", ()=>{
-            ten.texture = this.textures["tenFocus"];
+            ten.texture = this.textureSheet.textures["button_sizeTen_down"];
         });
         fifteen.on("pointerdown", ()=>{
-            fifteen.texture = this.textures["fifteenFocus"];
+            fifteen.texture = this.textureSheet.textures["button_sizeFifteen_down"];
         });
         back.on("pointerdown", ()=>{
-            back.texture = this.textures["backFocus"];
+            back.texture = this.textureSheet.textures["button_back_down"];
         });
 
         five.on("pointerup", ()=>{
-            five.texture = this.textures["five"];
+            five.texture = this.textureSheet.textures["button_sizeFive"];
             sound.play();
-            ScreenManager.changeScreen("gamescreen").newPuzzle(null, 5);
+            ScreenManager.changeScreen("gamescreen").newPuzzle();
         });
         ten.on("pointerup", ()=>{
-            ten.texture = this.textures["ten"];
+            ten.texture = this.textureSheet.textures["button_sizeTen"];
             sound.play();
-            ScreenManager.changeScreen("gamescreen").newPuzzle(null, 10);
+            ScreenManager.changeScreen("gamescreen").newPuzzle({puzzleSize:10});
         });
         fifteen.on("pointerup", ()=>{
-            fifteen.texture = this.textures["fifteen"];
+            fifteen.texture = this.textureSheet.textures["button_sizeFifteen"];
             sound.play();
-            ScreenManager.changeScreen("gamescreen").newPuzzle(null, 15);
+            ScreenManager.changeScreen("gamescreen").newPuzzle({puzzleSize:15});
         });
         back.on("pointerup", ()=>{
-            back.texture = this.textures["back"];
+            back.texture = this.textureSheet.textures["button_back"];
             ScreenManager.previousScreen();
             soundBack.play();
         });
 
         five.on("pointerout", ()=>{
-            five.texture = this.textures["five"];
+            five.texture = this.textureSheet.textures["button_sizeFive"];
         });
         ten.on("pointerout", ()=>{
-            ten.texture = this.textures["ten"];
+            ten.texture = this.textureSheet.textures["button_sizeTen"];
         });
         fifteen.on("pointerout", ()=>{
-            fifteen.texture = this.textures["fifteen"];
+            fifteen.texture = this.textureSheet.textures["button_sizeFifteen"];
         });
         back.on("pointerout", ()=>{
-            back.texture = this.textures["back"];
+            back.texture = this.textureSheet.textures["button_back"];
         });
     }
 
