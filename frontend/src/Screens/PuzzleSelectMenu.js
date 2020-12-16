@@ -1,16 +1,18 @@
 import ScreenManager from "../utils/ScreenManager.js";
 
 export default class PuzzleSelectMenu extends PIXI.Container {
-    constructor(textures) {
+    constructor(data) {
         super();
-        this.textures = textures;
+        
+        this.textureSheet = data.textureSheet;
 
-        this.background = new PIXI.Sprite(this.textures["background"]);
+        this.background = new PIXI.Sprite(data.background);
         this.addChild(this.background);
+
         this.alpha = 0.8;
-        this.levelBrowser = new PIXI.Sprite(textures["levelBrowser"]);
-        this.random = new PIXI.Sprite(textures["random"]);
-        this.back = new PIXI.Sprite(textures["back"]);
+        this.levelBrowser = new PIXI.Sprite(this.textureSheet.textures["button_puzzleBrowser"]);
+        this.random = new PIXI.Sprite(this.textureSheet.textures["button_random"]);
+        this.back = new PIXI.Sprite(this.textureSheet.textures["button_back"]);
         this.text = new PIXI.Text("P U Z Z L E   S E L E C T",{fontFamily : 'Rockwell', fontSize: 24, fill : 'white', align: 'center'});
         this.sound = PIXI.sound.Sound.from({
             url: './res/sound/select.mp3',
@@ -52,41 +54,41 @@ export default class PuzzleSelectMenu extends PIXI.Container {
             this.back.alpha = 1.2;
         });
         this.levelBrowser.on("pointerdown", ()=>{
-            this.levelBrowser.texture = textures["levelBrowserFocus"];
+            this.levelBrowser.texture = this.textureSheet.textures["button_puzzleBrowser_down"];
         });
         this.random.on("pointerdown", ()=>{
-            this.random.texture = textures["randomFocus"];
+            this.random.texture = this.textureSheet.textures["button_random_down"];
         });
         this.back.on("pointerdown", ()=>{
-            this.back.texture = textures["backFocus"];
+            this.back.texture = this.textureSheet.textures["button_back_down"];
         });
 
         this.levelBrowser.on("pointerup", ()=>{
-            this.levelBrowser.texture = textures["levelBrowser"];
+            this.levelBrowser.texture = this.textureSheet.textures["button_puzzleBrowser"];
             this.sound.play();
-            ScreenManager.changeScreen("gamescreen").newPuzzle(textures.presentationPuzzle);
+            ScreenManager.changeScreen("gamescreen").newPuzzle({puzzleData:data.presentationPuzzle});
         });
         this.random.on("pointerup", ()=>{
-            this.random.texture = textures["random"];
+            this.random.texture = this.textureSheet.textures["button_random"];
             this.sound.play();
             ScreenManager.changeScreen("gamesizemenu");
         });
         this.back.on("pointerup", ()=>{
-            this.back.texture = textures["back"];
+            this.back.texture = this.textureSheet.textures["button_back"];
             ScreenManager.previousScreen();
             this.soundBack.play();
         });
 
         this.levelBrowser.on("pointerout", ()=>{
-            this.levelBrowser.texture = textures["levelBrowser"];
+            this.levelBrowser.texture = this.textureSheet.textures["button_puzzleBrowser"];
             this.levelBrowser.alpha = 1;
         });
         this.random.on("pointerout", ()=>{
-            this.random.texture = textures["random"];
+            this.random.texture = this.textureSheet.textures["button_random"];
             this.random.alpha = 1;
         });
         this.back.on("pointerout", ()=>{
-            this.back.texture = textures["back"];
+            this.back.texture = this.textureSheet.textures["button_back"];
             this.back.alpha = 1;
         });
     }

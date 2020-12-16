@@ -42,88 +42,88 @@
         "number_9": {
             "frame": {"x": 72, "y": 32, "w": 8, "h": 8}
         },
-        "back": {
+        "button_back": {
             "frame": {"x": 128, "y": 16, "w": 64, "h": 32}
         },
-        "backFocus": {
+        "button_back_down": {
             "frame": {"x": 192, "y": 16, "w": 64, "h": 32}
         },
-        "solo": {
+        "button_solo": {
             "frame": {"x": 0, "y": 48, "w": 64, "h": 32}
         },
-        "soloFocus": {
+        "button_solo_down": {
             "frame": {"x": 64, "y": 48, "w": 64, "h": 32}
         },
-        "online": {
+        "button_online": {
             "frame": {"x": 128, "y": 48, "w": 64, "h": 32}
         },
-        "onlineFocus": {
+        "button_online_down": {
             "frame": {"x": 192, "y": 48, "w": 64, "h": 32}
         },
-        "build": {
+        "button_build": {
             "frame": {"x": 0, "y": 112, "w": 64, "h": 32}
         },
-        "buildFocus": {
+        "button_build_down": {
             "frame": {"x": 64, "y": 112, "w": 64, "h": 32}
         },
-        "levelBrowser": {
+        "button_puzzleBrowser": {
             "frame": {"x": 128, "y": 112, "w": 64, "h": 32}
         },
-        "levelBrowserFocus": {
+        "button_puzzleBrowser_down": {
             "frame": {"x":192, "y": 112, "w": 64, "h": 32}
         },
-        "random": {
+        "button_random": {
             "frame": {"x": 0, "y": 80, "w": 64, "h": 32}
         },
-        "randomFocus": {
+        "button_random_down": {
             "frame": {"x": 64, "y": 80, "w": 64, "h": 32}
         },
-        "host": {
+        "button_host": {
             "frame": {"x": 128, "y": 80, "w": 64, "h": 32}
         },
-        "hostFocus": {
+        "button_host_down": {
             "frame": {"x": 192, "y": 80, "w": 64, "h": 32}
         },
-        "join": {
+        "button_join": {
             "frame": {"x": 0, "y": 144, "w": 64, "h": 32}
         },
-        "joinFocus": {
+        "button_join_down": {
             "frame": {"x": 64, "y": 144, "w": 64, "h": 32}
         },
-        "restart": {
+        "button_restart": {
             "frame": {"x": 128, "y": 144, "w": 64, "h": 32}
         },
-        "restartFocus": {
+        "button_restart_down": {
             "frame": {"x": 192, "y": 144, "w": 64, "h": 32}
         },
-        "five": {
+        "button_sizeFive": {
             "frame": {"x": 0, "y": 176, "w": 128, "h": 32}
         },
-        "fiveFocus": {
+        "button_sizeFive_down": {
             "frame": {"x": 128, "y": 176, "w": 128, "h": 32}
         },
-        "ten": {
+        "button_sizeTen": {
             "frame": {"x": 0, "y": 208, "w": 128, "h": 32}
         },
-        "tenFocus": {
+        "button_sizeTen_down": {
             "frame": {"x": 128, "y": 208, "w": 128, "h": 32}
         },
-        "fifteen": {
+        "button_sizeFifteen": {
             "frame": {"x": 0, "y": 240, "w": 128, "h": 32}
         },
-        "fifteenFocus": {
+        "button_sizeFifteen_down": {
             "frame": {"x": 128, "y": 240, "w": 128, "h": 32}
         },
-        "mainmenu": {
+        "button_menu": {
             "frame": {"x": 0, "y": 272, "w": 64, "h": 32}
         },
-        "mainmenuFocus": {
+        "button_menu_down": {
             "frame": {"x": 64, "y": 272, "w": 64, "h": 32}
         },
-        "audio": {
+        "button_audio_on": {
             "frame": {"x": 128, "y": 286, "w": 17, "h": 18}
         },
-        "audioSilent": {
+        "button_audio_off": {
             "frame": {"x": 145, "y": 286, "w": 17, "h": 18}
         }
     },

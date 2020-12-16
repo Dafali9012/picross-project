@@ -1,15 +1,18 @@
 import ScreenManager from "../utils/ScreenManager.js";
 
 export default class PicrossMenu extends PIXI.Container {
-    constructor(textures) {
+    constructor(data) {
         super();
-        this.textures = textures;
-        this.background = new PIXI.Sprite(this.textures["background"]);
+
+        this.textureSheet = data.textureSheet;
+
+        this.background = new PIXI.Sprite(data.background);
         this.addChild(this.background);
+
         this.alpha = 0.8;
-        this.solo = new PIXI.Sprite(textures["solo"]);
-        this.online = new PIXI.Sprite(textures["online"]);
-        this.build = new PIXI.Sprite(textures["build"]);
+        this.solo = new PIXI.Sprite(this.textureSheet.textures["button_solo"]);
+        this.online = new PIXI.Sprite(this.textureSheet.textures["button_online"]);
+        this.build = new PIXI.Sprite(this.textureSheet.textures["button_build"]);
         this.text = new PIXI.Text("P I C R O S S",{fontFamily : 'Rockwell', fontSize: 24, fill : 'white', align: 'center'});
         this.sound = PIXI.sound.Sound.from({
             url: './res/sound/select.mp3',
@@ -38,7 +41,7 @@ export default class PicrossMenu extends PIXI.Container {
         this.online.buttonMode = true;
         
         this.solo.on("pointerdown", ()=>{
-            this.solo.texture = this.textures["soloFocus"];
+            this.solo.texture = this.textureSheet.textures["button_solo_down"];
         });
         this.solo.on("mouseover", ()=>{
             this.solo.alpha = 1.2;
@@ -50,37 +53,37 @@ export default class PicrossMenu extends PIXI.Container {
             this.build.alpha = 1.2;
         });
         this.online.on("pointerdown", ()=>{
-            online.texture = this.textures["onlineFocus"];
+            online.texture = this.textureSheet.textures["button_online_down"];
         });
         this.build.on("pointerdown", ()=>{
-            this.build.texture = this.textures["buildFocus"];
+            this.build.texture = this.textureSheet.textures["button_build_down"];
         });
 
         this.solo.on("pointerup", ()=>{
-            this.solo.texture = textures["solo"];
+            this.solo.texture = this.textureSheet.textures["button_solo"];
             this.sound.play();
             ScreenManager.changeScreen("puzzlemenu");
         });
         this.online.on("pointerup", ()=>{
-            this.online.texture = textures["online"];
+            this.online.texture = this.textureSheet.textures["button_online"];
             this.sound.play();
             ScreenManager.changeScreen("multiplayermenu");
         });
         this.build.on("pointerup", ()=>{
-            this.build.texture = this.textures["build"];
+            this.build.texture = this.textureSheet.textures["button_build"];
             this.sound.play();
         });
 
         this.solo.on("pointerout", ()=>{
-            this.solo.texture = textures["solo"];
+            this.solo.texture = this.textureSheet.textures["button_solo"];
             this.solo.alpha = 1;
         });
         this.online.on("pointerout", ()=>{
-            this.online.texture = textures["online"];
+            this.online.texture = this.textureSheet.textures["button_online"];
             this.online.alpha = 1;
         });
         this.build.on("pointerout", ()=>{
-            this.build.texture = this.textures["build"];
+            this.build.texture = this.textureSheet.textures["button_build"];
             this.build.alpha = 1;
         });
     }

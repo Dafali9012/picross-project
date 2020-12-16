@@ -1,16 +1,17 @@
 import ScreenManager from "../utils/ScreenManager.js";
 
 export default class MultiplayerMenu extends PIXI.Container {
-    constructor(textures) {
+    constructor(data) {
         super();
-        this.textures = textures;
+        
+        this.textureSheet = data.textureSheet;
 
-        this.background = new PIXI.Sprite(this.textures["background"]);
+        this.background = new PIXI.Sprite(data.background);
         this.addChild(this.background);
 
-        this.host = new PIXI.Sprite(textures["host"]);
-        this.join = new PIXI.Sprite(textures["join"]);
-        this.back = new PIXI.Sprite(textures["back"]);
+        this.host = new PIXI.Sprite(this.textureSheet.textures["button_host"]);
+        this.join = new PIXI.Sprite(this.textureSheet.textures["button_join"]);
+        this.back = new PIXI.Sprite(this.textureSheet.textures["button_back"]);
         this.text = new PIXI.Text("M U L T I P L A Y E R", {fontFamily: "Rockwell", fontSize: 24, fill: "white", align: "center"});
         this.sound = PIXI.sound.Sound.from({
             url: "./res/sound/select.mp3",
@@ -54,39 +55,39 @@ export default class MultiplayerMenu extends PIXI.Container {
         });
 
         this.host.on("pointerdown", () => {
-            this.host.texture = textures["hostFocus"];
+            this.host.texture = this.textureSheet.textures["button_host_down"];
         });
         this.join.on("pointerdown", () => {
-            this.join.texture = textures["joinFocus"];
+            this.join.texture = this.textureSheet.textures["button_join_down"];
         });
         this.back.on("pointerdown", ()=>{
-            this.back.texture = textures["backFocus"];
+            this.back.texture = this.textureSheet.textures["button_back_down"];
         });
 
         this.host.on("pointerup", () => {
-            this.host.texture = textures["host"];
+            this.host.texture = this.textureSheet.textures["button_host"];
             this.sound.play();
         });
         this.join.on("pointerup", () => {
-            this.join.texture = textures["join"];
+            this.join.texture = this.textureSheet.textures["button_join"];
             this.sound.play();
         });
         this.back.on("pointerup", ()=>{
-            this.back.texture = textures["back"];
+            this.back.texture = this.textureSheet.textures["button_back"];
             this.soundBack.play();
             ScreenManager.previousScreen();
         });
 
         this.host.on("pointerout", () => {
-            this.host.texture = textures["host"];
+            this.host.texture = this.textureSheet.textures["button_host"];
             this.host.alpha = 1;
         });
         this.join.on("pointerout", () => {
-            this.join.texture = textures["join"];
+            this.join.texture = this.textureSheet.textures["button_join"];
             this.join.alpha = 1;
         });
         this.back.on("pointerout", ()=>{
-            this.back.texture = textures["back"];
+            this.back.texture = this.textureSheet.textures["button_back"];
             this.back.alpha = 1;
         });
     }

@@ -9,7 +9,6 @@ import GameSizeMenu from "./Screens/GameSizeMenu.js";
 
 export default class Game {
     constructor() {
-
         this.app = new PIXI.Application({width:512, height:288, resolution:window.innerHeight/288});
         this.app.renderer.backgroundColor = "0xfd9168";
         PIXI.SCALE_MODES = PIXI.SCALE_MODES.NEAREST;
@@ -28,55 +27,37 @@ export default class Game {
             let textureSheet = resources["texture_sheet"].spritesheet;
         
             ScreenManager.init(this.app.stage);
-            ScreenManager.addNewScreen("gamescreen", 
+            ScreenManager.addScreen("gamescreen", 
                 new GameScreen({
                     textureSheet: textureSheet,
                     background: resources["bg_orange"].texture
                 })
             );
-            ScreenManager.addNewScreen("picrossmenu",
-            new PicrossMenu({
-                background: resources["bg_orange"].texture,
-                solo: textureSheet.textures["solo"],
-                soloFocus: textureSheet.textures["soloFocus"],
-                online: textureSheet.textures["online"],
-                onlineFocus: textureSheet.textures["onlineFocus"],
-                build: textureSheet.textures["build"],
-                buildFocus: textureSheet.textures["buildFocus"]
-            }));
-            ScreenManager.addNewScreen("multiplayermenu", 
-            new MultiplayerMenu({
-                background: resources["bg_orange"].texture,
-                host: textureSheet.textures["host"],
-                hostFocus: textureSheet.textures["hostFocus"],
-                join: textureSheet.textures["join"],
-                joinFocus: textureSheet.textures["joinFocus"],
-                back: textureSheet.textures["back"],
-                backFocus: textureSheet.textures["backFocus"]
-            }));
-            ScreenManager.addNewScreen("puzzlemenu", 
-            new PuzzleSelectMenu({
-                background: resources["bg_orange"].texture,
-                levelBrowser: textureSheet.textures["levelBrowser"],
-                levelBrowserFocus: textureSheet.textures["levelBrowserFocus"],
-                random: textureSheet.textures["random"],
-                randomFocus: textureSheet.textures["randomFocus"],
-                presentationPuzzle: resources["testdata"].data,
-                back: textureSheet.textures["back"],
-                backFocus: textureSheet.textures["backFocus"]
-            }));
-            ScreenManager.addNewScreen("gamesizemenu", 
-            new GameSizeMenu({
-                background: resources["bg_orange"].texture,
-                five: textureSheet.textures["five"],
-                fiveFocus: textureSheet.textures["fiveFocus"],
-                ten: textureSheet.textures["ten"],
-                tenFocus: textureSheet.textures["tenFocus"],
-                fifteen: textureSheet.textures["fifteen"],
-                fifteenFocus: textureSheet.textures["fifteenFocus"],
-                back: textureSheet.textures["back"],
-                backFocus: textureSheet.textures["backFocus"]
-            }));
+            ScreenManager.addScreen("picrossmenu",
+                new PicrossMenu({
+                    textureSheet: textureSheet,
+                    background: resources["bg_orange"].texture
+                })
+            );
+            ScreenManager.addScreen("multiplayermenu", 
+                new MultiplayerMenu({
+                    textureSheet: textureSheet,
+                    background: resources["bg_orange"].texture,
+                })
+            );
+            ScreenManager.addScreen("puzzlemenu", 
+                new PuzzleSelectMenu({
+                    textureSheet: textureSheet,
+                    background: resources["bg_orange"].texture,
+                    presentationPuzzle: resources["testdata"].data
+                })
+            );
+            ScreenManager.addScreen("gamesizemenu", 
+                new GameSizeMenu({
+                    textureSheet: textureSheet,
+                    background: resources["bg_orange"].texture
+                })
+            );
 
             ScreenManager.changeScreen("picrossmenu");
             Input.init(this.app.stage);

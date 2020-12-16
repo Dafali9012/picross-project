@@ -5,12 +5,16 @@ import Input from "../utils/Input.js";
 export default class GameScreen extends PIXI.Container {
     constructor(data) {
         super();
+
         this.textureSheet = data.textureSheet;
+
         this.background = new PIXI.Sprite(data.background);
         this.addChild(this.background);
+
         this.puzzle = new Puzzle(data);
         this.puzzle.x = (512-this.puzzle.width)/2;
         this.addChild(this.puzzle);
+
         this.won = false;
         this.back = PIXI.sound.Sound.from({
             url: "./res/sound/back.mp3",
@@ -36,13 +40,13 @@ export default class GameScreen extends PIXI.Container {
             volume: 0.1
         });
 
-        this.mainmenu = new PIXI.Sprite(this.textureSheet.textures["mainmenu"]);
-        this.audio = new PIXI.Sprite(this.textureSheet.textures["audio"]);
+        this.mainmenu = new PIXI.Sprite(this.textureSheet.textures["button_menu"]);
+        this.audio = new PIXI.Sprite(this.textureSheet.textures["button_audio_on"]);
         this.audio.x = ((512-this.puzzle.width)/2 + this.puzzle.width + (((512-this.puzzle.width)/2-this.mainmenu.width)/2));
         this.audio.y = this.mainmenu.height*2;
         this.mainmenu.x = ((512-this.puzzle.width)/2 + this.puzzle.width + (((512-this.puzzle.width)/2-this.mainmenu.width)/2));
         this.mainmenu.y = this.puzzle.height-this.mainmenu.height/2;
-        this.restart = new PIXI.Sprite(this.textureSheet.textures["restart"]);
+        this.restart = new PIXI.Sprite(this.textureSheet.textures["button_restart"]);
         this.addChild(this.restart);
         this.restart.position.set((512-this.puzzle.width)/2 + this.puzzle.width + (((512-this.puzzle.width)/2-this.restart.width)/2), (288-(this.restart.height)*3));
         this.restart.interactive = true;
@@ -61,33 +65,33 @@ export default class GameScreen extends PIXI.Container {
 
         this.restart.on("mouseover", ()=>{
             this.restart.alpha = 1.2;
-            this.restart.texture = this.textureSheet.textures["restart"];
+            this.restart.texture = this.textureSheet.textures["button_restart"];
         });
 
         this.restart.on("mousedown", ()=>{
-            this.restart.texture = this.textureSheet.textures["restartFocus"];
+            this.restart.texture = this.textureSheet.textures["button_restart_down"];
             this.restart.y = this.restart.y +1;
         });
 
         this.restart.on("mouseout", ()=> {
             this.restart.alpha = 1;
-            this.restart.texture = this.textureSheet.textures["restart"];
+            this.restart.texture = this.textureSheet.textures["button_restart"];
         });
 
         this.restart.on("mouseup", ()=> {
-            this.restart.texture = this.textureSheet.textures["restart"];
+            this.restart.texture = this.textureSheet.textures["button_restart"];
             this.restart.y = this.restart.y -1;
             this.soundReload.play();
             this.soundtrack.stop();
-            this.newPuzzle(null, this.puzzleSize);
-            this.audio.texture = this.textureSheet.textures["audio"];
+            this.newPuzzle({puzzleData:data.puzzleData});
+            this.audio.texture = this.textureSheet.textures["button_audio_on"];
         });
 
         this.mainmenu.on("pointerdown", ()=>{
-            this.mainmenu.texture = this.textureSheet.textures["mainmenuFocus"];
+            this.mainmenu.texture = this.textureSheet.textures["button_menu_down"];
         });
         this.audio.on("pointerdown", ()=>{
-            this.audio.texture = this.textureSheet.textures["audioSilent"];
+            this.audio.texture = this.textureSheet.textures["button_audio_off"];
             this.mainmenu.y = this.mainmenu.y -1;
         });
 
@@ -96,7 +100,7 @@ export default class GameScreen extends PIXI.Container {
         });
 
         this.mainmenu.on("pointerup", ()=>{
-            this.mainmenu.texture = this.textureSheet.textures["mainmenu"];
+            this.mainmenu.texture = this.textureSheet.textures["button_menu"];
             this.back.play();
             this.soundtrack.stop();
             ScreenManager.visitedScreens = [];
@@ -105,24 +109,23 @@ export default class GameScreen extends PIXI.Container {
         this.audio.on("click", ()=>{
             this.select.play();
             if(this.soundtrack.isPlaying) {
-                this.audio.texture = this.textureSheet.textures["audioSilent"];
+                this.audio.texture = this.textureSheet.textures["button_audio_off"];
                 //this.soundtrack.pause();
             } else {
-                this.audio.texture = this.textureSheet.textures["audio"];
+                this.audio.texture = this.textureSheet.textures["button_audio_on"];
                 //this.soundtrack.resume();
             }
         });
 
         this.mainmenu.on("pointerout", ()=>{
-            this.mainmenu.texture = this.textureSheet.textures["mainmenu"];
+            this.mainmenu.texture = this.textureSheet.textures["button_menu"];
             this.mainmenu.alpha = 1;
         });
 
         this.interactive = true;
     }
 
-    newPuzzle(puzzleData, puzzleSize) {
-        this.puzzleSize = puzzleSize;
+    newPuzzle(data) {
         this.won = false;
         this.alpha = 0.8;
         this.on("mouseup", ()=>{
@@ -138,12 +141,14 @@ export default class GameScreen extends PIXI.Container {
                 Input.operation = "";
             }
         });
+        
         this.removeChild(this.puzzle);
-        if(puzzleData) this.puzzle = new Puzzle({textureSheet:this.textureSheet, background:this.background, puzzleData:puzzleData});
-        else if(puzzleSize) this.puzzle = new Puzzle({textureSheet:this.textureSheet, background:this.background, puzzleSize:puzzleSize});
+
+        if(data.puzzleData) this.puzzle = new Puzzle({textureSheet:this.textureSheet, puzzleData:data.puzzleData});
+        else if(data.puzzleSize) this.puzzle = new Puzzle({textureSheet:this.textureSheet, puzzleSize:data.puzzleSize});
+
         this.puzzle.x = (512-this.puzzle.width)/2;
         this.addChild(this.puzzle);
-        //this.soundtrack.play();
     }
 
     scrollBackground(delta) {
