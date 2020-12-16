@@ -11,7 +11,6 @@ export default class Puzzle extends PIXI.Container {
         this.textMargin = 4;
         this.boxStructure = [];
         this.boxBox = new PIXI.Container();
-        console.log(this.puzzleData.data);
         this.boxSize = 288/this.puzzleData.data.length-(this.topMargin+this.bottomMargin)/this.puzzleData.data.length;
         this.buildBoxStructure();
         this.buildHints();

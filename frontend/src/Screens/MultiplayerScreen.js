@@ -1,6 +1,6 @@
 import ScreenManager from "../utils/ScreenManager.js";
 
-export default class MultiplayerMenu extends PIXI.Container {
+export default class MultiplayerScreen extends PIXI.Container {
     constructor(data) {
         super();
         

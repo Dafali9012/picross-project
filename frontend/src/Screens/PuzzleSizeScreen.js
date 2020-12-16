@@ -1,6 +1,6 @@
 import ScreenManager from "../utils/ScreenManager.js";
 
-export default class GameSizeMenu extends PIXI.Container {
+export default class PuzzleSizeScreen extends PIXI.Container {
     constructor(data) {
         super();
 

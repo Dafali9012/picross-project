@@ -18,7 +18,8 @@ export default class ScreenManager {
         return this.screens[screen];
     }
 
-    static addScreen(name, screen){
-        this.screens[name] = screen;
+    static addScreen(screen){
+        console.log(screen.constructor.name);
+        this.screens[screen.constructor.name] = screen;
     }
 }
