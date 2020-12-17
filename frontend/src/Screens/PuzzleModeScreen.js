@@ -1,3 +1,4 @@
+import Button from "../Button.js";
 import ScreenManager from "../utils/ScreenManager.js";
 
 export default class PuzzleModeScreen extends PIXI.Container {
@@ -9,88 +10,32 @@ export default class PuzzleModeScreen extends PIXI.Container {
         this.background = new PIXI.Sprite(data.background);
         this.addChild(this.background);
 
-        this.alpha = 0.8;
-        this.levelBrowser = new PIXI.Sprite(this.textureSheet.textures["button_puzzleBrowser"]);
-        this.random = new PIXI.Sprite(this.textureSheet.textures["button_random"]);
-        this.back = new PIXI.Sprite(this.textureSheet.textures["button_back"]);
-        this.text = new PIXI.Text("P U Z Z L E   S E L E C T",{fontFamily : 'Rockwell', fontSize: 24, fill : 'white', align: 'center'});
-        this.sound = PIXI.sound.Sound.from({
-            url: './res/sound/select.mp3',
-            volume: 0.05
-        });
-        this.soundBack = PIXI.sound.Sound.from({
-            url: "./res/sound/back.mp3",
-            volume: 0.05
+        this.title = new PIXI.AnimatedSprite(data.title.animations["mode_bounce"]);
+        this.title.animationSpeed = 0.02;
+        this.title.play();
+        this.title.anchor.set(0.5);
+        this.title.anchor.set(0);
+        this.title.position.set((512-this.title.width)/2, 32);
+        this.addChild(this.title);
+
+        this.buttonRandom = new Button(this.textureSheet, "text_random", () => {
+            ScreenManager.changeScreen("PuzzleSizeScreen").setBackgroundPosition(this.background.x, this.background.y);
         });
 
-        this.levelBrowser.x = (512-this.levelBrowser.width)/2;
-        this.levelBrowser.y = (288-this.levelBrowser.height)/3;
-        this.random.x = (512-this.random.width)/2;
-        this.random.y = (288-this.random.height)/2;
-        this.back.x = (512-this.back.width)/2;
-        this.back.y = (this.levelBrowser.y*2);
-        this.text.x = (512-this.text.width)/2;
-        this.text.y = (this.text.height);
+        this.buttonRandom.position.set(512/2, this.title.y + this.title.height + this.buttonRandom.height*2);
+        this.addChild(this.buttonRandom);
 
-        this.addChild(this.levelBrowser);
-        this.addChild(this.random);
-        this.addChild(this.back);
-        this.addChild(this.text);
-
-        this.levelBrowser.interactive = true;
-        this.random.interactive = true;
-        this.back.interactive = true;
-        this.levelBrowser.buttonMode = true;
-        this.random.buttonMode = true;
-        this.back.buttonMode = true;
-
-        this.levelBrowser.on("mouseover", ()=>{
-            this.levelBrowser.alpha = 1.2;
-        });
-        this.random.on("mouseover", ()=>{
-            this.random.alpha = 1.2;
-        });
-        this.back.on("mouseover", ()=>{
-            this.back.alpha = 1.2;
-        });
-        this.levelBrowser.on("pointerdown", ()=>{
-            this.levelBrowser.texture = this.textureSheet.textures["button_puzzleBrowser_down"];
-        });
-        this.random.on("pointerdown", ()=>{
-            this.random.texture = this.textureSheet.textures["button_random_down"];
-        });
-        this.back.on("pointerdown", ()=>{
-            this.back.texture = this.textureSheet.textures["button_back_down"];
+        this.buttonBack = new Button(this.textureSheet, "text_back", () => {
+            ScreenManager.previousScreen().setBackgroundPosition(this.background.x, this.background.y);
         });
 
-        this.levelBrowser.on("pointerup", ()=>{
-            this.levelBrowser.texture = this.textureSheet.textures["button_puzzleBrowser"];
-            this.sound.play();
-            ScreenManager.changeScreen("gamescreen").newPuzzle({puzzleData:data.presentationPuzzle});
-        });
-        this.random.on("pointerup", ()=>{
-            this.random.texture = this.textureSheet.textures["button_random"];
-            this.sound.play();
-            ScreenManager.changeScreen("gamesizemenu");
-        });
-        this.back.on("pointerup", ()=>{
-            this.back.texture = this.textureSheet.textures["button_back"];
-            ScreenManager.previousScreen();
-            this.soundBack.play();
-        });
+        this.buttonBack.position.set(512/2, this.buttonRandom.y + this.buttonBack.height);
+        this.addChild(this.buttonBack);
+    }
 
-        this.levelBrowser.on("pointerout", ()=>{
-            this.levelBrowser.texture = this.textureSheet.textures["button_puzzleBrowser"];
-            this.levelBrowser.alpha = 1;
-        });
-        this.random.on("pointerout", ()=>{
-            this.random.texture = this.textureSheet.textures["button_random"];
-            this.random.alpha = 1;
-        });
-        this.back.on("pointerout", ()=>{
-            this.back.texture = this.textureSheet.textures["button_back"];
-            this.back.alpha = 1;
-        });
+    setBackgroundPosition(x, y) {
+        this.background.position.set(x, y);
+        return this;
     }
 
     scrollBackground(delta) {

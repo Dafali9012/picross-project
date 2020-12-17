@@ -3,14 +3,28 @@
         "image": "title.png"
     },
     "frames": {
-        "1": {
+        "picross_1": {
             "frame": {"x":0, "y":0, "w": 144, "h": 32}
         },
-        "2": {
+        "picross_2": {
             "frame": {"x":0, "y":32, "w": 144, "h": 32}
+        },
+        "mode_1": {
+            "frame": {"x":0, "y":64, "w": 96, "h": 32}
+        },
+        "mode_2": {
+            "frame": {"x":0, "y":96, "w": 96, "h": 32}
+        },
+        "size_1": {
+            "frame": {"x":0, "y":128, "w": 80, "h": 32}
+        },
+        "size_2": {
+            "frame": {"x":0, "y":160, "w": 80, "h": 32}
         }
     },
     "animations": {
-        "bounce": ["1", "2"]
+        "picross_bounce": ["picross_1", "picross_2"],
+        "mode_bounce": ["mode_1", "mode_2"],
+        "size_bounce": ["size_1", "size_2"]
     }
 }

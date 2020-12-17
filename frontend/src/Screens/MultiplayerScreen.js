@@ -92,6 +92,11 @@ export default class MultiplayerScreen extends PIXI.Container {
         });
     }
 
+    setBackgroundPosition(x, y) {
+        this.background.position.set(x, y);
+        return this;
+    }
+
     scrollBackground(delta) {
         this.background.x = (this.background.x+0.4*delta<0)?this.background.x+0.4*delta:-32;
         this.background.y = (this.background.y+0.2*delta<0)?this.background.y+0.2*delta:-32;

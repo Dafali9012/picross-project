@@ -20,13 +20,21 @@ export default class GameScreen extends PIXI.Container {
 
         this.interactive = true;
 
-        this.menuButton = new Button(this.textureSheet, "text_menu", () => {
-            ScreenManager.changeScreen("MainMenuScreen");
+        this.buttonMenu = new Button(this.textureSheet, "text_menu", () => {
+            ScreenManager.changeScreen("MainMenuScreen").setBackgroundPosition(this.background.x, this.background.y);
         });
 
-        this.menuButton.position.set(this.puzzle.x + this.puzzle.width + (512 - (this.puzzle.x + this.puzzle.width))/2,
+        this.buttonMenu.position.set(this.puzzle.x + this.puzzle.width + (512 - (this.puzzle.x + this.puzzle.width))/2,
                                     this.puzzle.y + this.puzzle.height);
-        this.addChild(this.menuButton);
+        this.addChild(this.buttonMenu);
+
+        this.buttonRefresh = new Button(this.textureSheet, "text_refresh", () => {
+            this.newPuzzle({puzzleSize: this.puzzle.puzzleSize});
+        });
+
+        this.buttonRefresh.position.set(this.puzzle.x + this.puzzle.width + (512 - (this.puzzle.x + this.puzzle.width))/2,
+                                    this.puzzle.y + this.puzzle.height - this.buttonRefresh.height);
+        this.addChild(this.buttonRefresh);
     }
 
     newPuzzle(data) {
@@ -50,6 +58,11 @@ export default class GameScreen extends PIXI.Container {
 
         this.puzzle.x = (512-this.puzzle.width)/2;
         this.addChild(this.puzzle);
+    }
+
+    setBackgroundPosition(x, y) {
+        this.background.position.set(x, y);
+        return this;
     }
 
     scrollBackground(delta) {

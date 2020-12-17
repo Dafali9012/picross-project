@@ -52,13 +52,15 @@ export default class Game {
                 new PuzzleModeScreen({
                     textureSheet: textureSheet,
                     background: resources["bg_orange"].texture,
+                    title: resources["title"].spritesheet,
                     presentationPuzzle: resources["testdata"].data
                 })
             );
             ScreenManager.addScreen(
                 new PuzzleSizeScreen({
                     textureSheet: textureSheet,
-                    background: resources["bg_orange"].texture
+                    background: resources["bg_orange"].texture,
+                    title: resources["title"].spritesheet
                 })
             );
 

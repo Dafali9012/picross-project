@@ -8,7 +8,7 @@ export default class ScreenManager {
 
     static previousScreen() {
         this.visitedScreens.pop();
-        this.changeScreen(this.visitedScreens.pop());
+        return this.changeScreen(this.visitedScreens.pop());
     }
 
     static changeScreen(screen) {
@@ -19,7 +19,6 @@ export default class ScreenManager {
     }
 
     static addScreen(screen){
-        console.log(screen.constructor.name);
         this.screens[screen.constructor.name] = screen;
     }
 }
