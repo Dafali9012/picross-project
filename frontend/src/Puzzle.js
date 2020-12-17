@@ -1,4 +1,5 @@
 import Box from "./Box.js";
+import HSL2HEX from "./utils/HSL2HEX.js";
 
 export default class Puzzle extends PIXI.Container {
     constructor(data) {
@@ -28,14 +29,19 @@ export default class Puzzle extends PIXI.Container {
     }
 
     buildRandomPuzzle(){
-        let title = "Ass!";
-        let data = []
-        let randomColor_1 = "0x";
-        let randomColor_2 = "0x";
-        for(let i = 0; i < 6; i++) {
-            randomColor_1 += "0123456789ABCDEF".charAt(Math.floor(Math.random()*16));
-            randomColor_2 += "0123456789ABCDEF".charAt(Math.floor(Math.random()*16));
+        let title = "Complete!";
+        let data = [];
+
+        let colors = [];
+        for(let i = 0; i < 360; i += 20) {
+            colors.push(HSL2HEX.convert(i,100,65));
         }
+
+        let randomIndex = Math.floor(Math.random()*colors.length);
+        let randomColor_1 = colors[randomIndex];
+        colors.splice(colors.indexOf(colors[randomIndex]),1);
+        let randomColor_2 = colors[Math.floor(Math.random()*colors.length)];
+
         for(let row = 0; row < this.puzzleSize; row++){
             data[row] = [];
 
