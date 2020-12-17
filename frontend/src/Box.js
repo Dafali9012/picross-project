@@ -40,7 +40,6 @@ export default class Box extends PIXI.Container {
             }
         });
         this.on("rightdown", ()=>{
-            console.log(this.color, this.solutionFilled);
             if(this.state == "filled" || this.state == "crossed") {
                 this.state = "empty";
                 this.spriteProgress.texture = this.textureSheet.textures["box_empty"];

@@ -3,18 +3,23 @@ import Box from "./Box.js";
 export default class Puzzle extends PIXI.Container {
     constructor(data) {
         super();
+
+        this.textureSheet = data.textureSheet;
+
         this.puzzleSize = data.puzzleSize?data.puzzleSize:1;
         this.puzzleData = data.puzzleData?data.puzzleData:this.buildRandomPuzzle();
-        this.textureSheet = data.textureSheet;
+
         this.topMargin = 60;
         this.bottomMargin = 20;
         this.textMargin = 4;
+
         this.boxStructure = [];
         this.boxBox = new PIXI.Container();
-        console.log(this.puzzleData.data);
         this.boxSize = 288/this.puzzleData.data.length-(this.topMargin+this.bottomMargin)/this.puzzleData.data.length;
+
         this.buildBoxStructure();
         this.buildHints();
+
         this.title = new PIXI.Text(this.puzzleData.meta.title, {fontFamily: "Calibri"});
         this.title.position.set((this.boxBox.width-this.title.width)/2 + (this.hints.width+this.boxSize/2-this.boxSize*this.boxStructure.length)/2,
                                 (this.topMargin-this.title.height)/2);
@@ -28,10 +33,11 @@ export default class Puzzle extends PIXI.Container {
         let rowArray = []
         let row;
         let randomFinishedColor = "0x"+Math.floor(Math.random()*16777215).toString(16);
+        let randomFinishedColor2 = "0x"+Math.floor(Math.random()*16777215).toString(16);
         for(let i = 0; i<this.puzzleSize; i++){
             for(let col = 0; col<this.puzzleSize; col++){
                 let filled = Math.round(Math.random());
-                let color = "0xf2f2f2";
+                let color = randomFinishedColor2;
                 if(filled){
                     color = randomFinishedColor;
                 }

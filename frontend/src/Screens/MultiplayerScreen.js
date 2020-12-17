@@ -1,6 +1,6 @@
 import ScreenManager from "../utils/ScreenManager.js";
 
-export default class MultiplayerMenu extends PIXI.Container {
+export default class MultiplayerScreen extends PIXI.Container {
     constructor(data) {
         super();
         
@@ -90,6 +90,11 @@ export default class MultiplayerMenu extends PIXI.Container {
             this.back.texture = this.textureSheet.textures["button_back"];
             this.back.alpha = 1;
         });
+    }
+
+    setBackgroundPosition(x, y) {
+        this.background.position.set(x, y);
+        return this;
     }
 
     scrollBackground(delta) {
