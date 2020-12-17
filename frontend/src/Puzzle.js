@@ -28,24 +28,25 @@ export default class Puzzle extends PIXI.Container {
     }
 
     buildRandomPuzzle(){
-        let title = "Completed!";
+        let title = "Ass!";
         let data = []
-        let rowArray = []
-        let row;
-        let randomFinishedColor = "0x"+Math.floor(Math.random()*16777215).toString(16);
-        let randomFinishedColor2 = "0x"+Math.floor(Math.random()*16777215).toString(16);
-        for(let i = 0; i<this.puzzleSize; i++){
-            for(let col = 0; col<this.puzzleSize; col++){
+        let randomColor_1 = "0x";
+        let randomColor_2 = "0x";
+        for(let i = 0; i < 6; i++) {
+            randomColor_1 += "0123456789ABCDEF".charAt(Math.floor(Math.random()*16));
+            randomColor_2 += "0123456789ABCDEF".charAt(Math.floor(Math.random()*16));
+        }
+        for(let row = 0; row < this.puzzleSize; row++){
+            data[row] = [];
+
+            for(let col = 0; col < this.puzzleSize; col++){
+
                 let filled = Math.round(Math.random());
-                let color = randomFinishedColor2;
-                if(filled){
-                    color = randomFinishedColor;
+                data[row][col] = {
+                    filled:filled,
+                    color:filled?randomColor_1:randomColor_2
                 }
-                row = {filled: filled, color: color}
-                rowArray.push(row)
             }
-            data.push(rowArray)
-            rowArray = []
         }
         let randomPuzzle = {meta: {title, dimensions:this.puzzleSize}, data};
         return randomPuzzle;
