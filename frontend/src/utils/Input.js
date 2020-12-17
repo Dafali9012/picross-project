@@ -14,11 +14,9 @@ export default class Input {
 
     static onHold() {
         this.hold = true;
-        console.log("Holding");
     }
     
     static onRelease() {
         this.hold = false;
-        console.log("Released");
     }
 }

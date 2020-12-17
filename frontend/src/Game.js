@@ -1,11 +1,12 @@
-import PicrossMenu from "./screens/PicrossMenu.js";
-import PuzzleSelectMenu from "./screens/PuzzleSelectMenu.js";
-import MultiplayerMenu from "./screens/MultiplayerMenu.js";
+import MainMenuScreen from "./Screens/MainMenuScreen.js";
+import PuzzleModeScreen from "./Screens/PuzzleModeScreen.js";
+import PuzzleSizeScreen from "./Screens/PuzzleSizeScreen.js";
+import MultiplayerScreen from "./Screens/MultiplayerScreen.js";
 import GameScreen from "./screens/GameScreen.js";
 
 import Input from "./utils/Input.js";
 import ScreenManager from "./utils/ScreenManager.js";
-import GameSizeMenu from "./Screens/GameSizeMenu.js";
+
 
 export default class Game {
     constructor() {
@@ -20,46 +21,50 @@ export default class Game {
 
         let loader = new PIXI.Loader();
         loader
-        .add("texture_sheet", "./res/texture_sheet.json")
+        .add("texture_sheet", "./res/texture_sheet_test.json")
         .add("bg_orange", "./res/bg_orange.png")
         .add("testdata", "./res/test_json/test5x.json")
+        .add("title", "./res/title.json")
         .load((loader, resources)=>{
             let textureSheet = resources["texture_sheet"].spritesheet;
         
             ScreenManager.init(this.app.stage);
-            ScreenManager.addScreen("gamescreen", 
+            ScreenManager.addScreen( 
                 new GameScreen({
                     textureSheet: textureSheet,
                     background: resources["bg_orange"].texture
                 })
             );
-            ScreenManager.addScreen("picrossmenu",
-                new PicrossMenu({
+            ScreenManager.addScreen(
+                new MainMenuScreen({
                     textureSheet: textureSheet,
-                    background: resources["bg_orange"].texture
+                    background: resources["bg_orange"].texture,
+                    title: resources["title"].spritesheet
                 })
             );
-            ScreenManager.addScreen("multiplayermenu", 
-                new MultiplayerMenu({
+            ScreenManager.addScreen(
+                new MultiplayerScreen({
                     textureSheet: textureSheet,
                     background: resources["bg_orange"].texture,
                 })
             );
-            ScreenManager.addScreen("puzzlemenu", 
-                new PuzzleSelectMenu({
+            ScreenManager.addScreen(
+                new PuzzleModeScreen({
                     textureSheet: textureSheet,
                     background: resources["bg_orange"].texture,
+                    title: resources["title"].spritesheet,
                     presentationPuzzle: resources["testdata"].data
                 })
             );
-            ScreenManager.addScreen("gamesizemenu", 
-                new GameSizeMenu({
+            ScreenManager.addScreen(
+                new PuzzleSizeScreen({
                     textureSheet: textureSheet,
-                    background: resources["bg_orange"].texture
+                    background: resources["bg_orange"].texture,
+                    title: resources["title"].spritesheet
                 })
             );
 
-            ScreenManager.changeScreen("picrossmenu");
+            ScreenManager.changeScreen("MainMenuScreen");
             Input.init(this.app.stage);
 
             this.app.ticker.add(delta=>this.update(delta));
