@@ -13,7 +13,7 @@ export default class ScreenManager {
 
     static changeScreen(screen) {
         this.visitedScreens.push(screen);
-        if(this.stage.children[0]) this.stage.removeChildAt(0);
+        if(this.stage.children[1]) this.stage.removeChildAt(1);
         this.stage.addChild(this.screens[screen]);
         return this.screens[screen];
     }

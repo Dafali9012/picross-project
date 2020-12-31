@@ -9,9 +9,6 @@ export default class GameScreen extends PIXI.Container {
 
         this.textureSheet = data.textureSheet;
 
-        this.background = new PIXI.Sprite(data.background);
-        this.addChild(this.background);
-
         this.puzzle = new Puzzle(data);
         this.puzzle.x = (512-this.puzzle.width)/2;
         this.addChild(this.puzzle);
@@ -21,7 +18,7 @@ export default class GameScreen extends PIXI.Container {
         this.interactive = true;
 
         this.buttonMenu = new Button(this.textureSheet, "text_menu", () => {
-            ScreenManager.changeScreen("MainMenuScreen").setBackgroundPosition(this.background.x, this.background.y);
+            ScreenManager.changeScreen("MainMenuScreen").refreshTitleColor();
         });
 
         this.buttonMenu.position.set(this.puzzle.x + this.puzzle.width + (512 - (this.puzzle.x + this.puzzle.width))/2,
@@ -60,16 +57,6 @@ export default class GameScreen extends PIXI.Container {
         this.addChild(this.puzzle);
     }
 
-    setBackgroundPosition(x, y) {
-        this.background.position.set(x, y);
-        return this;
-    }
-
-    scrollBackground(delta) {
-        this.background.x = (this.background.x+0.4*delta<0)?this.background.x+0.4*delta:-32;
-        this.background.y = (this.background.y+0.2*delta<0)?this.background.y+0.2*delta:-32;
-    }
-
     revealPicture() {
         this.puzzle.boxBox.children.forEach(x=>{
             x.revealColor();
@@ -79,7 +66,6 @@ export default class GameScreen extends PIXI.Container {
     }
 
     update(delta) {
-        this.scrollBackground(delta);
         if(this.won) this.revealPicture();
     }
 }

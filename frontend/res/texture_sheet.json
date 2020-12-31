@@ -42,89 +42,35 @@
         "number_9": {
             "frame": {"x": 72, "y": 32, "w": 8, "h": 8}
         },
-        "button_back": {
-            "frame": {"x": 128, "y": 16, "w": 64, "h": 32}
-        },
-        "button_back_down": {
-            "frame": {"x": 192, "y": 16, "w": 64, "h": 32}
-        },
-        "button_solo": {
+        "buttontest": {
             "frame": {"x": 0, "y": 48, "w": 64, "h": 32}
         },
-        "button_solo_down": {
-            "frame": {"x": 64, "y": 48, "w": 64, "h": 32}
+        "text_play": {
+            "frame": {"x": 0, "y": 96, "w": 32, "h": 16}
         },
-        "button_online": {
-            "frame": {"x": 128, "y": 48, "w": 64, "h": 32}
+        "text_build": {
+            "frame": {"x": 0, "y": 112, "w": 32, "h": 16}
         },
-        "button_online_down": {
-            "frame": {"x": 192, "y": 48, "w": 64, "h": 32}
+        "text_back": {
+            "frame": {"x": 32, "y": 96, "w": 32, "h": 16}
         },
-        "button_build": {
-            "frame": {"x": 0, "y": 112, "w": 64, "h": 32}
+        "text_menu": {
+            "frame": {"x": 32, "y": 112, "w": 32, "h": 16}
         },
-        "button_build_down": {
-            "frame": {"x": 64, "y": 112, "w": 64, "h": 32}
+        "text_random": {
+            "frame": {"x": 0, "y": 128, "w": 48, "h": 16}
         },
-        "button_puzzleBrowser": {
-            "frame": {"x": 128, "y": 112, "w": 64, "h": 32}
+        "text_5x5": {
+            "frame": {"x": 64, "y": 48, "w": 32, "h": 16}
         },
-        "button_puzzleBrowser_down": {
-            "frame": {"x":192, "y": 112, "w": 64, "h": 32}
+        "text_10x10": {
+            "frame": {"x": 64, "y": 64, "w": 32, "h": 16}
         },
-        "button_random": {
-            "frame": {"x": 0, "y": 80, "w": 64, "h": 32}
+        "text_15x15": {
+            "frame": {"x": 64, "y": 80, "w": 32, "h": 16}
         },
-        "button_random_down": {
-            "frame": {"x": 64, "y": 80, "w": 64, "h": 32}
-        },
-        "button_host": {
-            "frame": {"x": 128, "y": 80, "w": 64, "h": 32}
-        },
-        "button_host_down": {
-            "frame": {"x": 192, "y": 80, "w": 64, "h": 32}
-        },
-        "button_join": {
-            "frame": {"x": 0, "y": 144, "w": 64, "h": 32}
-        },
-        "button_join_down": {
-            "frame": {"x": 64, "y": 144, "w": 64, "h": 32}
-        },
-        "button_restart": {
-            "frame": {"x": 128, "y": 144, "w": 64, "h": 32}
-        },
-        "button_restart_down": {
-            "frame": {"x": 192, "y": 144, "w": 64, "h": 32}
-        },
-        "button_sizeFive": {
-            "frame": {"x": 0, "y": 176, "w": 128, "h": 32}
-        },
-        "button_sizeFive_down": {
-            "frame": {"x": 128, "y": 176, "w": 128, "h": 32}
-        },
-        "button_sizeTen": {
-            "frame": {"x": 0, "y": 208, "w": 128, "h": 32}
-        },
-        "button_sizeTen_down": {
-            "frame": {"x": 128, "y": 208, "w": 128, "h": 32}
-        },
-        "button_sizeFifteen": {
-            "frame": {"x": 0, "y": 240, "w": 128, "h": 32}
-        },
-        "button_sizeFifteen_down": {
-            "frame": {"x": 128, "y": 240, "w": 128, "h": 32}
-        },
-        "button_menu": {
-            "frame": {"x": 0, "y": 272, "w": 64, "h": 32}
-        },
-        "button_menu_down": {
-            "frame": {"x": 64, "y": 272, "w": 64, "h": 32}
-        },
-        "button_audio_on": {
-            "frame": {"x": 128, "y": 286, "w": 17, "h": 18}
-        },
-        "button_audio_off": {
-            "frame": {"x": 145, "y": 286, "w": 17, "h": 18}
+        "text_refresh": {
+            "frame": {"x": 64, "y": 112, "w": 16, "h": 16}
         }
     },
     "animations": {

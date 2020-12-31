@@ -6,9 +6,6 @@ export default class MultiplayerScreen extends PIXI.Container {
         
         this.textureSheet = data.textureSheet;
 
-        this.background = new PIXI.Sprite(data.background);
-        this.addChild(this.background);
-
         this.host = new PIXI.Sprite(this.textureSheet.textures["button_host"]);
         this.join = new PIXI.Sprite(this.textureSheet.textures["button_join"]);
         this.back = new PIXI.Sprite(this.textureSheet.textures["button_back"]);
@@ -92,17 +89,6 @@ export default class MultiplayerScreen extends PIXI.Container {
         });
     }
 
-    setBackgroundPosition(x, y) {
-        this.background.position.set(x, y);
-        return this;
-    }
 
-    scrollBackground(delta) {
-        this.background.x = (this.background.x+0.4*delta<0)?this.background.x+0.4*delta:-32;
-        this.background.y = (this.background.y+0.2*delta<0)?this.background.y+0.2*delta:-32;
-    }
-
-    update(delta) {
-        this.scrollBackground(delta);
-    }
+    update(delta) {}
 }
