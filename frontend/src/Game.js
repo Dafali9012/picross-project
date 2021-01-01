@@ -70,12 +70,9 @@ export default class Game {
 
             Input.init(this.app.stage);
 
-            let font = new FontFaceObserver("myFont");
-            font.load().then(()=>{
-                console.log("my font has loaded");
-                ScreenManager.changeScreen("MainMenuScreen");
-                this.app.ticker.add(delta=>this.update(delta));
-            });
+            ScreenManager.changeScreen("MainMenuScreen");
+
+            this.app.ticker.add(delta=>this.update(delta));
         });
     }
 

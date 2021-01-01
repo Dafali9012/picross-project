@@ -1,3 +1,6 @@
 import Game from "./Game.js";
 
-new Game();
+let font = new FontFaceObserver("myFont");
+font.load().then(()=>{
+    new Game();
+});

@@ -15,8 +15,8 @@ export default class MainMenuScreen extends PIXI.Container {
             strokeThickness:1,
             align:"right"
         });
-        text.position.set(512 - 16 - text.width, 288 - 16 - text.height);
         this.addChild(text);
+        text.position.set(512 - 16 - text.width, 288 - 16 - text.height);
 
         this.title = new PIXI.AnimatedSprite(data.title.animations["picross_bounce"]);
         this.title.animationSpeed = 0.02;
