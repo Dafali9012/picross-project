@@ -1,4 +1,5 @@
 import Box from "./Box.js";
+import HSL2HEX from "./utils/HSL2HEX.js";
 
 export default class Puzzle extends PIXI.Container {
     constructor(data) {
@@ -20,7 +21,13 @@ export default class Puzzle extends PIXI.Container {
         this.buildBoxStructure();
         this.buildHints();
 
-        this.title = new PIXI.Text(this.puzzleData.meta.title, {fontFamily: "Calibri"});
+        this.title = new PIXI.Text(this.puzzleData.meta.title, {
+            fontFamily:"myFont",
+            fontSize:16, fill:0xFFFFFF,
+            stroke:0x000000,
+            strokeThickness:2,
+            align:"center"
+        });
         this.title.position.set((this.boxBox.width-this.title.width)/2 + (this.hints.width+this.boxSize/2-this.boxSize*this.boxStructure.length)/2,
                                 (this.topMargin-this.title.height)/2);
         this.title.alpha = 0;
@@ -28,27 +35,20 @@ export default class Puzzle extends PIXI.Container {
     }
 
     buildRandomPuzzle(){
-        let title = "Completed!";
-        let data = []
-        let rowArray = []
-        let row;
-        let randomFinishedColor = "0x"+Math.floor(Math.random()*16777215).toString(16);
-        let randomFinishedColor2 = "0x"+Math.floor(Math.random()*16777215).toString(16);
-        for(let i = 0; i<this.puzzleSize; i++){
-            for(let col = 0; col<this.puzzleSize; col++){
+        let title = "Complete!";
+        let data = [];
+
+        for(let row = 0; row < this.puzzleSize; row++){
+            data[row] = [];
+            for(let col = 0; col < this.puzzleSize; col++){
                 let filled = Math.round(Math.random());
-                let color = randomFinishedColor2;
-                if(filled){
-                    color = randomFinishedColor;
+                data[row][col] = {
+                    filled:filled,
+                    color:0x000000
                 }
-                row = {filled: filled, color: color}
-                rowArray.push(row)
             }
-            data.push(rowArray)
-            rowArray = []
         }
-        let randomPuzzle = {meta: {title, dimensions:this.puzzleSize}, data};
-        return randomPuzzle;
+        return {meta: {title, dimensions:this.puzzleSize}, data};
     }
 
     buildBoxStructure() {

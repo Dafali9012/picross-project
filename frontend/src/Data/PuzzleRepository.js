@@ -39,5 +39,4 @@ export default class PuzzleRepository{
             return puzzle;
         });
     }
-
 }

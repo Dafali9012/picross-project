@@ -1,0 +1,20 @@
+{
+  "name": "picross-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "fontfaceobserver": "^2.1.0",
+    "pixi-sound": "^3.0.5",
+    "pixi.js": "^5.3.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
