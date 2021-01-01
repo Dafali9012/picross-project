@@ -1,5 +1,6 @@
 import ScreenManager from "../utils/ScreenManager.js";
 import Button from "../Button.js";
+import BackgroundManager from "../utils/BackgroundManager.js";
 
 export default class PuzzleSizeScreen extends PIXI.Container {
     constructor(data) {
@@ -13,11 +14,11 @@ export default class PuzzleSizeScreen extends PIXI.Container {
         this.title.anchor.set(0.5);
         this.title.anchor.set(0);
         this.title.position.set((512-this.title.width)/2, 32);
-        this.title.tint = Math.random() * 0xFFFFFF;
         this.addChild(this.title);
 
         this.buttonFive = new Button(this.textureSheet, "text_5x5", () => {
             ScreenManager.changeScreen("GameScreen").newPuzzle({puzzleSize:5});
+            BackgroundManager.changeColor("white");
         });
 
         this.buttonFive.position.set(512/2, this.title.y + this.title.height + this.buttonFive.height*2);
@@ -25,6 +26,7 @@ export default class PuzzleSizeScreen extends PIXI.Container {
 
         this.buttonTen = new Button(this.textureSheet, "text_10x10", () => {
             ScreenManager.changeScreen("GameScreen").newPuzzle({puzzleSize:10});
+            BackgroundManager.changeColor("white");
         });
 
         this.buttonTen.position.set(512/2, this.buttonFive.y + this.buttonTen.height);
@@ -32,13 +34,14 @@ export default class PuzzleSizeScreen extends PIXI.Container {
 
         this.buttonFifteen = new Button(this.textureSheet, "text_15x15", () => {
             ScreenManager.changeScreen("GameScreen").newPuzzle({puzzleSize:15});
+            BackgroundManager.changeColor("white");
         });
 
         this.buttonFifteen.position.set(512/2, this.buttonTen.y + this.buttonFifteen.height);
         this.addChild(this.buttonFifteen);
 
         this.buttonBack = new Button(this.textureSheet, "text_back", () => {
-            ScreenManager.previousScreen().refreshTitleColor();
+            ScreenManager.previousScreen();
         });
 
         this.buttonBack.position.set(512/2, this.buttonFifteen.y + this.buttonBack.height);

@@ -21,7 +21,13 @@ export default class Puzzle extends PIXI.Container {
         this.buildBoxStructure();
         this.buildHints();
 
-        this.title = new PIXI.Text(this.puzzleData.meta.title, {fontFamily: "Calibri"});
+        this.title = new PIXI.Text(this.puzzleData.meta.title, {
+            fontFamily:"myFont",
+            fontSize:16, fill:0xFFFFFF,
+            stroke:0x000000,
+            strokeThickness:2,
+            align:"center"
+        });
         this.title.position.set((this.boxBox.width-this.title.width)/2 + (this.hints.width+this.boxSize/2-this.boxSize*this.boxStructure.length)/2,
                                 (this.topMargin-this.title.height)/2);
         this.title.alpha = 0;
@@ -32,30 +38,17 @@ export default class Puzzle extends PIXI.Container {
         let title = "Complete!";
         let data = [];
 
-        let colors = [];
-        for(let i = 0; i < 360; i += 20) {
-            colors.push(HSL2HEX.convert(i,100,65));
-        }
-
-        let randomIndex = Math.floor(Math.random()*colors.length);
-        let randomColor_1 = colors[randomIndex];
-        colors.splice(colors.indexOf(colors[randomIndex]),1);
-        let randomColor_2 = colors[Math.floor(Math.random()*colors.length)];
-
         for(let row = 0; row < this.puzzleSize; row++){
             data[row] = [];
-
             for(let col = 0; col < this.puzzleSize; col++){
-
                 let filled = Math.round(Math.random());
                 data[row][col] = {
                     filled:filled,
-                    color:filled?randomColor_1:randomColor_2
+                    color:0x000000
                 }
             }
         }
-        let randomPuzzle = {meta: {title, dimensions:this.puzzleSize}, data};
-        return randomPuzzle;
+        return {meta: {title, dimensions:this.puzzleSize}, data};
     }
 
     buildBoxStructure() {

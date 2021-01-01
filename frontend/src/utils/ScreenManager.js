@@ -1,3 +1,5 @@
+import BackgroundManager from "./BackgroundManager.js";
+
 export default class ScreenManager {
 
     static init(stage) {
@@ -8,6 +10,7 @@ export default class ScreenManager {
 
     static previousScreen() {
         this.visitedScreens.pop();
+        BackgroundManager.previousColor();
         return this.changeScreen(this.visitedScreens.pop());
     }
 

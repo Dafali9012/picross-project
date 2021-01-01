@@ -2,6 +2,7 @@ import Puzzle from "../Puzzle.js";
 import ScreenManager from "../utils/ScreenManager.js";
 import Input from "../utils/Input.js";
 import Button from "../Button.js";
+import BackgroundManager from "../utils/BackgroundManager.js";
 
 export default class GameScreen extends PIXI.Container {
     constructor(data) {
@@ -18,7 +19,8 @@ export default class GameScreen extends PIXI.Container {
         this.interactive = true;
 
         this.buttonMenu = new Button(this.textureSheet, "text_menu", () => {
-            ScreenManager.changeScreen("MainMenuScreen").refreshTitleColor();
+            ScreenManager.changeScreen("MainMenuScreen");
+            BackgroundManager.changeColor("blue");
         });
 
         this.buttonMenu.position.set(this.puzzle.x + this.puzzle.width + (512 - (this.puzzle.x + this.puzzle.width))/2,

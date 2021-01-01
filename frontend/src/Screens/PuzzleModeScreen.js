@@ -1,4 +1,5 @@
 import Button from "../Button.js";
+import BackgroundManager from "../utils/BackgroundManager.js";
 import ScreenManager from "../utils/ScreenManager.js";
 
 export default class PuzzleModeScreen extends PIXI.Container {
@@ -13,18 +14,18 @@ export default class PuzzleModeScreen extends PIXI.Container {
         this.title.anchor.set(0.5);
         this.title.anchor.set(0);
         this.title.position.set((512-this.title.width)/2, 32);
-        this.title.tint = Math.random() * 0xFFFFFF;
         this.addChild(this.title);
 
         this.buttonRandom = new Button(this.textureSheet, "text_random", () => {
-            ScreenManager.changeScreen("PuzzleSizeScreen").refreshTitleColor();
+            ScreenManager.changeScreen("PuzzleSizeScreen");
+            BackgroundManager.changeColor("orange");
         });
 
         this.buttonRandom.position.set(512/2, this.title.y + this.title.height + this.buttonRandom.height*2);
         this.addChild(this.buttonRandom);
 
         this.buttonBack = new Button(this.textureSheet, "text_back", () => {
-            ScreenManager.previousScreen().refreshTitleColor();
+            ScreenManager.previousScreen();
         });
 
         this.buttonBack.position.set(512/2, this.buttonRandom.y + this.buttonBack.height);

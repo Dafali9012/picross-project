@@ -89,6 +89,5 @@ export default class MultiplayerScreen extends PIXI.Container {
         });
     }
 
-
     update(delta) {}
 }

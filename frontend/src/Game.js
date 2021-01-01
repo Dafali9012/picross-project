@@ -6,7 +6,7 @@ import GameScreen from "./screens/GameScreen.js";
 
 import Input from "./utils/Input.js";
 import ScreenManager from "./utils/ScreenManager.js";
-
+import BackgroundManager from "./utils/BackgroundManager.js";
 
 export default class Game {
     constructor() {
@@ -28,6 +28,15 @@ export default class Game {
         .load((loader, resources)=>{
             let textureSheet = resources["texture_sheet"].spritesheet;
         
+            BackgroundManager.init(this.app.stage);
+            this.background = new PIXI.Sprite(resources["background"].texture);
+            this.app.stage.addChild(this.background);
+            BackgroundManager.addColor(0x1ab1cd, "blue");
+            BackgroundManager.addColor(0x9bdd1d, "green");
+            BackgroundManager.addColor(0xff9e44, "orange");
+            BackgroundManager.addColor(0xdddddd, "white");
+            BackgroundManager.changeColor("blue");
+
             ScreenManager.init(this.app.stage);
             ScreenManager.addScreen( 
                 new GameScreen({
@@ -59,20 +68,20 @@ export default class Game {
                 })
             );
 
-            this.background = new PIXI.Sprite(resources["background"].texture);
-            this.background.tint = Math.random() * 0xFFFFFF;
-            this.app.stage.addChild(this.background);
-
-            ScreenManager.changeScreen("MainMenuScreen");
             Input.init(this.app.stage);
 
-            this.app.ticker.add(delta=>this.update(delta));
+            let font = new FontFaceObserver("myFont");
+            font.load().then(()=>{
+                console.log("my font has loaded");
+                ScreenManager.changeScreen("MainMenuScreen");
+                this.app.ticker.add(delta=>this.update(delta));
+            });
         });
     }
 
     scrollBackground(delta) {
-        this.background.x = (this.background.x+0.4*delta<0)?this.background.x+0.4*delta:-32;
-        this.background.y = (this.background.y+0.2*delta<0)?this.background.y+0.2*delta:-32;
+        this.background.x = (this.background.x+0.28*delta<0)?this.background.x+0.28*delta:-32;
+        this.background.y = (this.background.y+0.28*delta<0)?this.background.y+0.28*delta:-32;
     }
 
     update(delta) {
