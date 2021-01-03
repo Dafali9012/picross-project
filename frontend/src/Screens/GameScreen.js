@@ -1,8 +1,7 @@
-import Puzzle from "../Puzzle.js";
 import ScreenManager from "../utils/ScreenManager.js";
-import Input from "../utils/Input.js";
 import Button from "../Button.js";
 import BackgroundManager from "../utils/BackgroundManager.js";
+import BoxGrid from "../BoxGrid.js";
 
 export default class GameScreen extends PIXI.Container {
     constructor(data) {
@@ -10,64 +9,45 @@ export default class GameScreen extends PIXI.Container {
 
         this.textureSheet = data.textureSheet;
 
-        this.puzzle = new Puzzle(data);
-        this.puzzle.x = (512-this.puzzle.width)/2;
-        this.addChild(this.puzzle);
+        this.boxGrid = new BoxGrid({textureSheet:this.textureSheet, mask:data.mask});
+        this.addChild(this.boxGrid);
 
-        this.won = false;
-
-        this.interactive = true;
-
-        this.buttonMenu = new Button(this.textureSheet, "text_menu", () => {
+        this.buttonMenu = new Button(this.textureSheet, "MENU", () => {
             ScreenManager.changeScreen("MainMenuScreen");
             BackgroundManager.changeColor("blue");
         });
-
-        this.buttonMenu.position.set(this.puzzle.x + this.puzzle.width + (512 - (this.puzzle.x + this.puzzle.width))/2,
-                                    this.puzzle.y + this.puzzle.height);
+        this.buttonMenu.position.set(512-this.buttonMenu.width, 288-this.buttonMenu.height);
         this.addChild(this.buttonMenu);
 
-        this.buttonRefresh = new Button(this.textureSheet, "text_refresh", () => {
-            this.newPuzzle({puzzleSize: this.puzzle.puzzleSize});
-        });
-
-        this.buttonRefresh.position.set(this.puzzle.x + this.puzzle.width + (512 - (this.puzzle.x + this.puzzle.width))/2,
-                                    this.puzzle.y + this.puzzle.height - this.buttonRefresh.height);
-        this.addChild(this.buttonRefresh);
+        this.interactive = true;
+        this.on("pointerup", ()=>this.isSolved());
     }
 
-    newPuzzle(data) {
-        this.won = false;
-        this.on("mouseup", ()=>{
-            if(this.puzzle.checkWin()) {
-                this.won = true;
-                this.removeListener("mouseup");
-                this.puzzle.boxBox.children.forEach(x=>{
-                    x.removeAllListeners();
-                    x.buttonMode = false;
-                });
-                Input.operation = "";
-            }
-        });
-        
-        this.removeChild(this.puzzle);
-
-        if(data.puzzleData) this.puzzle = new Puzzle({textureSheet:this.textureSheet, puzzleData:data.puzzleData});
-        else if(data.puzzleSize) this.puzzle = new Puzzle({textureSheet:this.textureSheet, puzzleSize:data.puzzleSize});
-
-        this.puzzle.x = (512-this.puzzle.width)/2;
-        this.addChild(this.puzzle);
+    randomPuzzle(size) {
+        this.boxGrid.scale.set(1,1);
+        this.boxGrid.buildGridRandom(size);
+        this.boxGrid.scale.y = 288/this.boxGrid.height;
+        this.boxGrid.scale.x = this.boxGrid.scale.y;
+        this.boxGrid.position.set((512-this.boxGrid.width)/2, 0);
     }
 
-    revealPicture() {
-        this.puzzle.boxBox.children.forEach(x=>{
-            x.revealColor();
-        });
-        this.puzzle.fadeOutHints();
-        this.puzzle.fadeInTitle();
+    fixedPuzzle(json) {
+        this.boxGrid.scale.set(1,1);
+        this.boxGrid.buildGrid(json);
+        this.boxGrid.scale.y = 288/this.boxGrid.height;
+        this.boxGrid.scale.x = this.boxGrid.scale.y;
+        this.boxGrid.position.set((512-this.boxGrid.width)/2, 0);
+    }
+
+    isSolved() {
+        console.log("is the puzzle solved?");
+        if(this.boxGrid.isSolved()) {
+            this.boxGrid.revealResult();
+        }
     }
 
     update(delta) {
-        if(this.won) this.revealPicture();
+        //if(this.won) this.revealPicture();
     }
+    
 }

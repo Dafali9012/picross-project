@@ -16,19 +16,24 @@ export default class PuzzleModeScreen extends PIXI.Container {
         this.title.position.set((512-this.title.width)/2, 32);
         this.addChild(this.title);
 
-        this.buttonRandom = new Button(this.textureSheet, "text_random", () => {
+        this.buttonRandom = new Button(this.textureSheet, "RANDOM", () => {
             ScreenManager.changeScreen("PuzzleSizeScreen");
             BackgroundManager.changeColor("orange");
         });
-
         this.buttonRandom.position.set(512/2, this.title.y + this.title.height + this.buttonRandom.height*2);
         this.addChild(this.buttonRandom);
 
-        this.buttonBack = new Button(this.textureSheet, "text_back", () => {
+        this.buttonTest = new Button(this.textureSheet, "TEST", () => {
+            ScreenManager.changeScreen("GameScreen").fixedPuzzle(data.presentationPuzzle);
+            BackgroundManager.changeColor("white");
+        });
+        this.buttonTest.position.set(512/2, this.buttonRandom.y + this.buttonTest.height);
+        this.addChild(this.buttonTest);
+
+        this.buttonBack = new Button(this.textureSheet, "BACK", () => {
             ScreenManager.previousScreen();
         });
-
-        this.buttonBack.position.set(512/2, this.buttonRandom.y + this.buttonBack.height);
+        this.buttonBack.position.set(512/2, this.buttonTest.y + this.buttonBack.height);
         this.addChild(this.buttonBack);
     }
 

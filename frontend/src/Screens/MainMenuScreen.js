@@ -18,22 +18,18 @@ export default class MainMenuScreen extends PIXI.Container {
         this.addChild(text);
         text.position.set(512 - 16 - text.width, 288 - 16 - text.height);
 
-        this.title = new PIXI.AnimatedSprite(data.title.animations["picross_bounce"]);
-        this.title.animationSpeed = 0.02;
-        this.title.play();
-        this.title.anchor.set(0.5);
-        this.title.anchor.set(0);
+        this.title = new PIXI.Sprite(data.title.textures["picross_1"]);
         this.title.position.set((512-this.title.width)/2, 32);
         this.addChild(this.title);
         
-        this.buttonPlay = new Button(data.textureSheet, "text_play", ()=>{
+        this.buttonPlay = new Button(data.textureSheet, "PLAY", ()=>{
             ScreenManager.changeScreen("PuzzleModeScreen");
             BackgroundManager.changeColor("green");
         });
         this.buttonPlay.position.set(512/2, this.title.y + this.title.height + this.buttonPlay.height*2);
         this.addChild(this.buttonPlay);
 
-        this.buttonBuild = new Button(data.textureSheet, "text_build", () => {
+        this.buttonBuild = new Button(data.textureSheet, "BUILD", () => {
             // goto: build puzzle screen
         });
         this.buttonBuild.position.set(512/2, this.buttonPlay.y + this.buttonBuild.height);

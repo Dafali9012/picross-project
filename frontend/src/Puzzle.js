@@ -44,7 +44,7 @@ export default class Puzzle extends PIXI.Container {
                 let filled = Math.round(Math.random());
                 data[row][col] = {
                     filled:filled,
-                    color:0x000000
+                    color:filled?0x000000:0xFFFFFF
                 }
             }
         }
