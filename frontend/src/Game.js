@@ -22,6 +22,8 @@ export default class Game {
         let loader = new PIXI.Loader();
         loader
         .add("texture_sheet", "./res/texture_sheet.json")
+        .add("edge", "./res/edge_dark.png")
+        .add("mask", "./res/result_mask.png")
         .add("background", "./res/background.png")
         .add("testdata", "./res/test_json/test5x.json")
         .add("title", "./res/title.json")
@@ -37,10 +39,15 @@ export default class Game {
             BackgroundManager.addColor(0xdddddd, "white");
             BackgroundManager.changeColor("blue");
 
-            ScreenManager.init(this.app.stage);
+            this.screenContainer = new PIXI.Container();
+            this.app.stage.addChild(this.screenContainer);
+
+            ScreenManager.init(this.screenContainer);
+
             ScreenManager.addScreen( 
                 new GameScreen({
                     textureSheet: textureSheet,
+                    mask: resources["mask"].texture
                 })
             );
             ScreenManager.addScreen(
@@ -72,6 +79,8 @@ export default class Game {
 
             ScreenManager.changeScreen("MainMenuScreen");
 
+            this.app.stage.addChild(new PIXI.Sprite(resources["edge"].texture));
+
             this.app.ticker.add(delta=>this.update(delta));
         });
     }
@@ -83,6 +92,6 @@ export default class Game {
 
     update(delta) {
         this.scrollBackground(delta);
-        this.app.stage.children[1].update(delta);
+        this.screenContainer.getChildAt(0).update(delta);
     }
 }

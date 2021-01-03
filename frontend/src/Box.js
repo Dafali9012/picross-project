@@ -1,80 +1,54 @@
 import Input from "./utils/Input.js";
 
-export default class Box extends PIXI.Container {
-    constructor(textureSheet, boxSize) {
+export default class Box extends PIXI.Sprite {
+    constructor(data) {
         super();
-        this.textureSheet = textureSheet;
-        this.spriteProgress = new PIXI.Sprite(this.textureSheet.textures["box_empty"]);
-        this.spriteProgress.width = boxSize;
-        this.spriteProgress.height = boxSize;
-        this.addChild(this.spriteProgress);
-        this.spriteComplete = new PIXI.Sprite(PIXI.Texture.WHITE);
-        this.spriteComplete.width = boxSize;
-        this.spriteComplete.height = boxSize;
-        this.spriteComplete.alpha = 0;
-        this.addChild(this.spriteComplete);
-        this.sound = PIXI.sound.Sound.from({
-            url: "./res/sound/puzzle.mp3",
-            volume: 0.02});
+        this.textureSheet = data.textureSheet;
+
+        this.texture = this.textureSheet.textures["box_empty"];
 
         this.interactive = true;
         this.buttonMode = true;
         this.state = "empty";
-        this.hitArea = new PIXI.Rectangle(0, 0, boxSize,boxSize);
-        this.mouseout = ()=> {
-            this.alpha = 1;
-        }
 
         this.on("mousedown", ()=>{
+            Input.leftClick=true;
             if(this.state == "filled" || this.state == "crossed") {
                 this.state = "empty";
-                this.spriteProgress.texture = this.textureSheet.textures["box_empty"];
-                Input.operation = "remove";
-                this.sound.play();
+                this.texture = this.textureSheet.textures["box_empty"];
+                Input.delete = true;
             }
             else if(this.state == "empty") {
+                this.texture = this.textureSheet.textures["box_filled"];
                 this.state = "filled";
-                this.spriteProgress.texture = this.textureSheet.textures["box_filled"];
-                Input.operation = "fill";
-                this.sound.play();
+                Input.delete = false;
             }
         });
         this.on("rightdown", ()=>{
+            Input.leftClick=false;
             if(this.state == "filled" || this.state == "crossed") {
                 this.state = "empty";
-                this.spriteProgress.texture = this.textureSheet.textures["box_empty"];
-                Input.operation = "remove";
-                this.sound.play();
+                this.texture = this.textureSheet.textures["box_empty"];
+                Input.delete = true;
             }
             else if(this.state == "empty") {
+                this.texture = this.textureSheet.textures["box_crossed"];
                 this.state = "crossed";
-                this.spriteProgress.texture = this.textureSheet.textures["box_crossed"];
-                Input.operation = "cross";
-                this.sound.play();
+                Input.delete = false;
             }
         });
         this.on("mouseover", ()=>{
-            this.alpha = 1.5;
             if(Input.hold){
-                if(Input.operation == "remove") {
+                if(Input.delete) {
                     if(this.state != "empty") {
-                        this.spriteProgress.texture = this.textureSheet.textures["box_empty"];
+                        this.texture = this.textureSheet.textures["box_empty"];
                         this.state = "empty";
-                        this.sound.play();
                     }
                 }
-                if(Input.operation == "fill") {
+                if(!Input.delete) {
                     if(this.state == "empty") {
-                        this.spriteProgress.texture = this.textureSheet.textures["box_filled"];
-                        this.state = "filled";
-                        this.sound.play();
-                    }
-                }
-                if(Input.operation == "cross") {
-                    if(this.state == "empty") {
-                        this.spriteProgress.texture = this.textureSheet.textures["box_crossed"];
-                        this.state = "crossed";
-                        this.sound.play();
+                        this.texture = Input.leftClick?this.textureSheet.textures["box_filled"]:this.textureSheet.textures["box_crossed"];
+                        this.state = Input.leftClick?"filled":"crossed";
                     }
                 }
             }
@@ -82,8 +56,16 @@ export default class Box extends PIXI.Container {
     }
 
     revealColor() {
+        let colored = new PIXI.Sprite(PIXI.Texture.WHITE);
+        colored.tint = this.color;
+        colored.width = this.width;
+        colored.height = this.height;
+        this.addChild(colored);
+
+        /*
         if(this.spriteComplete.tint != this.color) this.spriteComplete.tint = this.color;
         if(this.spriteComplete.alpha != 1) this.spriteComplete.alpha = Math.min(this.spriteComplete.alpha+0.02, 1);
         if(this.spriteProgress.alpha != 0) this.spriteProgress.alpha = Math.max(this.spriteProgress.alpha-0.02, 0);
+        */
     }
 }
