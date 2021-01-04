@@ -7,6 +7,7 @@ import GameScreen from "./screens/GameScreen.js";
 import Input from "./utils/Input.js";
 import ScreenManager from "./utils/ScreenManager.js";
 import BackgroundManager from "./utils/BackgroundManager.js";
+import LevelBrowserScreen from "./Screens/LevelBrowserScreen.js";
 
 export default class Game {
     constructor() {
@@ -70,6 +71,12 @@ export default class Game {
             );
             ScreenManager.addScreen(
                 new PuzzleSizeScreen({
+                    textureSheet: textureSheet,
+                    title: resources["title"].spritesheet
+                })
+            );
+            ScreenManager.addScreen(
+                new LevelBrowserScreen({
                     textureSheet: textureSheet,
                     title: resources["title"].spritesheet
                 })
