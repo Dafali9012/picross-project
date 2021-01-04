@@ -28,6 +28,10 @@ export default class Button extends PIXI.Sprite {
             this.scale.set(1);
         });
 
+        this.on("mouseover", () => {
+            this.scale.set(1.05);
+        });
+
         this.on("click", () => {
             callback();
         });
