@@ -9,10 +9,13 @@ export default class GameScreen extends PIXI.Container {
 
         this.textureSheet = data.textureSheet;
 
+        this.isSolvedBound = this.isSolved.bind(this);
+
         this.boxGrid = new BoxGrid({textureSheet:this.textureSheet, mask:data.mask});
         this.addChild(this.boxGrid);
 
         this.buttonMenu = new Button(this.textureSheet, "MENU", () => {
+            document.removeEventListener("pointerup", this.isSolvedBound);
             ScreenManager.changeScreen("MainMenuScreen");
             BackgroundManager.changeColor("blue");
         });
@@ -20,29 +23,39 @@ export default class GameScreen extends PIXI.Container {
         this.addChild(this.buttonMenu);
 
         this.interactive = true;
-        this.on("pointerup", ()=>this.isSolved());
     }
 
     randomPuzzle(size) {
         this.boxGrid.scale.set(1,1);
         this.boxGrid.buildGridRandom(size);
-        this.boxGrid.scale.y = 288/this.boxGrid.height;
+        this.boxGrid.pivot.set(this.boxGrid.width/2, this.boxGrid.height/2);
+        this.boxGrid.scale.y = 288/this.boxGrid.height*0.9;
         this.boxGrid.scale.x = this.boxGrid.scale.y;
-        this.boxGrid.position.set((512-this.boxGrid.width)/2, 0);
+        this.boxGrid.position.set(512/2, 288/2);
+        this.boxGrid.buildHints();
+
+        document.removeEventListener("pointerup", this.isSolvedBound);
+        document.addEventListener("pointerup", this.isSolvedBound);
     }
 
     fixedPuzzle(json) {
         this.boxGrid.scale.set(1,1);
         this.boxGrid.buildGrid(json);
-        this.boxGrid.scale.y = 288/this.boxGrid.height;
+        this.boxGrid.pivot.set(this.boxGrid.width/2, this.boxGrid.height/2);
+        this.boxGrid.scale.y = 288/this.boxGrid.height*0.9;
         this.boxGrid.scale.x = this.boxGrid.scale.y;
-        this.boxGrid.position.set((512-this.boxGrid.width)/2, 0);
+        this.boxGrid.position.set(512/2, 288/2);
+        this.boxGrid.buildHints();
+
+        document.removeEventListener("pointerup", this.isSolvedBound);
+        document.addEventListener("pointerup", this.isSolvedBound);
     }
 
     isSolved() {
         console.log("is the puzzle solved?");
         if(this.boxGrid.isSolved()) {
             this.boxGrid.revealResult();
+            document.removeEventListener("pointerup", this.isSolvedBound);
         }
     }
 
