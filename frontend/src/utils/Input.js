@@ -2,21 +2,28 @@ export default class Input {
 
     static init(stage){
         this.hold = false;
-        this.operation = "";
+        this.delete = false;
+        this.leftClick = true;
 
         document.addEventListener("contextmenu", e => {e.preventDefault();});
 
         stage.interactive = true;
 
-        stage.on('pointerdown', this.onHold.bind(this));
-        stage.on('pointerup', this.onRelease.bind(this));
-    }
-
-    static onHold() {
-        this.hold = true;
-    }
-    
-    static onRelease() {
-        this.hold = false;
+        stage.on('mousedown', ()=>{
+            this.hold = true;
+            this.leftClick = true;
+        });
+        stage.on('mouseup', ()=>{
+            this.hold = false;
+            this.delete = false;
+        });
+        stage.on('rightdown', ()=>{
+            this.hold = true;
+            this.leftClick = false;
+        });
+        stage.on('rightup', ()=>{
+            this.hold = false;
+            this.delete = false;
+        });
     }
 }

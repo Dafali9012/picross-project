@@ -5,3 +5,8 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+@font-face {
+    font-family: "myFont";
+    src: url("../res/font/PressStart2P-Regular.ttf") format("truetype");
+}
