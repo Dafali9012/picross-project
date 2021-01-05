@@ -1,4 +1,5 @@
 import Box from "./Box.js";
+import HSL2HEX from "./utils/HSL2HEX.js";
 
 export default class BoxGrid extends PIXI.Container {
     constructor(data) {
@@ -20,12 +21,13 @@ export default class BoxGrid extends PIXI.Container {
 
     buildGridRandom(size) {
         this.resetState();
+        let randColor = HSL2HEX.convert(Math.random()*360, 100, 50);
         for(let y = 0; y < size; y++) {
             this.boxMap.push([]);
             for(let x = 0; x < size; x++) {
                 let box = new Box({textureSheet:this.textureSheet});
                 box.filled = Math.round(Math.random()+0.1);
-                box.color = box.filled?Math.random()*0x000000:0xFFFFFF;
+                box.color = box.filled?randColor:0xFFFFFF;
                 box.position.set(x*box.width, y*box.height);
                 this.boxGrid.addChild(box);
                 this.boxMap[y][x] = box;

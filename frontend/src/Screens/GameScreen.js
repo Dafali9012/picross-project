@@ -18,7 +18,19 @@ export default class GameScreen extends PIXI.Container {
         this.hints = new Hints();
         this.addChild(this.hints);
 
+        this.title = new PIXI.Text("", {
+            fontFamily:"myFont",
+            fontSize:16, fill:0xFFFFFF,
+            stroke:0x000000,
+            strokeThickness:1.6,
+            align:"center"
+        });
+        this.title.scale.set(0.5);
+        this.addChild(this.title);
+        this.title.alpha = 0;
+
         this.buttonMenu = new Button(this.textureSheet, "MENU", () => {
+            this.title.alpha = 0;
             document.removeEventListener("pointerup", this.isSolvedBound);
             this.hints.removeChildren();
             ScreenManager.changeScreen("MainMenuScreen");
@@ -31,10 +43,14 @@ export default class GameScreen extends PIXI.Container {
     }
 
     randomPuzzle(size) {
+        this.title.text = "Complete!";
+        this.title.position.set((512-this.title.width)/2, this.title.height*2);
         this.buildPuzzle(()=>this.boxGrid.buildGridRandom(size));
     }
 
     fixedPuzzle(json) {
+        this.title.text = json.meta.title;
+        this.title.position.set((512-this.title.width)/2, this.title.height*2);
         this.buildPuzzle(()=>this.boxGrid.buildGrid(json));
     }
 
@@ -61,6 +77,7 @@ export default class GameScreen extends PIXI.Container {
     isSolved() {
         console.log("is the puzzle solved?");
         if(this.boxGrid.isSolved()) {
+            this.title.alpha = 1;
             this.boxGrid.revealResult();
             this.hints.removeChildren();
             document.removeEventListener("pointerup", this.isSolvedBound);

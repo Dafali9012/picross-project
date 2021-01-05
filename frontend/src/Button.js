@@ -6,11 +6,12 @@ export default class Button extends PIXI.Sprite {
         this.anchor.set(0.5);
         this.text = new PIXI.Text(text, {
             fontFamily:"myFont",
-            fontSize:6, fill:0xFFFFFF,
+            fontSize:16, fill:0xFFFFFF,
             stroke:0x000000,
-            strokeThickness:1,
+            strokeThickness:2.25,
             align:"center"
         });
+        this.text.scale.set(0.3);
         this.text.anchor.set(0.5);
         this.addChild(this.text);
         this.interactive = true;

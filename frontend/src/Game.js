@@ -65,8 +65,7 @@ export default class Game {
             ScreenManager.addScreen(
                 new PuzzleModeScreen({
                     textureSheet: textureSheet,
-                    title: resources["title"].spritesheet,
-                    presentationPuzzle: resources["testdata"].data
+                    title: resources["title"].spritesheet
                 })
             );
             ScreenManager.addScreen(
@@ -78,7 +77,8 @@ export default class Game {
             ScreenManager.addScreen(
                 new LevelBrowserScreen({
                     textureSheet: textureSheet,
-                    title: resources["title"].spritesheet
+                    title: resources["title"].spritesheet,
+                    presentationPuzzle: resources["testdata"].data
                 })
             );
 

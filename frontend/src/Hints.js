@@ -41,11 +41,12 @@ export default class Hints extends PIXI.Container {
             text = text.substring(0, text.length-1);
             let hintText = new PIXI.Text(text, {
                 fontFamily:"myFont",
-                fontSize:4, fill:0xFFFFFF,
+                fontSize:16, fill:0xFFFFFF,
                 stroke:0x000000,
-                strokeThickness:1,
-                align:"right"
+                strokeThickness:2.25,
+                align:"center"
             });
+            hintText.scale.set(0.3);
             if(x.match("row")) {
                 hintText.position.set(hintText.width*-1, boxMap[0][0].height*boxGridScale * x.substring(4) + (boxMap[0][0].height*boxGridScale-hintText.height)/2);
             }
