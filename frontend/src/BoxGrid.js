@@ -8,6 +8,8 @@ export default class BoxGrid extends PIXI.Container {
         this.resultMask = new PIXI.Sprite(data.mask);
         this.boxGrid = new PIXI.Container();
         this.addChild(this.boxGrid);
+        this.lines = new PIXI.Container();
+        this.addChild(this.lines);
     }
 
     resetState() {
@@ -35,6 +37,7 @@ export default class BoxGrid extends PIXI.Container {
         }
         this.resultMask.width = this.boxGrid.width;
         this.resultMask.height = this.boxGrid.height;
+        this.drawLines();
     }
 
     buildGrid(json) {
@@ -52,6 +55,25 @@ export default class BoxGrid extends PIXI.Container {
         }
         this.resultMask.width = this.boxGrid.width;
         this.resultMask.height = this.boxGrid.height;
+        this.drawLines();
+    }
+
+    drawLines() {
+        this.lines.removeChildren();
+        for(let i = 1; i < this.boxMap.length/5; i++) {
+            let line = new PIXI.Graphics();
+            line.lineStyle(2,0x00bde7);
+            line.moveTo(0,i * this.boxMap[0][0].height*5);
+            line.lineTo(this.boxGrid.width,i * this.boxMap[0][0].height*5);
+            this.lines.addChild(line);
+        }
+        for(let i = 1; i < this.boxMap[0].length/5; i++) {
+            let line = new PIXI.Graphics();
+            line.lineStyle(2,0x00bde7);
+            line.moveTo(i * this.boxMap[0][0].width*5, 0);
+            line.lineTo(i * this.boxMap[0][0].width*5, this.boxGrid.height);
+            this.lines.addChild(line);
+        }
     }
 
     getBoxMap() {
@@ -73,6 +95,7 @@ export default class BoxGrid extends PIXI.Container {
     }
 
     revealResult() {
+        this.lines.removeChildren();
         for(let box of this.boxGrid.children) box.revealColor();
         this.addChild(this.resultMask);
         this.boxGrid.mask = this.resultMask;

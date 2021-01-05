@@ -58,6 +58,7 @@ export default class Box extends PIXI.Sprite {
                 this.anchor.set(0.5);
                 this.position.set(this.x + this.width/2, this.y + this.height/2);
                 this.scale.set(1.02);
+                this.tint = 0xeeeeee;
             }
         });
 
@@ -66,6 +67,7 @@ export default class Box extends PIXI.Sprite {
                 this.scale.set(1);
                 this.anchor.set(0);
                 this.position.set(this.x - this.width/2, this.y - this.height/2);
+                this.tint = 0xffffff;
             }
         });
     }
@@ -84,11 +86,5 @@ export default class Box extends PIXI.Sprite {
         colored.width = this.width;
         colored.height = this.height;
         this.addChild(colored);
-
-        /*
-        if(this.spriteComplete.tint != this.color) this.spriteComplete.tint = this.color;
-        if(this.spriteComplete.alpha != 1) this.spriteComplete.alpha = Math.min(this.spriteComplete.alpha+0.02, 1);
-        if(this.spriteProgress.alpha != 0) this.spriteProgress.alpha = Math.max(this.spriteProgress.alpha-0.02, 0);
-        */
     }
 }
