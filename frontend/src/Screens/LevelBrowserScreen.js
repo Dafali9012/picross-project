@@ -1,6 +1,7 @@
 import Button from "../Button.js";
 import ScreenManager from "../utils/ScreenManager.js";
 import BackgroundManager from "../utils/BackgroundManager.js";
+import Game from "../Game.js";
 
 
 export default class LevelBrowserScreen extends PIXI.Container{
@@ -8,6 +9,11 @@ export default class LevelBrowserScreen extends PIXI.Container{
         super()
 
         this.textureSheet = data.textureSheet;
+
+        this.contentContainer = new PIXI.Container();
+        this.contentContainer.height = 500;
+        console.log("container height: " + this.contentContainer.height)
+        this.addChild(this.contentContainer)
 
         this.title = new PIXI.AnimatedSprite(data.title.animations["mode_bounce"]);
         this.title.animationSpeed = 0.02;
