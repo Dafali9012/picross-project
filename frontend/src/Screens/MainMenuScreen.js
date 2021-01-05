@@ -11,11 +11,12 @@ export default class MainMenuScreen extends PIXI.Container {
 
         let text = new PIXI.Text("v0.35\n2021-01-01", {
             fontFamily:"myFont",
-            fontSize:4, fill:0xFFFFFF,
+            fontSize:16, fill:0xFFFFFF,
             stroke:0x000000,
-            strokeThickness:1,
+            strokeThickness:2.25,
             align:"right"
         });
+        text.scale.set(0.3);
         this.addChild(text);
         text.position.set(512 - 16 - text.width, 288 - 16 - text.height);
 

@@ -1,5 +1,6 @@
 import Button from "../Button.js";
 import ScreenManager from "../utils/ScreenManager.js";
+import BackgroundManager from "../utils/BackgroundManager.js";
 
 
 export default class LevelBrowserScreen extends PIXI.Container{
@@ -17,10 +18,16 @@ export default class LevelBrowserScreen extends PIXI.Container{
         this.addChild(this.title);
 
         this.buttonBack = new Button(this.textureSheet, "BACK", () => {
-            ScreenManager.previousScreen();
+            //ScreenManager.previousScreen();
+            this.fixedGame(data.presentationPuzzle);
         });
         this.buttonBack.position.set(512/2, this.title.y + this.title.height + this.buttonBack.height*2);
         this.addChild(this.buttonBack);
+    }
+
+    fixedGame(json) {
+        BackgroundManager.changeColor("white");
+        ScreenManager.changeScreen("GameScreen").fixedPuzzle(json);
     }
 
     update(delta) {}
