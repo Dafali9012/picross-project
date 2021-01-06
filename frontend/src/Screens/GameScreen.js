@@ -2,7 +2,6 @@ import ScreenManager from "../utils/ScreenManager.js";
 import Button from "../Button.js";
 import BackgroundManager from "../utils/BackgroundManager.js";
 import BoxGrid from "../BoxGrid.js";
-import Hints from "../Hints.js";
 
 export default class GameScreen extends PIXI.Container {
     constructor(data) {
@@ -15,9 +14,6 @@ export default class GameScreen extends PIXI.Container {
         this.boxGrid = new BoxGrid({textureSheet:this.textureSheet, mask:data.mask});
         this.addChild(this.boxGrid);
 
-        this.hints = new Hints();
-        this.addChild(this.hints);
-
         this.title = new PIXI.Text("", {
             fontFamily:"myFont",
             fontSize:16, fill:0xFFFFFF,
@@ -26,13 +22,12 @@ export default class GameScreen extends PIXI.Container {
             align:"center"
         });
         this.title.scale.set(0.5);
-        this.addChild(this.title);
         this.title.alpha = 0;
+        this.addChild(this.title);
 
         this.buttonMenu = new Button(this.textureSheet, "MENU", () => {
             this.title.alpha = 0;
             document.removeEventListener("pointerup", this.isSolvedBound);
-            this.hints.removeChildren();
             ScreenManager.changeScreen("MainMenuScreen");
             BackgroundManager.changeColor("blue");
         });
@@ -44,34 +39,26 @@ export default class GameScreen extends PIXI.Container {
 
     randomPuzzle(size) {
         this.title.text = "Complete!";
-        this.title.position.set((512-this.title.width)/2, this.title.height*2);
         this.buildPuzzle(()=>this.boxGrid.buildGridRandom(size));
     }
 
     fixedPuzzle(json) {
         this.title.text = json.meta.title;
-        this.title.position.set((512-this.title.width)/2, this.title.height*2);
         this.buildPuzzle(()=>this.boxGrid.buildGrid(json));
     }
 
     buildPuzzle(puzzleCallback) {
         this.boxGrid.scale.set(1,1);
         puzzleCallback();
-        this.boxGrid.pivot.set(this.boxGrid.width/2, this.boxGrid.height/2);
-        this.boxGrid.scale.y = 288/this.boxGrid.height*0.8;
+        this.boxGrid.pivot.set((this.boxGrid.xOffset/2)*-1, this.boxGrid.yOffset*-1);
+        this.boxGrid.scale.y = 288/this.boxGrid.height;
         this.boxGrid.scale.x = this.boxGrid.scale.y;
-        this.boxGrid.position.set(512/2, 288/2+(288-this.boxGrid.height)/2-16);
+        this.boxGrid.position.set((512-this.boxGrid.width)/2, (288-this.boxGrid.height)/2);
 
-        this.buildHints();
+        this.title.position.set((512-this.title.width)/2, (this.boxGrid.yOffset*this.boxGrid.scale.y-this.title.height)/2);
 
         document.removeEventListener("pointerup", this.isSolvedBound);
         document.addEventListener("pointerup", this.isSolvedBound);
-    }
-
-    buildHints() {
-        this.hints.removeChildren();
-        this.hints.buildHints(this.boxGrid.getBoxMap(), this.boxGrid.scale.y);
-        this.hints.position.set(this.boxGrid.x-this.boxGrid.width/2,this.boxGrid.y-this.boxGrid.height/2);
     }
 
     isSolved() {
@@ -79,7 +66,6 @@ export default class GameScreen extends PIXI.Container {
         if(this.boxGrid.isSolved()) {
             this.title.alpha = 1;
             this.boxGrid.revealResult();
-            this.hints.removeChildren();
             document.removeEventListener("pointerup", this.isSolvedBound);
         }
     }

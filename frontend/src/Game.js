@@ -26,7 +26,7 @@ export default class Game {
         .add("edge", "./res/edge_dark.png")
         .add("mask", "./res/result_mask.png")
         .add("background", "./res/background.png")
-        .add("testdata", "./res/test_json/test5x.json")
+        .add("testdata", "./res/test_json/test15x.json")
         .add("title", "./res/title.json")
         .load((loader, resources)=>{
             let textureSheet = resources["texture_sheet"].spritesheet;
