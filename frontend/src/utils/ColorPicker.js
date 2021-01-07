@@ -1,95 +1,43 @@
-export default class ColorPicker extends PIXI.Container {
-  constructor(width, height, x, y) {
-    super();
-    this.width = width;
-    this.height = height;
-    this.x = x;
-    this.y = y;
-    this.body = this.createColorPickerBody(width, height);
-    this.generateBasicColors(width,y,x);
-  }
+import HSL2HEX from "./HSL2HEX.js";
 
-  createColorPickerBody(width, height) {
-    let body = new PIXI.Graphics();
-    body.beginFill(0xffffff);
-    body.drawRect(this.x, this.y, width, height);
-    super.addChild(body);
-    return body;
-  }
+export default class ColorPicker extends PIXI.Sprite {
+    constructor(data) {
+        super();
+        this.textureSheet = data.textureSheet;
 
-  generateBasicColors(width,y,x) {
-    let positionY = y + 10;
-    let positionX = x + 5;
-    let currentWidth = width;
+        this.bg = new PIXI.Sprite(this.textureSheet.textures["slider_bg"]);
+        this.line = new PIXI.Sprite(this.textureSheet.textures["slider_line"]);
+        this.slider = new PIXI.Sprite(this.textureSheet.textures["slider_button"]);
 
-    let colors = [
-      0xe08080,
-      0xe0e180,
-      0x80e180,
-      0x00e180,
-      0x80e1e1,
-      0x00e1e1,
-      0xe180e1,
-      0xe08080,
-      0xe0e180,
-      0x80e180,
-      0x00e180,
-      0x80e1e1,
-      0x00e1e1,
-      0xe180e1,
-      0xe08080,
-      0xe0e180,
-      0x80e180,
-      0x00e180,
-      0x80e1e1,
-      0x00e1e1,
-      0xe180e1,
-      0xe08080,
-      0xe0e180,
-      0x80e180,
-      0x00e180,
-      0x80e1e1,
-      0x00e1e1,
-      0xe180e1,
-      0xe08080,
-      0xe0e180,
-      0x80e180,
-      0x00e180,
-      0x80e1e1,
-      0x00e1e1,
-      0xe180e1,
-      0xe08080,
-      0xe0e180,
-      0x80e180,
-      0x00e180,
-      0x80e1e1,
-      0x00e1e1,
-      0xe180e1,
-      0xe08080,
-      0xe0e180,
-      0x80e180,
-      0x00e180,
-      0x80e1e1,
-      0x00e1e1,
-      0xe180e1,
-    ];
-    
-    for (let i = 0; i < colors.length; i++) {
-        console.log("Width", width);
-        console.log("positionX", positionX);
-        console.log("positionY", positionY);
-        console.log(positionX + 20 > width, `${positionX + 20}`);
-     
-        if (positionX + 20 > width) {
-        positionX = this.x + 5;
-        positionY += 20;
-      }
+        this.slider.anchor.set(0.5);
+        this.slider.position.set(this.slider.width/2, this.slider.height/2);
+ 
+        this.hue = 0;
+        this.bg.tint = HSL2HEX.convert(this.hue,100,50);
 
-      let square = new PIXI.Graphics();
-      square.beginFill(colors[i]);
-      square.drawRect(positionX, positionY, 10, 10);
-      super.addChild(square);
-      positionX += 20;
+        this.addChild(this.bg);
+        this.addChild(this.line);
+        this.addChild(this.slider);
+
+        this.slider.interactive = true;
+        this.slider.buttonMode = true;
+
+        this.slider.on("mousedown", ()=>{
+            this.slider.drag = true;
+        })
+        document.addEventListener("mouseup", ()=>{
+            this.slider.drag = false;
+        })
+        this.slider.on("mousemove", (e)=>{
+            if(this.slider.drag) {
+                let newPosition = e.data.getLocalPosition(this.slider.parent);
+                this.slider.position.x = newPosition.x;
+                if(this.slider.x < this.slider.width/2) this.slider.x = this.slider.width/2;
+                if(this.slider.x >= 96 - this.slider.width/2) this.slider.x = 96 - this.slider.width/2;
+
+                this.hue = ((1/80)*(this.slider.x-this.slider.width/2)) * 359;
+                this.bg.tint = HSL2HEX.convert(this.hue,100,50);
+            }
+        })
     }
-  }
 }

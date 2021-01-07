@@ -10,6 +10,7 @@ import ColorPicker from "./utils/ColorPicker.js"
 import Input from "./utils/Input.js";
 import ScreenManager from "./utils/ScreenManager.js";
 import BackgroundManager from "./utils/BackgroundManager.js";
+import LevelBrowserScreen from "./Screens/LevelBrowserScreen.js";
 
 
 export default class Game {
@@ -68,8 +69,7 @@ export default class Game {
             ScreenManager.addScreen(
                 new PuzzleModeScreen({
                     textureSheet: textureSheet,
-                    title: resources["title"].spritesheet,
-                    presentationPuzzle: resources["testdata"].data
+                    title: resources["title"].spritesheet
                 })
             );
             ScreenManager.addScreen(
@@ -78,9 +78,14 @@ export default class Game {
                     title: resources["title"].spritesheet
                 })
             );
-            const colorPicker = new ColorPicker(200, 150, 50, 20);
-            console.log(colorPicker);
-            this.app.stage.addChild(colorPicker)
+            ScreenManager.addScreen(
+                new LevelBrowserScreen({
+                    textureSheet: textureSheet,
+                    title: resources["title"].spritesheet,
+                    presentationPuzzle: resources["testdata"].data
+                })
+            );
+
             Input.init(this.app.stage);
 
             ScreenManager.changeScreen("MainMenuScreen");
