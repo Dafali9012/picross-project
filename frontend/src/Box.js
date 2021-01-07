@@ -41,6 +41,7 @@ export default class Box extends PIXI.Sprite {
 
         this.on("mouseover", ()=>{
             if(this.state != "solved") {
+                data.highlights.show({x:this.coordinates.x, y:this.coordinates.y});
                 if(Input.hold){
                     if(Input.delete) {
                         if(this.state != "empty") {
@@ -64,6 +65,7 @@ export default class Box extends PIXI.Sprite {
 
         this.on("mouseout", ()=>{
             if(this.state!="solved") {
+                data.highlights.hide();
                 this.scale.set(1);
                 this.anchor.set(0);
                 this.position.set(this.x - this.width/2, this.y - this.height/2);

@@ -6,10 +6,19 @@ export default class BoxGrid extends PIXI.Container {
         super();
         this.textureSheet = data.textureSheet;
         this.resultMask = new PIXI.Sprite(data.mask);
+
         this.boxGrid = new PIXI.Container();
         this.addChild(this.boxGrid);
+
         this.lines = new PIXI.Container();
         this.addChild(this.lines);
+
+        this.xHighlight = new PIXI.Graphics();
+        this.addChild(this.xHighlight);
+
+        this.yHighlight = new PIXI.Graphics();
+        this.addChild(this.yHighlight);
+
         this.hints = new PIXI.Container();
         this.addChild(this.hints);
 
@@ -36,10 +45,11 @@ export default class BoxGrid extends PIXI.Container {
         for(let y = 0; y < size; y++) {
             this.boxMap.push([]);
             for(let x = 0; x < size; x++) {
-                let box = new Box({textureSheet:this.textureSheet});
+                let box = new Box({textureSheet:this.textureSheet, highlights:{hide:this.hideHighlight.bind(this), show:this.showHighlight.bind(this)}});
                 box.filled = Math.round(Math.random()+0.1);
                 box.color = box.filled?randColor:0xFFFFFF;
                 box.position.set(x*box.width, y*box.height);
+                box.coordinates = {x:x,y:y}
                 this.boxGrid.addChild(box);
                 this.boxMap[y][x] = box;
             }
@@ -48,6 +58,7 @@ export default class BoxGrid extends PIXI.Container {
         this.resultMask.height = this.boxGrid.height;
         this.drawLines();
         this.buildHints();
+        this.drawHighlights();
     }
 
     buildGrid(json) {
@@ -55,10 +66,11 @@ export default class BoxGrid extends PIXI.Container {
         for(let y = 0; y < json.data.length; y++) {
             this.boxMap.push([]);
             for(let x = 0; x < json.data[y].length; x++) {
-                let box = new Box({textureSheet:this.textureSheet});
+                let box = new Box({textureSheet:this.textureSheet, highlights:{hide:this.hideHighlight.bind(this), show:this.showHighlight.bind(this)}});
                 box.filled = json.data[y][x].filled;
                 box.color = json.data[y][x].color;
                 box.position.set(x*box.width, y*box.height);
+                box.coordinates = {x:x,y:y}
                 this.boxGrid.addChild(box);
                 this.boxMap[y][x] = box;
             }
@@ -67,6 +79,37 @@ export default class BoxGrid extends PIXI.Container {
         this.resultMask.height = this.boxGrid.height;
         this.drawLines();
         this.buildHints();
+        this.drawHighlights();
+    }
+
+    drawHighlights() {
+        this.xHighlight.clear();
+        this.yHighlight.clear();
+
+        this.xHighlight.beginFill(0xffffff, 0.25);
+        this.xHighlight.drawRect(0,0,this.boxMap[0][0].width, this.yOffset);
+        this.xHighlight.endFill();
+        this.xHighlight.position.set(0, this.xHighlight.height*-1);
+        this.xHighlight.alpha = 0;
+
+        this.yHighlight.beginFill(0xffffff, 0.25);
+        this.yHighlight.drawRect(0,0,this.xOffset, this.boxMap[0][0].height);
+        this.yHighlight.endFill();
+        this.yHighlight.position.set(this.yHighlight.width*-1, 0);
+        this.yHighlight.alpha = 0;
+    }
+
+    hideHighlight() {
+        this.yHighlight.alpha = 0;
+        this.xHighlight.alpha = 0;
+    }
+
+    showHighlight(coordinates) {
+        this.yHighlight.y = coordinates.y*this.boxMap[0][0].height;
+        this.yHighlight.alpha = 1;
+
+        this.xHighlight.x = coordinates.x*this.boxMap[0][0].width;
+        this.xHighlight.alpha = 1;
     }
 
     drawLines() {
@@ -155,6 +198,7 @@ export default class BoxGrid extends PIXI.Container {
     }
 
     revealResult() {
+        this.hideHighlight();
         this.hints.removeChildren();
         this.lines.removeChildren();
         for(let box of this.boxGrid.children) box.revealColor();

@@ -9,11 +9,11 @@ export default class PuzzleModeScreen extends PIXI.Container {
         this.resolution = data.resolution;
         this.textureSheet = data.textureSheet;
 
-        this.title = new PIXI.AnimatedSprite(data.title.animations["mode_bounce"]);
-        this.title.animationSpeed = 0.04;
-        this.title.play();
+        this.title = new PIXI.AnimatedSprite(data.title.animations["write"]);
+        this.title.animationSpeed = 0.5;
+        this.title.loop = false;
         this.title.scale.set(2);
-        this.title.position.set((this.resolution.x-this.title.width)/2, (this.resolution.y/2-this.title.height)/2);
+        this.title.position.set((this.resolution.x-this.title.width)/2-20, (this.resolution.y/2-this.title.height)/2);
         this.addChild(this.title);
 
         this.buttonRandom = new Button(this.textureSheet, "RANDOM", () => {
@@ -37,8 +37,8 @@ export default class PuzzleModeScreen extends PIXI.Container {
         this.addChild(this.buttonBack);
     }
 
-    refreshTitleColor() {
-        this.title.tint = Math.random() * 0xFFFFFF;
+    enter() {
+        this.title.gotoAndPlay(0);
     }
 
     update(delta) {}

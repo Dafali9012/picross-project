@@ -28,7 +28,7 @@ export default class PuzzleSizeScreen extends PIXI.Container {
         this.buttonFifteen.position.set(this.resolution.x/2, this.buttonTen.y + this.buttonFifteen.height);
         this.addChild(this.buttonFifteen);
 
-        this.buttonBack = new Button(this.textureSheet, "BACK", ()=>ScreenManager.previousScreen());
+        this.buttonBack = new Button(this.textureSheet, "BACK", ()=>ScreenManager.previousScreen().enter());
         this.buttonBack.position.set(this.resolution.x/2, this.buttonFifteen.y + this.buttonBack.height);
         this.addChild(this.buttonBack);
     }

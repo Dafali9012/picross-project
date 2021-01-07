@@ -29,6 +29,7 @@ export default class Game {
         .add("background", "./res/background.png")
         .add("testdata", "./res/test_json/test5x.json")
         .add("title", "./res/title.json")
+        .add("title_test", "./res/title_test.json")
         .load((loader, resources)=>{
             let textureSheet = resources["texture_sheet"].spritesheet;
         
@@ -69,7 +70,7 @@ export default class Game {
             ScreenManager.addScreen(
                 new PuzzleModeScreen({
                     textureSheet: textureSheet,
-                    title: resources["title"].spritesheet,
+                    title: resources["title_test"].spritesheet,
                     resolution: this.resolution
                 })
             );
