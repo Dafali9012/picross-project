@@ -11,13 +11,12 @@ export default class MainMenuScreen extends PIXI.Container {
         this.textureSheet = data.textureSheet;
 
         let text = new PIXI.Text("v0.42\n2021-01-01", {
-            fontFamily:"myFont",
-            fontSize:16, fill:0xFFFFFF,
+            fontFamily:"Calibri",
+            fontSize:8, fill:0xFFFFFF,
             stroke:0x000000,
-            strokeThickness:2.25,
+            strokeThickness:0,
             align:"right"
         });
-        text.scale.set(0.3);
         this.addChild(text);
         text.position.set(this.resolution.x - 16 - text.width, this.resolution.y - 16 - text.height);
 

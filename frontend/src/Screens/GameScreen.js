@@ -52,7 +52,7 @@ export default class GameScreen extends PIXI.Container {
         this.boxGrid.scale.set(1,1);
         puzzleCallback();
         this.boxGrid.pivot.set((this.boxGrid.xOffset/2)*-1, this.boxGrid.yOffset*-1);
-        this.boxGrid.scale.y = this.resolution.y/this.boxGrid.height;
+        this.boxGrid.scale.y = (this.resolution.y/this.boxGrid.height)*0.9;
         this.boxGrid.scale.x = this.boxGrid.scale.y;
         this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);
 

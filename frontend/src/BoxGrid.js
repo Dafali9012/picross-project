@@ -121,10 +121,10 @@ export default class BoxGrid extends PIXI.Container {
             });
             text = text.substring(0, text.length-1);
             let hintText = new PIXI.Text(text, {
-                fontFamily:"myFont",
+                fontFamily:"Calibri",
                 fontSize:16, fill:0xFFFFFF,
                 stroke:0x000000,
-                strokeThickness:2,
+                strokeThickness:0,
                 align:"center"
             });
             hintText.scale.set(0.6);
