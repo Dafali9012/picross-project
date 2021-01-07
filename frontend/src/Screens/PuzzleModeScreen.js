@@ -10,16 +10,17 @@ export default class PuzzleModeScreen extends PIXI.Container {
         this.textureSheet = data.textureSheet;
 
         this.title = new PIXI.AnimatedSprite(data.title.animations["mode_bounce"]);
-        this.title.animationSpeed = 0.02;
+        this.title.animationSpeed = 0.04;
         this.title.play();
-        this.title.position.set((this.resolution.x-this.title.width)/2, 32);
+        this.title.scale.set(2);
+        this.title.position.set((this.resolution.x-this.title.width)/2, (this.resolution.y/2-this.title.height)/2);
         this.addChild(this.title);
 
         this.buttonRandom = new Button(this.textureSheet, "RANDOM", () => {
             ScreenManager.changeScreen("PuzzleSizeScreen");
             BackgroundManager.changeColor("orange");
         });
-        this.buttonRandom.position.set(this.resolution.x/2, this.title.y + this.title.height + this.buttonRandom.height*2);
+        this.buttonRandom.position.set(this.resolution.x/2, this.resolution.y/2);
         this.addChild(this.buttonRandom);
 
         this.buttonTest = new Button(this.textureSheet, "LEVELS", () => {

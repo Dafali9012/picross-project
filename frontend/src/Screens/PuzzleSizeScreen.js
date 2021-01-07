@@ -10,15 +10,14 @@ export default class PuzzleSizeScreen extends PIXI.Container {
         this.textureSheet = data.textureSheet;
 
         this.title = new PIXI.AnimatedSprite(data.title.animations["size_bounce"]);
-        this.title.animationSpeed = 0.02;
+        this.title.animationSpeed = 0.04;
         this.title.play();
-        this.title.anchor.set(0.5);
-        this.title.anchor.set(0);
-        this.title.position.set((this.resolution.x-this.title.width)/2, 32);
+        this.title.scale.set(2);
+        this.title.position.set((this.resolution.x-this.title.width)/2, (this.resolution.y/2-this.title.height)/2);
         this.addChild(this.title);
 
         this.buttonFive = new Button(this.textureSheet, "5x5", ()=>this.randomGame(5));
-        this.buttonFive.position.set(this.resolution.x/2, this.title.y + this.title.height + this.buttonFive.height*2);
+        this.buttonFive.position.set(this.resolution.x/2, this.resolution.y/2);
         this.addChild(this.buttonFive);
 
         this.buttonTen = new Button(this.textureSheet, "10x10", ()=>this.randomGame(10));

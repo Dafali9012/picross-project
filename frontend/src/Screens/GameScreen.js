@@ -17,12 +17,11 @@ export default class GameScreen extends PIXI.Container {
 
         this.title = new PIXI.Text("", {
             fontFamily:"myFont",
-            fontSize:16, fill:0xFFFFFF,
+            fontSize:32, fill:0xFFFFFF,
             stroke:0x000000,
-            strokeThickness:1.6,
+            strokeThickness:0,
             align:"center"
         });
-        this.title.scale.set(0.5);
         this.title.alpha = 0;
         this.addChild(this.title);
 
@@ -56,7 +55,7 @@ export default class GameScreen extends PIXI.Container {
         this.boxGrid.scale.x = this.boxGrid.scale.y;
         this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);
 
-        this.title.position.set((this.resolution.x-this.title.width)/2, (this.boxGrid.yOffset*this.boxGrid.scale.y-this.title.height)/2);
+        this.title.position.set((this.resolution.x-this.title.width)/2, (this.boxGrid.y+this.boxGrid.yOffset*this.boxGrid.scale.y-this.title.height)/2);
 
         document.removeEventListener("pointerup", this.isSolvedBound);
         document.addEventListener("pointerup", this.isSolvedBound);
