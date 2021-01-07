@@ -10,15 +10,24 @@ export default class BoxGrid extends PIXI.Container {
         this.addChild(this.boxGrid);
         this.lines = new PIXI.Container();
         this.addChild(this.lines);
+        this.hints = new PIXI.Container();
+        this.addChild(this.hints);
+
+        this.yOffset = 0;
     }
 
     resetState() {
         this.boxMap = [];
         this.hintMap = [];
+        this.hints.removeChildren();
         this.boxGrid.removeChildren();
+        this.lines.removeChildren();
 
         this.removeChild(this.resultMask);
         this.boxGrid.mask = null;
+
+        this.xOffset = 0;
+        this.yOffset = 0;
     }
 
     buildGridRandom(size) {
@@ -38,6 +47,7 @@ export default class BoxGrid extends PIXI.Container {
         this.resultMask.width = this.boxGrid.width;
         this.resultMask.height = this.boxGrid.height;
         this.drawLines();
+        this.buildHints();
     }
 
     buildGrid(json) {
@@ -56,10 +66,10 @@ export default class BoxGrid extends PIXI.Container {
         this.resultMask.width = this.boxGrid.width;
         this.resultMask.height = this.boxGrid.height;
         this.drawLines();
+        this.buildHints();
     }
 
     drawLines() {
-        this.lines.removeChildren();
         for(let i = 1; i < this.boxMap.length/5; i++) {
             let line = new PIXI.Graphics();
             line.lineStyle(2,0x00bde7);
@@ -76,8 +86,58 @@ export default class BoxGrid extends PIXI.Container {
         }
     }
 
-    getBoxMap() {
-        return this.boxMap;
+    buildHints() {
+        let filledData = {};
+        let hintData = {};
+
+        for(let row = 0; row < this.boxMap.length; row++) {
+            for(let col = 0; col < this.boxMap[row].length; col++) {
+                filledData["row_"+row.toString()] = filledData["row_"+row.toString()]?[...filledData["row_"+row.toString()], this.boxMap[row][col].filled]:[this.boxMap[row][col].filled];
+                filledData["col_"+col.toString()] = filledData["col_"+col.toString()]?[...filledData["col_"+col.toString()], this.boxMap[row][col].filled]:[this.boxMap[row][col].filled];
+            }
+        }
+
+        Object.keys(filledData).forEach(x=>{
+            let group = 0;
+            filledData[x].forEach((y,i)=>{
+                if(y==true) group++;
+                if((y==false || i==filledData[x].length-1) && group > 0) {
+                    hintData[x] = hintData[x]?[...hintData[x], group]:[group];
+                    group = 0;
+                }
+            });
+            if(!hintData[x]) hintData[x] = [group];
+        });
+
+        Object.keys(hintData).forEach((x)=>{
+            let text = "";
+            hintData[x].forEach((y)=>{
+                if(x.match("row")) {
+                    text = text.concat(y+" ");
+                }
+                if(x.match("col")) {
+                    text = text.concat(y+"\n");
+                }
+            });
+            text = text.substring(0, text.length-1);
+            let hintText = new PIXI.Text(text, {
+                fontFamily:"myFont",
+                fontSize:16, fill:0xFFFFFF,
+                stroke:0x000000,
+                strokeThickness:2,
+                align:"center"
+            });
+            hintText.scale.set(0.6);
+            if(x.match("row")) {
+                hintText.position.set(hintText.width*-1, this.boxMap[0][0].height * x.substring(4) + (this.boxMap[0][0].height-hintText.height)/2);
+                if(hintText.width > this.xOffset) this.xOffset = hintText.width;
+            }
+            if(x.match("col")) {
+                hintText.position.set(this.boxMap[0][0].width * x.substring(4) + (this.boxMap[0][0].width-hintText.width)/2,hintText.height*-1);
+                if(hintText.height > this.yOffset) this.yOffset = hintText.height;
+            }
+            this.hints.addChild(hintText);
+        });
     }
 
     isSolved() {
@@ -95,6 +155,7 @@ export default class BoxGrid extends PIXI.Container {
     }
 
     revealResult() {
+        this.hints.removeChildren();
         this.lines.removeChildren();
         for(let box of this.boxGrid.children) box.revealColor();
         this.addChild(this.resultMask);

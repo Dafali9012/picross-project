@@ -4,6 +4,7 @@ export default class MultiplayerScreen extends PIXI.Container {
     constructor(data) {
         super();
         
+        this.resolution = data.resolution;
         this.textureSheet = data.textureSheet;
 
         this.host = new PIXI.Sprite(this.textureSheet.textures["button_host"]);
@@ -20,13 +21,13 @@ export default class MultiplayerScreen extends PIXI.Container {
         });
         
 
-        this.host.x = (512 - this.host.width) / 2;
-        this.host.y = (288 - this.host.height) / 3;
-        this.join.x = (512 - this.join.width) / 2;
-        this.join.y = (288 - this.join.height) / 2;
-        this.back.x = (512-this.back.width)/2;
+        this.host.x = (this.resolution.x - this.host.width) / 2;
+        this.host.y = (this.resolution.y - this.host.height) / 3;
+        this.join.x = (this.resolution.x - this.join.width) / 2;
+        this.join.y = (this.resolution.y - this.join.height) / 2;
+        this.back.x = (this.resolution.x-this.back.width)/2;
         this.back.y = (this.host.y*2);
-        this.text.x = (512 - this.text.width) / 2;
+        this.text.x = (this.resolution.x - this.text.width) / 2;
         this.text.y = this.text.height;
 
         this.addChild(this.host);
