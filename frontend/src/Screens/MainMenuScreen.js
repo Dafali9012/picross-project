@@ -30,7 +30,7 @@ export default class MainMenuScreen extends PIXI.Container {
         this.title.position.set((this.resolution.x)/2, (this.resolution.y/2)/2);
         
         this.buttonPlay = new Button(data.textureSheet, "PLAY", ()=>{
-            ScreenManager.changeScreen("PuzzleModeScreen");
+            ScreenManager.changeScreen("PuzzleModeScreen").enter();
             BackgroundManager.changeColor("green");
         });
         this.buttonPlay.position.set(this.resolution.x/2, this.resolution.y/2);
