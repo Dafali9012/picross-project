@@ -86,13 +86,13 @@ export default class BoxGrid extends PIXI.Container {
         this.xHighlight.clear();
         this.yHighlight.clear();
 
-        this.xHighlight.beginFill(0xffffff, 0.25);
+        this.xHighlight.beginFill(0x000000, 0.25);
         this.xHighlight.drawRect(0,0,this.boxMap[0][0].width, this.yOffset);
         this.xHighlight.endFill();
         this.xHighlight.position.set(0, this.xHighlight.height*-1);
         this.xHighlight.alpha = 0;
 
-        this.yHighlight.beginFill(0xffffff, 0.25);
+        this.yHighlight.beginFill(0x000000, 0.25);
         this.yHighlight.drawRect(0,0,this.xOffset, this.boxMap[0][0].height);
         this.yHighlight.endFill();
         this.yHighlight.position.set(this.yHighlight.width*-1, 0);
