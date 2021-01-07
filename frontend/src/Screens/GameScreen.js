@@ -27,6 +27,7 @@ export default class GameScreen extends PIXI.Container {
 
         this.buttonMenu = new Button(this.textureSheet, "MENU", () => {
             this.title.alpha = 0;
+            this.boxGrid.hideHighlight();
             document.removeEventListener("pointerup", this.isSolvedBound);
             ScreenManager.changeScreen("MainMenuScreen");
             BackgroundManager.changeColor("blue");
