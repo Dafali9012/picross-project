@@ -22,7 +22,6 @@ export default class GameScreen extends PIXI.Container {
             strokeThickness:1.6,
             align:"center"
         });
-        this.title.scale.set(0.5);
         this.title.alpha = 0;
         this.addChild(this.title);
 

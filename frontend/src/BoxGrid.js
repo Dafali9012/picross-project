@@ -121,13 +121,13 @@ export default class BoxGrid extends PIXI.Container {
             });
             text = text.substring(0, text.length-1);
             let hintText = new PIXI.Text(text, {
-                fontFamily:"Calibri",
-                fontSize:16, fill:0xFFFFFF,
+                fontFamily:"Verdana",
+                fontSize:32, fill:0xFFFFFF,
                 stroke:0x000000,
                 strokeThickness:0,
                 align:"center"
             });
-            hintText.scale.set(0.6);
+            hintText.scale.set(0.5);
             if(x.match("row")) {
                 hintText.position.set(hintText.width*-1, this.boxMap[0][0].height * x.substring(4) + (this.boxMap[0][0].height-hintText.height)/2);
                 if(hintText.width > this.xOffset) this.xOffset = hintText.width;
