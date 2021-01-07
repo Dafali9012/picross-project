@@ -12,8 +12,6 @@ export default class PuzzleModeScreen extends PIXI.Container {
         this.title = new PIXI.AnimatedSprite(data.title.animations["mode_bounce"]);
         this.title.animationSpeed = 0.02;
         this.title.play();
-        this.title.anchor.set(0.5);
-        this.title.anchor.set(0);
         this.title.position.set((this.resolution.x-this.title.width)/2, 32);
         this.addChild(this.title);
 
