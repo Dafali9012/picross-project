@@ -32,7 +32,12 @@ export default class MainMenuScreen extends PIXI.Container {
         this.buttonBuild = new Button(data.textureSheet, "BUILD", () => {
             // goto: build puzzle screen
         });
+
         this.buttonBuild.position.set(512/2, this.buttonPlay.y + this.buttonBuild.height);
+
+        this.buttonBuild.on('mousedown', function (e) {
+            console.log('BUILD CLICK');
+        });
         this.addChild(this.buttonBuild);
     }
 

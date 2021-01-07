@@ -3,18 +3,22 @@ import PuzzleModeScreen from "./Screens/PuzzleModeScreen.js";
 import PuzzleSizeScreen from "./Screens/PuzzleSizeScreen.js";
 import MultiplayerScreen from "./Screens/MultiplayerScreen.js";
 import GameScreen from "./screens/GameScreen.js";
+import ColorPicker from "./utils/ColorPicker.js"
+
+
 
 import Input from "./utils/Input.js";
 import ScreenManager from "./utils/ScreenManager.js";
 import BackgroundManager from "./utils/BackgroundManager.js";
+
 
 export default class Game {
     constructor() {
         this.app = new PIXI.Application({width:512, height:288, resolution:window.innerHeight/288});
         this.app.renderer.backgroundColor = "0xfd9168";
         PIXI.SCALE_MODES = PIXI.SCALE_MODES.NEAREST;
+       
         document.body.appendChild(this.app.view);
-
         document.addEventListener("contextmenu", e=>{
             e.preventDefault();
         });
@@ -74,7 +78,9 @@ export default class Game {
                     title: resources["title"].spritesheet
                 })
             );
-
+            const colorPicker = new ColorPicker(200, 150, 50, 20);
+            console.log(colorPicker);
+            this.app.stage.addChild(colorPicker)
             Input.init(this.app.stage);
 
             ScreenManager.changeScreen("MainMenuScreen");
@@ -83,6 +89,7 @@ export default class Game {
 
             this.app.ticker.add(delta=>this.update(delta));
         });
+
     }
 
     scrollBackground(delta) {
