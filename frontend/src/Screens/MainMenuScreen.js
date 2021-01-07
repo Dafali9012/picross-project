@@ -7,6 +7,7 @@ export default class MainMenuScreen extends PIXI.Container {
     constructor(data) {
         super();
 
+        this.resolution = data.resolution;
         this.textureSheet = data.textureSheet;
 
         let text = new PIXI.Text("v0.42\n2021-01-01", {
@@ -18,23 +19,23 @@ export default class MainMenuScreen extends PIXI.Container {
         });
         text.scale.set(0.3);
         this.addChild(text);
-        text.position.set(512 - 16 - text.width, 288 - 16 - text.height);
+        text.position.set(this.resolution.x - 16 - text.width, this.resolution.y - 16 - text.height);
 
         this.title = new PIXI.Sprite(data.title.textures["picross_1"]);
-        this.title.position.set((512-this.title.width)/2, 32);
+        this.title.position.set((this.resolution.x-this.title.width)/2, 32);
         this.addChild(this.title);
         
         this.buttonPlay = new Button(data.textureSheet, "PLAY", ()=>{
             ScreenManager.changeScreen("PuzzleModeScreen");
             BackgroundManager.changeColor("green");
         });
-        this.buttonPlay.position.set(512/2, this.title.y + this.title.height + this.buttonPlay.height*2);
+        this.buttonPlay.position.set(this.resolution.x/2, this.title.y + this.title.height + this.buttonPlay.height*2);
         this.addChild(this.buttonPlay);
 
         this.buttonBuild = new Button(data.textureSheet, "BUILD", () => {
             // goto: build puzzle screen
         });
-        this.buttonBuild.position.set(512/2, this.buttonPlay.y + this.buttonBuild.height);
+        this.buttonBuild.position.set(this.resolution.x/2, this.buttonPlay.y + this.buttonBuild.height);
         this.addChild(this.buttonBuild);
 
         /*

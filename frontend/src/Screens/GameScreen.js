@@ -7,6 +7,7 @@ export default class GameScreen extends PIXI.Container {
     constructor(data) {
         super();
 
+        this.resolution = data.resolution;
         this.textureSheet = data.textureSheet;
 
         this.isSolvedBound = this.isSolved.bind(this);
@@ -31,7 +32,7 @@ export default class GameScreen extends PIXI.Container {
             ScreenManager.changeScreen("MainMenuScreen");
             BackgroundManager.changeColor("blue");
         });
-        this.buttonMenu.position.set(512-this.buttonMenu.width, 288-this.buttonMenu.height);
+        this.buttonMenu.position.set(this.resolution.x-this.buttonMenu.width, this.resolution.y-this.buttonMenu.height);
         this.addChild(this.buttonMenu);
 
         this.interactive = true;
@@ -51,11 +52,11 @@ export default class GameScreen extends PIXI.Container {
         this.boxGrid.scale.set(1,1);
         puzzleCallback();
         this.boxGrid.pivot.set((this.boxGrid.xOffset/2)*-1, this.boxGrid.yOffset*-1);
-        this.boxGrid.scale.y = 288/this.boxGrid.height;
+        this.boxGrid.scale.y = this.resolution.y/this.boxGrid.height;
         this.boxGrid.scale.x = this.boxGrid.scale.y;
-        this.boxGrid.position.set((512-this.boxGrid.width)/2, (288-this.boxGrid.height)/2);
+        this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);
 
-        this.title.position.set((512-this.title.width)/2, (this.boxGrid.yOffset*this.boxGrid.scale.y-this.title.height)/2);
+        this.title.position.set((this.resolution.x-this.title.width)/2, (this.boxGrid.yOffset*this.boxGrid.scale.y-this.title.height)/2);
 
         document.removeEventListener("pointerup", this.isSolvedBound);
         document.addEventListener("pointerup", this.isSolvedBound);
