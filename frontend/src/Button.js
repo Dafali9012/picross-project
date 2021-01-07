@@ -5,13 +5,13 @@ export default class Button extends PIXI.Sprite {
         this.texture = this.textureSheet.textures["button"];
         this.anchor.set(0.5);
         this.text = new PIXI.Text(text, {
-            fontFamily:"myFont",
-            fontSize:16, fill:0xFFFFFF,
+            fontFamily:"Calibri",
+            fontSize:8, fill:0xFFFFFF,
             stroke:0x000000,
-            strokeThickness:2.25,
+            strokeThickness:0,
             align:"center"
         });
-        this.text.scale.set(0.3);
+        //this.text.scale.set(0.3);
         this.text.anchor.set(0.5);
         this.addChild(this.text);
         this.interactive = true;

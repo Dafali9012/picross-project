@@ -11,7 +11,8 @@ import LevelBrowserScreen from "./Screens/LevelBrowserScreen.js";
 
 export default class Game {
     constructor() {
-        this.app = new PIXI.Application({width:512, height:288, resolution:window.innerHeight/288});
+        this.resolution = {x:1280,y:720}
+        this.app = new PIXI.Application({width:this.resolution.x, height:this.resolution.y, resolution:window.innerHeight/this.resolution.y});
         this.app.renderer.backgroundColor = "0xfd9168";
         PIXI.SCALE_MODES = PIXI.SCALE_MODES.NEAREST;
         document.body.appendChild(this.app.view);
@@ -23,7 +24,7 @@ export default class Game {
         let loader = new PIXI.Loader();
         loader
         .add("texture_sheet", "./res/texture_sheet.json")
-        .add("edge", "./res/edge_dark.png")
+        .add("edge", "./res/edge_dark_720.png")
         .add("mask", "./res/result_mask.png")
         .add("background", "./res/background.png")
         .add("testdata", "./res/test_json/test5x.json")
@@ -48,37 +49,43 @@ export default class Game {
             ScreenManager.addScreen( 
                 new GameScreen({
                     textureSheet: textureSheet,
-                    mask: resources["mask"].texture
+                    mask: resources["mask"].texture,
+                    resolution: this.resolution
                 })
             );
             ScreenManager.addScreen(
                 new MainMenuScreen({
                     textureSheet: textureSheet,
-                    title: resources["title"].spritesheet
+                    title: resources["title"].spritesheet,
+                    resolution: this.resolution
                 })
             );
             ScreenManager.addScreen(
                 new MultiplayerScreen({
                     textureSheet: textureSheet,
+                    resolution: this.resolution
                 })
             );
             ScreenManager.addScreen(
                 new PuzzleModeScreen({
                     textureSheet: textureSheet,
-                    title: resources["title"].spritesheet
+                    title: resources["title"].spritesheet,
+                    resolution: this.resolution
                 })
             );
             ScreenManager.addScreen(
                 new PuzzleSizeScreen({
                     textureSheet: textureSheet,
-                    title: resources["title"].spritesheet
+                    title: resources["title"].spritesheet,
+                    resolution: this.resolution
                 })
             );
             ScreenManager.addScreen(
                 new LevelBrowserScreen({
                     textureSheet: textureSheet,
                     title: resources["title"].spritesheet,
-                    presentationPuzzle: resources["testdata"].data
+                    presentationPuzzle: resources["testdata"].data,
+                    resolution: this.resolution
                 })
             );
 
