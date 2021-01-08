@@ -1,0 +1,13 @@
+{
+    "meta": {
+        "image": "main_title.png"
+    },
+    "frames": {
+        "title": {
+            "frame": {"x":0, "y":0, "w": 192, "h": 48}
+        },
+        "gleam": {
+            "frame": {"x":0, "y":48, "w": 64, "h": 48}
+        }
+    }
+}
