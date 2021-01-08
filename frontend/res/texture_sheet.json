@@ -44,6 +44,15 @@
         },
         "button": {
             "frame": {"x": 0, "y": 48, "w": 64, "h": 32}
+        },
+        "slider_line": {
+            "frame": {"x": 0, "y": 80, "w": 96, "h": 32}
+        },
+        "slider_button": {
+            "frame": {"x": 80, "y": 48, "w": 16, "h": 32}
+        },
+        "slider_bg": {
+            "frame": {"x": 0, "y": 112, "w": 96, "h": 32}
         }
     },
     "animations": {

@@ -6,35 +6,60 @@ export default class MainMenuScreen extends PIXI.Container {
     constructor(data) {
         super();
 
+        this.resolution = data.resolution;
         this.textureSheet = data.textureSheet;
 
-        let text = new PIXI.Text("v0.2\n2021-01-01", {
-            fontFamily:"myFont",
-            fontSize:4, fill:0xFFFFFF,
+        this.scaleIncrease = true;
+        this.angleIncrease = true;
+
+        let text = new PIXI.Text("v0.42\n2021-01-01", {
+            fontFamily:"Calibri",
+            fontSize:32, fill:0xFFFFFF,
             stroke:0x000000,
-            strokeThickness:1,
+            strokeThickness:0,
             align:"right"
         });
+        text.scale.set(0.35);
         this.addChild(text);
-        text.position.set(512 - 16 - text.width, 288 - 16 - text.height);
+        text.position.set(this.resolution.x - 16 - text.width, this.resolution.y - 16 - text.height);
 
         this.title = new PIXI.Sprite(data.title.textures["picross_1"]);
-        this.title.position.set((512-this.title.width)/2, 32);
         this.addChild(this.title);
+        this.title.pivot.set(this.title.width/2,this.title.height/2);
+        this.title.scale.set(2);
+        this.title.position.set((this.resolution.x)/2, (this.resolution.y/2)/2);
         
         this.buttonPlay = new Button(data.textureSheet, "PLAY", ()=>{
-            ScreenManager.changeScreen("PuzzleModeScreen");
+            ScreenManager.changeScreen("PuzzleModeScreen").enter();
             BackgroundManager.changeColor("green");
         });
-        this.buttonPlay.position.set(512/2, this.title.y + this.title.height + this.buttonPlay.height*2);
+        this.buttonPlay.position.set(this.resolution.x/2, this.resolution.y/2);
         this.addChild(this.buttonPlay);
 
         this.buttonBuild = new Button(data.textureSheet, "BUILD", () => {
             // goto: build puzzle screen
         });
-        this.buttonBuild.position.set(512/2, this.buttonPlay.y + this.buttonBuild.height);
+        this.buttonBuild.position.set(this.resolution.x/2, this.buttonPlay.y + this.buttonBuild.height);
         this.addChild(this.buttonBuild);
     }
 
-    update(delta) {}
+    update(delta) {
+        if(this.scaleIncrease) {
+            this.title.scale.set(this.title.scale.y+=0.0025);
+            if(this.title.scale.y>=2.1) this.scaleIncrease=false;
+        }
+        if(!this.scaleIncrease) {
+            this.title.scale.set(this.title.scale.y-=0.0025);
+            if(this.title.scale.y<=2) this.scaleIncrease=true;
+        }
+
+        if(this.angleIncrease) {
+            this.title.angle +=0.1;
+            if(this.title.angle>=4) this.angleIncrease=false;
+        }
+        if(!this.angleIncrease) {
+            this.title.angle -=0.1;
+            if(this.title.angle<=-4) this.angleIncrease=true;
+        }
+    }
 }
