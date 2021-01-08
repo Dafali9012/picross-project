@@ -23,14 +23,24 @@ export default class MainMenuScreen extends PIXI.Container {
         this.addChild(text);
         text.position.set(this.resolution.x - 16 - text.width, this.resolution.y - 16 - text.height);
 
-        this.title = new PIXI.Sprite(data.title.textures["picross_1"]);
+        this.title = new PIXI.Sprite(data.title.textures["title"]);
         this.addChild(this.title);
-        this.title.pivot.set(this.title.width/2,this.title.height/2);
         this.title.scale.set(2);
-        this.title.position.set((this.resolution.x)/2, (this.resolution.y/2)/2);
+        this.title.position.set((this.resolution.x-this.title.width)/2, (this.resolution.y/2)/2);
+
+        this.gleamMask = new PIXI.Sprite(data.title.textures["title"]);
+        this.addChild(this.gleamMask);
+        this.gleamMask.scale.set(2);
+        this.gleamMask.position.set(this.title.x, this.title.y);
+
+        this.gleam = new PIXI.Sprite(data.title.textures["gleam"]);
+        this.addChild(this.gleam);
+        this.gleam.scale.set(2);
+        this.gleam.position.set(this.title.x-this.gleam.width, this.title.y);
+        this.gleam.mask = this.gleamMask;
         
         this.buttonPlay = new Button(data.textureSheet, "PLAY", ()=>{
-            ScreenManager.changeScreen("PuzzleModeScreen").enter();
+            ScreenManager.changeScreen("PuzzleModeScreen");
             BackgroundManager.changeColor("green");
         });
         this.buttonPlay.position.set(this.resolution.x/2, this.resolution.y/2);
@@ -44,22 +54,7 @@ export default class MainMenuScreen extends PIXI.Container {
     }
 
     update(delta) {
-        if(this.scaleIncrease) {
-            this.title.scale.set(this.title.scale.y+=0.0025);
-            if(this.title.scale.y>=2.1) this.scaleIncrease=false;
-        }
-        if(!this.scaleIncrease) {
-            this.title.scale.set(this.title.scale.y-=0.0025);
-            if(this.title.scale.y<=2) this.scaleIncrease=true;
-        }
-
-        if(this.angleIncrease) {
-            this.title.angle +=0.1;
-            if(this.title.angle>=4) this.angleIncrease=false;
-        }
-        if(!this.angleIncrease) {
-            this.title.angle -=0.1;
-            if(this.title.angle<=-4) this.angleIncrease=true;
-        }
+        this.gleam.x += 12.5;
+        if(this.gleam.x > this.resolution.x) this.gleam.x = (this.gleam.width*-1)*4;
     }
 }
