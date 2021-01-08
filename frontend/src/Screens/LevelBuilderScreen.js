@@ -25,6 +25,25 @@ export default class LevelBuilderScreen extends PIXI.Container {
         this.addChild(this.boxGrid);
         this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);*/
 
+        this.input = new PIXI.TextInput({
+            input: {
+                fontSize: '20px',
+                padding: '10px',
+                width: '260px',
+                color: '#F0F0F0'
+            },
+            box: {
+                default: {fill: 0x01BCE7, rounded: 12, stroke: {color: 0xffffff, width: 4}},
+                focused: {fill: 0x01BCE7, rounded: 8, stroke: {color: 0xffffff, width: 6}},
+                disabled: {fill: 0x01BCE7, rounded: 12}
+            }
+        })
+        this.input.placeholder = 'Enter your puzzle name ...'
+	    this.input.x = 650
+	    this.input.y = 650
+	    this.input.pivot.x = this.input.width/2
+	    this.input.pivot.y = this.input.height/2
+	    this.addChild(this.input)
 
         this.buttonMenu = new Button(this.textureSheet, "MENU", () => {
             document.removeEventListener("pointerup", this.isSolvedBound);
