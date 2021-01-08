@@ -9,9 +9,6 @@ export default class MainMenuScreen extends PIXI.Container {
         this.resolution = data.resolution;
         this.textureSheet = data.textureSheet;
 
-        this.scaleIncrease = true;
-        this.angleIncrease = true;
-
         let text = new PIXI.Text("v0.42\n2021-01-01", {
             fontFamily:"Calibri",
             fontSize:32, fill:0xFFFFFF,
@@ -26,7 +23,7 @@ export default class MainMenuScreen extends PIXI.Container {
         this.title = new PIXI.Sprite(data.title.textures["title"]);
         this.addChild(this.title);
         this.title.scale.set(2);
-        this.title.position.set((this.resolution.x-this.title.width)/2, (this.resolution.y/2)/2);
+        this.title.position.set((this.resolution.x-this.title.width)/2, (this.resolution.y/2)/2-this.title.height/2);
 
         this.gleamMask = new PIXI.Sprite(data.title.textures["title"]);
         this.addChild(this.gleamMask);
