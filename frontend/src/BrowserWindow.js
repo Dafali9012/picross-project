@@ -11,7 +11,14 @@ export default class BrowserWindow extends PIXI.Container {
         this.background.width = this.resolution.x*0.6;
         this.addChild(this.background);
 
-        for(let i = 0; i<=5; i++) {
+        let DBresp = [];
+        
+        DBresp.push(data.presentationPuzzle)
+        DBresp.push(data.presentationPuzzle2)
+        DBresp.push(data.presentationPuzzle3)
+        
+
+        for(let puzzle of DBresp) {
             this.browserItem = new PIXI.Container();
             this.browserItem.interactive = true;
             this.browserItem.buttonMode = true;
@@ -19,13 +26,13 @@ export default class BrowserWindow extends PIXI.Container {
             this.browserItem.background.tint = 0x00d0ff;
             this.browserItem.background.width = this.width*0.8;
             this.browserItem.background.height = 32;
-            this.browserItem.json = data.presentationPuzzle;
+            this.browserItem.json = puzzle;
             this.browserItem.addChild(this.browserItem.background);
             this.browserItem.position.set((this.width-this.browserItem.width)/2, this.children.length>1 ? ((this.children.length-1)*this.browserItem.height) : 0);
             this.browserItem.content = new PIXI.Container();
             this.browserItem.on('click', () => {
                 BackgroundManager.changeColor("white");
-                ScreenManager.changeScreen("GameScreen").fixedPuzzle(this.browserItem.json);
+                ScreenManager.changeScreen("GameScreen").fixedPuzzle(puzzle);
             });
             this.title = new PIXI.Text(this.browserItem.json.meta.title, {
                 fontFamily:"Calibri",

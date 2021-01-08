@@ -17,7 +17,12 @@ export default class LevelBrowserScreen extends PIXI.Container{
         this.title.position.set((this.resolution.x-this.title.width)/2, 32);
         this.addChild(this.title);
         
-        this.browserWindow = new BrowserWindow({resolution:data.resolution, presentationPuzzle: data.presentationPuzzle});
+        this.browserWindow = new BrowserWindow({
+            resolution:data.resolution, 
+            presentationPuzzle: data.presentationPuzzle, 
+            presentationPuzzle2: data.presentationPuzzle2,
+            presentationPuzzle3: data.presentationPuzzle3
+        });
         this.browserWindow.position.set((this.resolution.x-this.browserWindow.width)/2, this.title.y+this.title.height+32);
         this.addChild(this.browserWindow);
         
