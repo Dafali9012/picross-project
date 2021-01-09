@@ -8,6 +8,7 @@ import Input from "./utils/Input.js";
 import ScreenManager from "./utils/ScreenManager.js";
 import BackgroundManager from "./utils/BackgroundManager.js";
 import LevelBrowserScreen from "./Screens/LevelBrowserScreen.js";
+import LevelBuilderScreen from "./Screens/LevelBuilderScreen.js";
 
 export default class Game {
     constructor() {
@@ -27,7 +28,6 @@ export default class Game {
         .add("edge", "./res/edge_dark_720.png")
         .add("mask", "./res/result_mask.png")
         .add("background", "./res/background.png")
-        .add("testdata", "./res/test_json/test5x.json")
         .add("title", "./res/title.json")
         .add("main_title", "./res/main_title.json")
         .load((loader, resources)=>{
@@ -85,7 +85,13 @@ export default class Game {
                 new LevelBrowserScreen({
                     textureSheet: textureSheet,
                     title: resources["title"].spritesheet,
-                    presentationPuzzle: resources["testdata"].data,
+                    resolution: this.resolution
+                })
+            );
+            ScreenManager.addScreen(
+                new LevelBuilderScreen({
+                    textureSheet: textureSheet,
+                    title: resources["title"].spritesheet,
                     resolution: this.resolution
                 })
             );
