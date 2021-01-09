@@ -20,11 +20,18 @@
         },
         "size_2": {
             "frame": {"x":0, "y":160, "w": 80, "h": 32}
+        },
+        "puzzles_1": {
+            "frame": {"x":0, "y":0, "w": 160, "h": 32}
+        },
+        "puzzles_2": {
+            "frame": {"x":0, "y":32, "w": 160, "h": 32}
         }
     },
     "animations": {
         "picross_bounce": ["picross_1", "picross_2"],
         "mode_bounce": ["mode_1", "mode_2"],
-        "size_bounce": ["size_1", "size_2"]
+        "size_bounce": ["size_1", "size_2"],
+        "puzzles_bounce": ["puzzles_1", "puzzles_2"]
     }
 }
