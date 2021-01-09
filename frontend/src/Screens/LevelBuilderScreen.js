@@ -50,7 +50,7 @@ export default class LevelBuilderScreen extends PIXI.Container {
             ScreenManager.changeScreen("MainMenuScreen");
             BackgroundManager.changeColor("blue");
         });
-        this.saveLevel = new Button(this.textureSheet, "SAVE", () => {
+        this.publishLevel = new Button(this.textureSheet, "PUBLISH", () => {
             document.removeEventListener("pointerup", this.isSolvedBound);
         });
         this.buttonFive = new Button(this.textureSheet, "5x5", () => {
@@ -64,15 +64,15 @@ export default class LevelBuilderScreen extends PIXI.Container {
         });
         
         this.buttonMenu.position.set(this.resolution.x-this.buttonMenu.width, this.resolution.y-this.buttonMenu.height);
-        this.saveLevel.position.set(this.resolution.x-this.saveLevel.width, this.resolution.y-2*this.saveLevel.height);
-        this.buttonFive.position.set(this.resolution.x-this.saveLevel.width, this.resolution.y-9*this.saveLevel.height);
-        this.buttonTen.position.set(this.resolution.x-this.saveLevel.width, this.resolution.y-8*this.saveLevel.height);
-        this.buttonFifteen.position.set(this.resolution.x-this.saveLevel.width, this.resolution.y-7*this.saveLevel.height);
-        this.colorPicker.position.set(this.resolution.x-this.saveLevel.width - 48, this.resolution.y-6*this.saveLevel.height);
+        this.publishLevel.position.set(this.resolution.x-this.publishLevel.width, this.resolution.y-2*this.publishLevel.height);
+        this.buttonFive.position.set(this.resolution.x-this.publishLevel.width, this.resolution.y-9*this.publishLevel.height);
+        this.buttonTen.position.set(this.resolution.x-this.publishLevel.width, this.resolution.y-8*this.publishLevel.height);
+        this.buttonFifteen.position.set(this.resolution.x-this.publishLevel.width, this.resolution.y-7*this.publishLevel.height);
+        this.colorPicker.position.set(this.resolution.x-this.publishLevel.width - 48, this.resolution.y-6*this.publishLevel.height);
 
 
         this.addChild(this.buttonMenu);
-        this.addChild(this.saveLevel);
+        this.addChild(this.publishLevel);
         this.addChild(this.buttonFive);
         this.addChild(this.buttonTen);
         this.addChild(this.buttonFifteen);

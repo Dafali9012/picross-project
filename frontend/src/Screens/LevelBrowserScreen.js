@@ -10,22 +10,23 @@ export default class LevelBrowserScreen extends PIXI.Container{
         this.resolution = data.resolution;
         this.textureSheet = data.textureSheet;
         
-        this.title = new PIXI.AnimatedSprite(data.title.animations["mode_bounce"]);
+        this.title = new PIXI.AnimatedSprite(data.title.animations["puzzles_bounce"]);
         this.title.animationSpeed = 0.04;
         this.title.play();
         this.title.scale.set(2);
         this.title.position.set((this.resolution.x-this.title.width)/2, 32);
         this.addChild(this.title);
         
+
         this.browserWindow = new BrowserWindow({
-            resolution:data.resolution, 
-            presentationPuzzle: data.presentationPuzzle, 
-            presentationPuzzle2: data.presentationPuzzle2,
-            presentationPuzzle3: data.presentationPuzzle3
+            resolution:data.resolution,
+            fetchFinish:this.afterFetch.bind(this)
         });
         this.browserWindow.position.set((this.resolution.x-this.browserWindow.width)/2, this.title.y+this.title.height+32);
         this.addChild(this.browserWindow);
-        
+    }
+
+    afterFetch() {
         this.buttonBack = new Button(this.textureSheet, "BACK", () => {
             ScreenManager.previousScreen();
         });

@@ -28,9 +28,6 @@ export default class Game {
         .add("edge", "./res/edge_dark_720.png")
         .add("mask", "./res/result_mask.png")
         .add("background", "./res/background.png")
-        .add("testdata", "./res/test_json/test5x.json")
-        .add("testdata2", "./res/test_json/test10x.json")
-        .add("testdata3", "./res/test_json/test15x.json")
         .add("title", "./res/title.json")
         .add("main_title", "./res/main_title.json")
         .load((loader, resources)=>{
@@ -88,9 +85,6 @@ export default class Game {
                 new LevelBrowserScreen({
                     textureSheet: textureSheet,
                     title: resources["title"].spritesheet,
-                    presentationPuzzle: resources["testdata"].data,
-                    presentationPuzzle2: resources["testdata2"].data,
-                    presentationPuzzle3: resources["testdata3"].data,
                     resolution: this.resolution
                 })
             );
