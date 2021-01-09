@@ -9,7 +9,7 @@ export default class MainMenuScreen extends PIXI.Container {
         this.resolution = data.resolution;
         this.textureSheet = data.textureSheet;
 
-        let text = new PIXI.Text("v0.42\n2021-01-01", {
+        let text = new PIXI.Text("v0.61\n2021-01-09", {
             fontFamily:"Calibri",
             fontSize:32, fill:0xFFFFFF,
             stroke:0x000000,
