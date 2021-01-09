@@ -8,7 +8,8 @@ export default class BrowserWindow extends PIXI.Container {
         this.resolution = data.resolution;
 
         this.background = new PIXI.Sprite(PIXI.Texture.WHITE);
-        this.background.width = this.resolution.x*0.6;
+        this.background.width = this.resolution.x*0.4;
+        this.background.alpha = 0.2;
         this.addChild(this.background);
 
         this.fetchPuzzles().then((puzzles)=>{
@@ -16,9 +17,9 @@ export default class BrowserWindow extends PIXI.Container {
                 let browserItem = new PIXI.Container();
                 browserItem.interactive = true;
                 browserItem.buttonMode = true;
-                browserItem.background = new PIXI.Sprite(PIXI.Texture.WHITE);
-                browserItem.background.tint = 0x00d0ff;
-                browserItem.background.width = this.width*0.8;
+                browserItem.background = new PIXI.Sprite(data.textureSheet.textures["button"]);
+                //browserItem.background.tint = 0x00d0ff;
+                browserItem.background.width = this.width*0.9;
                 browserItem.background.height = 32;
                 browserItem.json = JSON.parse(x.json);
                 browserItem.addChild(browserItem.background);
@@ -30,24 +31,27 @@ export default class BrowserWindow extends PIXI.Container {
                 });
                 this.title = new PIXI.Text(browserItem.json.meta.title, {
                     fontFamily:"Calibri",
-                    fontSize:18, fill:0xFFFFFF,
+                    fontSize:32, fill:0xFFFFFF,
                     stroke:0x000000,
-                    strokeThickness:0
+                    strokeThickness:0,
+                    align:"left"
                 });
                 this.dimensions = new PIXI.Text(browserItem.json.meta.dimensions + "x" + browserItem.json.meta.dimensions, {
                     fontFamily:"Calibri",
-                    fontSize:18, fill:0xFFFFFF,
+                    fontSize:32, fill:0xFFFFFF,
                     stroke:0x000000,
-                    strokeThickness:0
+                    strokeThickness:0,
+                    align:"left"
                 });
-                this.dimensions.position.set((this.title.x+this.title.width)+browserItem.width/4, 0);
+                this.dimensions.scale.set(0.5);
+                this.title.scale.set(0.5);
+                this.dimensions.position.set(192, 0);
                 browserItem.content.addChild(this.title);
                 browserItem.content.addChild(this.dimensions);
-                browserItem.content.position.set((browserItem.width-browserItem.content.width)/2,(browserItem.height-browserItem.content.height)/2)
+                browserItem.content.position.set(64,(browserItem.height-browserItem.content.height)/2)
                 browserItem.addChild(browserItem.content)
                 this.addChild(browserItem);
             });
-            this.background.height = this.children.length>1 ? ((this.children.length-1)*32) : 0;
             data.fetchFinish();
         }); 
     }
