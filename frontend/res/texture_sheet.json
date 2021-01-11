@@ -53,6 +53,12 @@
         },
         "slider_bg": {
             "frame": {"x": 0, "y": 112, "w": 96, "h": 32}
+        },
+        "the_chosen_one": {
+            "frame": {"x": 96, "y": 0, "w": 32, "h": 32}
+        },
+        "the_not_chosen_one" : {
+            "frame": {"x": 96, "y": 32, "w": 32, "h": 32}
         }
     },
     "animations": {

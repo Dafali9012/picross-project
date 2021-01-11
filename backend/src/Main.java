@@ -31,7 +31,11 @@ public class Main {
         app.post("/api/puzzle", (req,res)->{
             Connection conn = connectDB();
             if(conn!=null) {
-                // res
+                try {
+                    Statement statement = conn.createStatement();
+                    System.out.println(req.body());
+                    statement.execute("insert into puzzle(title, json) values(\"please\",\""+req.body()+"\")");
+                } catch (SQLException e) { e.printStackTrace(); }
                 try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
             }
         });

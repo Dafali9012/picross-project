@@ -1,9 +1,11 @@
 import Box from "./Box.js";
+import BuildBox from "./BuildBox.js";
 import HSL2HEX from "./utils/HSL2HEX.js";
 
 export default class BoxGrid extends PIXI.Container {
     constructor(data) {
         super();
+
         this.textureSheet = data.textureSheet;
         this.resultMask = new PIXI.Sprite(data.mask);
 
@@ -80,6 +82,23 @@ export default class BoxGrid extends PIXI.Container {
         this.drawLines();
         this.buildHints();
         this.drawHighlights();
+    }
+
+    buildBuildGrid(size) {
+        this.resetState();
+        for(let y = 0; y < size; y++) {
+            this.boxMap.push([]);
+            for(let x = 0; x < size; x++) {
+                let box = new BuildBox({textureSheet:this.textureSheet});
+                box.filled = 0;
+                box.color = 0xFFFFFF;
+                box.position.set(x*box.width, y*box.height);
+                box.coordinates = {x:x,y:y}
+                this.boxGrid.addChild(box);
+                this.boxMap[y][x] = box;
+            }
+        }
+        this.drawLines();
     }
 
     drawHighlights() {

@@ -1,3 +1,4 @@
+import Color from "./Color.js";
 import HSL2HEX from "./HSL2HEX.js";
 
 export default class ColorPicker extends PIXI.Sprite {
@@ -13,6 +14,7 @@ export default class ColorPicker extends PIXI.Sprite {
         this.slider.position.set(this.slider.width/2, this.slider.height/2);
 
         this.hue = 0;
+        Color.setColor(HSL2HEX.convert(this.hue,100,50));
         this.bg.tint = HSL2HEX.convert(this.hue,100,50);
 
         this.addChild(this.bg);
@@ -37,7 +39,8 @@ export default class ColorPicker extends PIXI.Sprite {
 
                 this.hue = ((1/80)*(this.slider.x-this.slider.width/2)) * 359;
                 this.bg.tint = HSL2HEX.convert(this.hue,100,50);
+                Color.setColor(HSL2HEX.convert(this.hue,100,50));
             }
-        })
+        });
     }
 }

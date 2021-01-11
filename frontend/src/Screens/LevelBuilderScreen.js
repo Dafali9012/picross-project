@@ -21,9 +21,10 @@ export default class LevelBuilderScreen extends PIXI.Container {
         this.colorPicker = new ColorPicker({textureSheet:this.textureSheet});
         this.addChild(this.colorPicker);
 
-        /*this.boxGrid = new BoxGrid({textureSheet:this.textureSheet, mask:data.mask});
+        this.boxGrid = new BoxGrid({textureSheet:this.textureSheet, mask:data.mask});
+        this.boxGrid.buildBuildGrid(5);
         this.addChild(this.boxGrid);
-        this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);*/
+        this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);
 
         this.input = new PIXI.TextInput({
             input: {
@@ -40,27 +41,29 @@ export default class LevelBuilderScreen extends PIXI.Container {
         })
         this.input.placeholder = 'Enter your puzzle name ...'
 	    this.input.x = 650
-	    this.input.y = 650
+	    this.input.y = this.resolution.y - 32;
 	    this.input.pivot.x = this.input.width/2
 	    this.input.pivot.y = this.input.height/2
 	    this.addChild(this.input)
 
         this.buttonMenu = new Button(this.textureSheet, "MENU", () => {
-            document.removeEventListener("pointerup", this.isSolvedBound);
             ScreenManager.changeScreen("MainMenuScreen");
             BackgroundManager.changeColor("blue");
         });
         this.publishLevel = new Button(this.textureSheet, "PUBLISH", () => {
-            document.removeEventListener("pointerup", this.isSolvedBound);
+            this.sendPuzzle({meta: {title: "random", dimensions:this.boxGrid.boxMap.length}, data:this.convertMap(this.boxGrid.boxMap)});
         });
         this.buttonFive = new Button(this.textureSheet, "5x5", () => {
-            document.removeEventListener("pointerup", this.isSolvedBound);
+            this.boxGrid.buildBuildGrid(5);
+            this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);
         });
         this.buttonTen = new Button(this.textureSheet, "10x10", () => {
-            document.removeEventListener("pointerup", this.isSolvedBound);
+            this.boxGrid.buildBuildGrid(10);
+            this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);
         });
         this.buttonFifteen = new Button(this.textureSheet, "15x15", () => {
-            document.removeEventListener("pointerup", this.isSolvedBound);
+            this.boxGrid.buildBuildGrid(15);
+            this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);
         });
         
         this.buttonMenu.position.set(this.resolution.x-this.buttonMenu.width, this.resolution.y-this.buttonMenu.height);
@@ -78,6 +81,23 @@ export default class LevelBuilderScreen extends PIXI.Container {
         this.addChild(this.buttonFifteen);
 
         this.interactive = true;
+    }
+
+    convertMap(boxMap) {
+        let jsonData = [];
+
+        for(let y = 0; y < boxMap.length; y++) {
+            jsonData.push([]);
+            for(let x = 0; x < boxMap[y].length; x++) {
+                jsonData[y][x] = {filled:boxMap[y][x].filled, color:boxMap[y][x].color}
+            }
+        }
+
+        return jsonData;
+    }
+
+    async sendPuzzle(data) {
+        return await fetch("http://localhost:3000/api/puzzle" , {method:"POST", body:JSON.stringify(data)});
     }
 
     update(delta) {}

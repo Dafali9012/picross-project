@@ -24,7 +24,7 @@ export default class PuzzleModeScreen extends PIXI.Container {
         this.addChild(this.buttonRandom);
 
         this.buttonTest = new Button(this.textureSheet, "PUZZLES", () => {
-            ScreenManager.changeScreen("LevelBrowserScreen");
+            ScreenManager.changeScreen("LevelBrowserScreen").updatePuzzles();
             BackgroundManager.changeColor("orange");
         });
         this.buttonTest.position.set(this.resolution.x/2, this.buttonRandom.y + this.buttonTest.height);
