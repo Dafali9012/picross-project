@@ -23,18 +23,8 @@ export default class LevelBrowserScreen extends PIXI.Container{
             resolution:data.resolution,
             fetchFinish:this.afterFetch.bind(this)
         });
-        this.buttonMenu = new Button(this.textureSheet, "MENU", () => {
-            document.removeEventListener("pointerup", this.isSolvedBound);
-            ScreenManager.changeScreen("MainMenuScreen");
-            BackgroundManager.changeColor("blue");
-        });
         this.browserWindow.position.set((this.resolution.x-this.browserWindow.width)/2, this.title.y+this.title.height+32);
-        this.buttonMenu.position.set(this.resolution.x-this.buttonMenu.width, this.resolution.y-this.buttonMenu.height);
-        this.addChild(this.buttonMenu);
-
         this.addChild(this.browserWindow);
-        this.interactive = true;
-
     }
 
     afterFetch() {
