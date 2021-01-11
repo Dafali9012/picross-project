@@ -18,7 +18,6 @@ export default class BrowserWindow extends PIXI.Container {
                 browserItem.interactive = true;
                 browserItem.buttonMode = true;
                 browserItem.background = new PIXI.Sprite(data.textureSheet.textures["button"]);
-                //browserItem.background.tint = 0x00d0ff;
                 browserItem.background.width = this.width*0.9;
                 browserItem.background.height = 32;
                 browserItem.json = JSON.parse(x.json);
@@ -52,7 +51,6 @@ export default class BrowserWindow extends PIXI.Container {
                 browserItem.addChild(browserItem.content)
                 this.addChild(browserItem);
             });
-            data.fetchFinish();
         }); 
     }
 
