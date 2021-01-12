@@ -51,7 +51,20 @@ export default class LevelBuilderScreen extends PIXI.Container {
             BackgroundManager.changeColor("blue");
         });
         this.publishLevel = new Button(this.textureSheet, "PUBLISH", () => {
-            this.sendPuzzle({meta: {title: "random", dimensions:this.boxGrid.boxMap.length}, data:this.convertMap(this.boxGrid.boxMap)});
+            let data = 
+            {
+                title: this.input.text,
+                json:
+                {
+                    meta: {
+                        title: this.input.text,
+                        dimensions:this.boxGrid.boxMap.length
+                    },
+                    data:this.convertMap(this.boxGrid.boxMap)
+                }
+            }
+            
+            this.sendPuzzle(JSON.stringify(data));
         });
         this.buttonFive = new Button(this.textureSheet, "5x5", () => {
             this.boxGrid.buildBuildGrid(5);
@@ -97,7 +110,7 @@ export default class LevelBuilderScreen extends PIXI.Container {
     }
 
     async sendPuzzle(data) {
-        return await fetch("http://localhost:3000/api/puzzle" , {method:"POST", body:JSON.stringify(data)});
+        await fetch("http://localhost:3000/api/puzzle" , {method:"POST", body:data});
     }
 
     update(delta) {}
