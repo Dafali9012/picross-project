@@ -1,9 +1,11 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
 import express.Express;
 import io.javalin.core.JavalinConfig;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public void start() {
@@ -32,9 +34,16 @@ public class Main {
             Connection conn = connectDB();
             if(conn!=null) {
                 try {
-                    Statement statement = conn.createStatement();
-                    System.out.println(req.body());
-                    statement.execute("insert into puzzle(title, json) values(\"please\",\""+req.body()+"\")");
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    String json = objectMapper.writeValueAsString(req.body().get("json"));
+                    System.out.println(json);
+
+                    String sql = "insert into puzzle(title, json) values(?,?)";
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    ps.setString(1, req.body().get("title").toString());
+                    ps.setString(2, json);
+                    ps.executeUpdate();
+
                 } catch (SQLException e) { e.printStackTrace(); }
                 try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
             }
