@@ -21,11 +21,6 @@ export default class LevelBuilderScreen extends PIXI.Container {
         this.colorPicker = new ColorPicker({textureSheet:this.textureSheet});
         this.addChild(this.colorPicker);
 
-        this.boxGrid = new BoxGrid({textureSheet:this.textureSheet, mask:data.mask});
-        this.boxGrid.buildBuildGrid(5);
-        this.addChild(this.boxGrid);
-        this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);
-
         this.input = new PIXI.TextInput({
             input: {
                 fontSize: '20px',
@@ -40,11 +35,14 @@ export default class LevelBuilderScreen extends PIXI.Container {
             }
         })
         this.input.placeholder = 'Enter your puzzle name ...'
-	    this.input.x = 650
-	    this.input.y = this.resolution.y - 32;
-	    this.input.pivot.x = this.input.width/2
-	    this.input.pivot.y = this.input.height/2
-	    this.addChild(this.input)
+	    this.input.position.set((this.resolution.x-this.input.width)/2, this.resolution.y - this.input.height - 32);
+        this.addChild(this.input)
+        
+        this.boxGrid = new BoxGrid({textureSheet:this.textureSheet, mask:data.mask});
+        this.boxGrid.buildBuildGrid(5);
+        this.boxGrid.scale.set((this.resolution.y-(this.title.height+this.input.height+128))/this.boxGrid.height);
+        this.addChild(this.boxGrid);
+        this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);
 
         this.buttonMenu = new Button(this.textureSheet, "MENU", () => {
             ScreenManager.changeScreen("MainMenuScreen");
@@ -64,18 +62,24 @@ export default class LevelBuilderScreen extends PIXI.Container {
                 }
             }
             
-            this.sendPuzzle(JSON.stringify(data));
+            this.sendPuzzle(JSON.stringify(data)).then(()=>this.reset());
         });
         this.buttonFive = new Button(this.textureSheet, "5x5", () => {
+            this.boxGrid.scale.set(1);
             this.boxGrid.buildBuildGrid(5);
+            this.boxGrid.scale.set((this.resolution.y-(this.title.height+this.input.height+128))/this.boxGrid.height);
             this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);
         });
         this.buttonTen = new Button(this.textureSheet, "10x10", () => {
+            this.boxGrid.scale.set(1);
             this.boxGrid.buildBuildGrid(10);
+            this.boxGrid.scale.set((this.resolution.y-(this.title.height+this.input.height+128))/this.boxGrid.height);
             this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);
         });
         this.buttonFifteen = new Button(this.textureSheet, "15x15", () => {
+            this.boxGrid.scale.set(1);
             this.boxGrid.buildBuildGrid(15);
+            this.boxGrid.scale.set((this.resolution.y-(this.title.height+this.input.height+128))/this.boxGrid.height);
             this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);
         });
         
@@ -111,6 +115,12 @@ export default class LevelBuilderScreen extends PIXI.Container {
 
     async sendPuzzle(data) {
         await fetch("http://localhost:3000/api/puzzle" , {method:"POST", body:data});
+    }
+
+    reset() {
+        this.input.text = "";
+        this.boxGrid.buildBuildGrid(5);
+        this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);
     }
 
     update(delta) {}
