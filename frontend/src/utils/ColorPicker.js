@@ -1,3 +1,4 @@
+import ColorSlot from "../ColorSlot.js";
 import Color from "./Color.js";
 import HSL2HEX from "./HSL2HEX.js";
 
@@ -6,129 +7,133 @@ export default class ColorPicker extends PIXI.Sprite {
         super();
         this.textureSheet = data.textureSheet;
 
-        this.bg = new PIXI.Sprite(this.textureSheet.textures["slider_bg"]);
-        this.line = new PIXI.Sprite(this.textureSheet.textures["slider_line"]);
-        this.slider = new PIXI.Sprite(this.textureSheet.textures["slider_button"]);
-        this.currentColor = new PIXI.Graphics();
-
-        this.slider.anchor.set(0.5);
-        this.slider.position.set(this.slider.width/2, this.slider.height/2);
-
-        this.baseColorBlack = new PIXI.Graphics();
-        this.baseColorwhite = new PIXI.Graphics();
-        this.baseColorRed = new PIXI.Graphics();
-        this.baseColorBlue = new PIXI.Graphics();
-        this.baseColorGreen = new PIXI.Graphics();
-
         this.hue = 0;
-        Color.setColor(HSL2HEX.convert(this.hue,100,50));
-        this.bg.tint = HSL2HEX.convert(this.hue,100,50);;
+        this.sat = 100;
+        this.light = 50;
 
-        //BASE BLACK
-        this.baseColorBlack.position = this.slider.position;
-        this.baseColorBlack.lineStyle(1)
-        this.baseColorBlack.beginFill(0x000000, 1)
-        this.baseColorBlack.drawRect(this.currentColor.position.x-5, this.currentColor.position.y-40, 10, 10);
-        this.baseColorBlack.endFill();
-        this.baseColorBlack.interactive = true;
-        this.addChild(this.baseColorBlack);
-        this.baseColorBlack.on("mousedown", ()=>{
-            Color.setColor(HSL2HEX.convert(this.hue,100,0));
-            this.bg.tint = HSL2HEX.convert(this.hue,100,0);;
-        })
-        
-        //BASE WHITE
-        this.baseColorwhite.position = this.slider.position;
-        this.baseColorwhite.lineStyle(1)
-        this.baseColorwhite.beginFill(0xffffff, 1)
-        this.baseColorwhite.drawRect(this.currentColor.position.x+15, this.currentColor.position.y-40, 10, 10);
-        this.baseColorwhite.endFill();
-        this.baseColorwhite.interactive = true;
-        this.addChild(this.baseColorwhite);
-        this.baseColorwhite.on("mousedown", ()=>{
-            Color.setColor(HSL2HEX.convert(this.hue,100,100));
-            this.bg.tint = HSL2HEX.convert(this.hue,100,100);;
-        })
+        this.selectedColor = new PIXI.Sprite(this.textureSheet.textures["box_empty"]);
+        this.addChild(this.selectedColor);
 
-        //BASE RED
-        this.baseColorRed.position = this.slider.position;
-        this.baseColorRed.lineStyle(1)
-        this.baseColorRed.beginFill(0xff0000, 1)
-        this.baseColorRed.drawRect(this.currentColor.position.x+35, this.currentColor.position.y-40, 10, 10);
-        this.baseColorRed.endFill();
-        this.baseColorRed.interactive = true;
-        this.addChild(this.baseColorRed);
-        this.baseColorRed.on("mousedown", ()=>{
-            this.hue = 0;
-            Color.setColor(HSL2HEX.convert(this.hue,100,50));
-            this.bg.tint = HSL2HEX.convert(this.hue,100,50);;
-        })
+        this.selectedColor.tint = HSL2HEX.convert(this.hue,this.sat,this.light);
+        Color.setColor(HSL2HEX.convert(this.hue,this.sat,this.light));
 
-        //BASE BLUE
-        this.baseColorBlue.position = this.slider.position;
-        this.baseColorBlue.lineStyle(1)
-        this.baseColorBlue.beginFill(0x0077ff, 1)
-        this.baseColorBlue.drawRect(this.currentColor.position.x+55, this.currentColor.position.y-40, 10, 10);
-        this.baseColorBlue.endFill();
-        this.baseColorBlue.interactive = true;
-        this.addChild(this.baseColorBlue);
-        this.baseColorBlue.on("mousedown", ()=>{
-            this.hue = 212;
-            Color.setColor(HSL2HEX.convert(this.hue,100,50));
-            this.bg.tint = HSL2HEX.convert(this.hue,100,50);;
-        })
+        for(let i = 0; i < 3; i++) {
+            let line = new PIXI.Sprite(this.textureSheet.textures["slider_line"]);
+            line.position.set(0, i*line.height+this.selectedColor.height*1.5);
+            this.addChild(line);
+        }
 
-        //BASE GREEN
-        this.baseColorGreen.position = this.slider.position;
-        this.baseColorGreen.lineStyle(1)
-        this.baseColorGreen.beginFill(0x00d100, 1)
-        this.baseColorGreen.drawRect(this.currentColor.position.x+75, this.currentColor.position.y-40, 10, 10);
-        this.baseColorGreen.endFill();
-        this.baseColorGreen.interactive = true;
-        this.addChild(this.baseColorGreen);
-        this.baseColorGreen.on("mousedown", ()=>{
-            this.hue = 120;
-            Color.setColor(HSL2HEX.convert(this.hue,100,41));
-            this.bg.tint = HSL2HEX.convert(this.hue,100,41);;
-        })
+        this.selectedColor.position.set((96-this.selectedColor.width)/2, 0);
 
-        this.currentColor.lineStyle(1)
-        this.currentColor.beginFill(this.bg.tint, 1)
-        this.currentColor.drawRect(this.currentColor.position.x, this.currentColor.position.y+10, 50, 50);
-        this.currentColor.endFill();
-        this.currentColor.position.set(this.line.position.x+13,this.line.position.y+15);
+        this.hueSlider = new PIXI.Sprite(this.textureSheet.textures["slider_button"]);
+        this.satSlider = new PIXI.Sprite(this.textureSheet.textures["slider_button"]);
+        this.lightSlider = new PIXI.Sprite(this.textureSheet.textures["slider_button"]);
 
-        this.addChild(this.bg);
-        this.addChild(this.line);
-        this.addChild(this.slider);
-        this.addChild(this.currentColor);
+        this.hueSlider.position.set(0, this.selectedColor.height*1.5);
+        this.satSlider.position.set(96-this.satSlider.width, this.hueSlider.y+this.hueSlider.height);
+        this.lightSlider.position.set((96-this.lightSlider.width)/2, this.satSlider.y+this.satSlider.height);
 
-        this.slider.interactive = true;
-        this.slider.buttonMode = true;
+        this.addChild(this.hueSlider);
+        this.addChild(this.satSlider);
+        this.addChild(this.lightSlider);
 
-        this.slider.on("mousedown", ()=>{
-            this.slider.drag = true;
-        })
+        this.hueSlider.interactive = true;
+        this.hueSlider.buttonMode = true;
+
+        this.satSlider.interactive = true;
+        this.satSlider.buttonMode = true;
+
+        this.lightSlider.interactive = true;
+        this.lightSlider.buttonMode = true;
+
+        this.hueSlider.on("mousedown", ()=>{
+            this.hueSlider.drag = true;
+        });
+
+        this.satSlider.on("mousedown", ()=>{
+            this.satSlider.drag = true;
+        });
+
+        this.lightSlider.on("mousedown", ()=>{
+            this.lightSlider.drag = true;
+        });
+
         document.addEventListener("mouseup", ()=>{
-            this.slider.drag = false;
-            this.currentColor.clear();
-            this.currentColor.lineStyle(1);
-            this.currentColor.beginFill(this.bg.tint, 1);
-            this.currentColor.drawRect(this.currentColor.position.x, this.currentColor.position.y+10, 50, 50);
-            this.currentColor.endFill();
-        })
-        this.slider.on("mousemove", (e)=>{
-            if(this.slider.drag) {
-                let newPosition = e.data.getLocalPosition(this.slider.parent);
-                this.slider.position.x = newPosition.x;
-                if(this.slider.x < this.slider.width/2) this.slider.x = this.slider.width/2;
-                if(this.slider.x >= 96 - this.slider.width/2) this.slider.x = 96 - this.slider.width/2;
+            this.hueSlider.drag = false;
+            this.satSlider.drag = false;
+            this.lightSlider.drag = false;
+        });
 
-                this.hue = ((1/80)*(this.slider.x-this.slider.width/2)) * 359;
-                this.bg.tint = HSL2HEX.convert(this.hue,100,50);
-                Color.setColor(HSL2HEX.convert(this.hue,100,50));
+        this.hueSlider.on("mousemove", (e)=>{
+            if(this.hueSlider.drag) {
+                let newPosition = e.data.getLocalPosition(this.hueSlider.parent);
+                this.hueSlider.position.x = newPosition.x-this.hueSlider.width/2;
+                if(this.hueSlider.x <= 0) this.hueSlider.x = 0;
+                if(this.hueSlider.x >= 96 - this.hueSlider.width) this.hueSlider.x = 96 - this.hueSlider.width;
 
+                this.hue = (1/(96-this.hueSlider.width)) * (this.hueSlider.x) * 359;
+                this.selectedColor.tint = HSL2HEX.convert(this.hue,this.sat,this.light);
+                Color.setColor(HSL2HEX.convert(this.hue,this.sat,this.light));
+            }
+            if(this.satSlider.drag) {
+                let newPosition = e.data.getLocalPosition(this.satSlider.parent);
+                this.satSlider.position.x = newPosition.x-this.satSlider.width/2;
+                if(this.satSlider.x <= 0) this.satSlider.x = 0;
+                if(this.satSlider.x >= 96 - this.satSlider.width) this.satSlider.x = 96 - this.satSlider.width;
+
+                this.sat = (1/(96-this.satSlider.width)) * (this.satSlider.x) * 100;
+                this.selectedColor.tint = HSL2HEX.convert(this.hue,this.sat,this.light);
+                Color.setColor(HSL2HEX.convert(this.hue,this.sat,this.light));
+            }
+            if(this.lightSlider.drag) {
+                let newPosition = e.data.getLocalPosition(this.lightSlider.parent);
+                this.lightSlider.position.x = newPosition.x-this.lightSlider.width/2;
+                if(this.lightSlider.x <= 0) this.lightSlider.x = 0;
+                if(this.lightSlider.x >= 96 - this.lightSlider.width) this.lightSlider.x = 96 - this.lightSlider.width;
+
+                this.light = (1/(96-this.lightSlider.width)) * (this.lightSlider.x) * 100;
+                this.selectedColor.tint = HSL2HEX.convert(this.hue,this.sat,this.light);
+                Color.setColor(HSL2HEX.convert(this.hue,this.sat,this.light));
             }
         });
+
+        this.addColor = new PIXI.Sprite(this.textureSheet.textures["add_color"]);
+        this.addColor.position.set(this.selectedColor.x+this.selectedColor.width,(32-this.addColor.height)/2);
+        this.addChild(this.addColor);
+
+        this.addColor.interactive = true;
+        this.addColor.buttonMode = true;
+
+        this.addColor.on("click", ()=>{
+            this.colorSlotData.reverse().push(this.selectedColor.tint);
+            this.colorSlotData.reverse().pop();
+            this.setColorSlotData();
+        });
+
+        this.colorSlots = new PIXI.Container();
+        for(let y = 0; y < 2; y++) {
+            for(let x = 0; x < 5; x++) {
+                let colorSlot = new ColorSlot({textureSheet:this.textureSheet}, (hex)=>{
+                    Color.setColor(hex);
+                    this.selectedColor.tint = Color.getColor();
+                });
+                colorSlot.position.set(colorSlot.width*x, colorSlot.height*y);
+                this.colorSlots.addChild(colorSlot);
+            }
+        }
+        this.colorSlots.position.set(0, this.lightSlider.y + this.lightSlider.height + 16);
+        this.colorSlots.scale.set(96/this.colorSlots.width);
+        this.addChild(this.colorSlots);
+
+        this.colorSlotData = [];
+        for(let colorSlot of this.colorSlots.children) {
+            this.colorSlotData.push(colorSlot.tint);
+        }
+    }
+
+    setColorSlotData() {
+        for(let i = 0; i < this.colorSlots.children.length; i++) {
+            this.colorSlots.children[i].tint = this.colorSlotData[i];
+        }
     }
 }

@@ -15,7 +15,7 @@ export default class BuildBox extends PIXI.Sprite {
         this.filled = false;
         this.color = 0xFFFFFF;
 
-        this.theChosenOne = new PIXI.Sprite(this.textureSheet.textures["the_not_chosen_one"]);
+        this.theChosenOne = new PIXI.Sprite(PIXI.Texture.EMPTY);
         this.addChild(this.theChosenOne);
 
         this.on("mousedown", ()=>{
@@ -23,13 +23,13 @@ export default class BuildBox extends PIXI.Sprite {
             if(this.state == "filled") {
                 this.state = "empty";
                 this.filled = false;
-                this.theChosenOne.texture = this.textureSheet.textures["the_not_chosen_one"];
+                this.theChosenOne.texture = PIXI.Texture.EMPTY;
                 Input.delete = true;
             }
             else if(this.state == "empty") {
                 this.state = "filled";
                 this.filled = true;
-                this.theChosenOne.texture = this.textureSheet.textures["the_chosen_one"];
+                this.theChosenOne.texture = this.textureSheet.textures["build_filled"];
                 Input.delete = false;
             }
         });
@@ -45,12 +45,12 @@ export default class BuildBox extends PIXI.Sprite {
                     if(this.state != "empty") {
                         this.state = "empty";
                         this.filled = false;
-                        this.theChosenOne.texture = this.textureSheet.textures["the_not_chosen_one"];
+                        this.theChosenOne.texture = PIXI.Texture.EMPTY;
                     }
                 }
                 if(!Input.delete) {
                     if(this.state == "empty") {
-                        this.theChosenOne.texture = Input.leftClick?this.textureSheet.textures["the_chosen_one"]:this.textureSheet.textures["the_not_chosen_one"];
+                        this.theChosenOne.texture = Input.leftClick?this.textureSheet.textures["build_filled"]:PIXI.Texture.EMPTY;
                         if(Input.leftClick) {
                             this.state = "filled";
                             this.filled = true;
@@ -62,19 +62,7 @@ export default class BuildBox extends PIXI.Sprite {
                     this.setColor();
                 }
             }
-            /*
-            this.anchor.set(0.5);
-            this.position.set(this.x + this.width/2, this.y + this.height/2);
-            this.scale.set(1.02);
-            */
         });
-        /*
-        this.on("mouseout", ()=>{
-            this.scale.set(1);
-            this.anchor.set(0);
-            this.position.set(this.x - this.width/2, this.y - this.height/2);
-        });
-        */
     }
 
     setColor() {
