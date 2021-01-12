@@ -42,9 +42,9 @@ export default class MainMenuScreen extends PIXI.Container {
         });
         this.addChild(this.buttonBuild);
 
-        this.colorPicker = new ColorPicker({textureSheet:this.textureSheet});
-        this.colorPicker.position.set((512-96)/2, this.buttonBuild.y + this.buttonBuild.height/1.5);
-        this.addChild(this.colorPicker);
+        // this.colorPicker = new ColorPicker({textureSheet:this.textureSheet});
+        // this.colorPicker.position.set((512-96)/2, 100);
+        // this.addChild(this.colorPicker);
     }
 
     update(delta) {}
