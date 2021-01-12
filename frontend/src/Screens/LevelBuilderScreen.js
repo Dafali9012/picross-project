@@ -10,7 +10,6 @@ export default class LevelBuilderScreen extends PIXI.Container {
 
         this.resolution = data.resolution;
         this.textureSheet = data.textureSheet;
-
         this.title = new PIXI.AnimatedSprite(data.title.animations["mode_bounce"]);
         this.title.animationSpeed = 0.04;
         this.title.play();
@@ -20,6 +19,7 @@ export default class LevelBuilderScreen extends PIXI.Container {
 
         this.colorPicker = new ColorPicker({textureSheet:this.textureSheet});
         this.addChild(this.colorPicker);
+        this.currentSize = 5;
 
         this.boxGrid = new BoxGrid({textureSheet:this.textureSheet, mask:data.mask});
         this.boxGrid.buildBuildGrid(5);
@@ -65,16 +65,21 @@ export default class LevelBuilderScreen extends PIXI.Container {
             }
             
             this.sendPuzzle(JSON.stringify(data));
+            this.resetPuzzle();
+
         });
         this.buttonFive = new Button(this.textureSheet, "5x5", () => {
+            this.currentSize = 5;
             this.boxGrid.buildBuildGrid(5);
             this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);
         });
         this.buttonTen = new Button(this.textureSheet, "10x10", () => {
+            this.currentSize = 10;
             this.boxGrid.buildBuildGrid(10);
             this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);
         });
         this.buttonFifteen = new Button(this.textureSheet, "15x15", () => {
+            this.currentSize = 15;
             this.boxGrid.buildBuildGrid(15);
             this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);
         });
@@ -94,8 +99,9 @@ export default class LevelBuilderScreen extends PIXI.Container {
         this.addChild(this.buttonFifteen);
 
         this.interactive = true;
-    }
 
+    }
+    
     convertMap(boxMap) {
         let jsonData = [];
 
@@ -112,6 +118,10 @@ export default class LevelBuilderScreen extends PIXI.Container {
     async sendPuzzle(data) {
         await fetch("http://localhost:3000/api/puzzle" , {method:"POST", body:data});
     }
-
+    
     update(delta) {}
+    resetPuzzle(){
+        this.input.text = ""
+        this.boxGrid.buildBuildGrid(this.currentSize);
+    };
 }
