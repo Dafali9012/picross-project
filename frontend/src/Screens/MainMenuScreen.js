@@ -44,7 +44,7 @@ export default class MainMenuScreen extends PIXI.Container {
         this.addChild(this.buttonPlay);
 
         this.buttonBuild = new Button(data.textureSheet, "BUILD", () => {
-            ScreenManager.changeScreen("LevelBuilderScreen");
+            ScreenManager.changeScreen("LevelBuilderScreen").reset();
             BackgroundManager.changeColor("green");
         });
         this.buttonBuild.position.set(this.resolution.x/2, this.buttonPlay.y + this.buttonBuild.height);
