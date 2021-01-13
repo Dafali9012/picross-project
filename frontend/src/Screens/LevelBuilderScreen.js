@@ -48,6 +48,11 @@ export default class LevelBuilderScreen extends PIXI.Container {
             ScreenManager.changeScreen("MainMenuScreen");
             BackgroundManager.changeColor("blue");
         });
+
+        this.publishMessage = new Button(this.textureSheet, " Puzzle is published ! ", () => {
+            this.publishMessage.visible = false;
+        })
+
         this.publishLevel = new Button(this.textureSheet, "PUBLISH", () => {
             let data = 
             {
@@ -63,6 +68,7 @@ export default class LevelBuilderScreen extends PIXI.Container {
             }
             
             this.sendPuzzle(JSON.stringify(data)).then(()=>this.reset());
+            this.publishMessage.visible = true;
         });
         this.buttonFive = new Button(this.textureSheet, "5x5", () => {
             this.boxGrid.scale.set(1);
@@ -85,12 +91,20 @@ export default class LevelBuilderScreen extends PIXI.Container {
         
         this.buttonMenu.position.set(this.resolution.x-this.buttonMenu.width, this.resolution.y-this.buttonMenu.height);
         this.publishLevel.position.set(this.resolution.x-this.publishLevel.width, this.resolution.y-2*this.publishLevel.height);
+        this.publishMessage.position.set(
+        this.resolution.x / 2,this.resolution.y - 5 * this.publishMessage.height * 1.3);
+
         this.buttonFive.position.set(this.resolution.x-this.publishLevel.width, this.resolution.y-9*this.publishLevel.height);
         this.buttonTen.position.set(this.resolution.x-this.publishLevel.width, this.resolution.y-8*this.publishLevel.height);
         this.buttonFifteen.position.set(this.resolution.x-this.publishLevel.width, this.resolution.y-7*this.publishLevel.height);
         this.colorPicker.position.set(this.resolution.x-this.publishLevel.width - 48, this.resolution.y-6*this.publishLevel.height);
+        
+        this.publishMessage.height = 80;
+        this.publishMessage.width = 280;
+        this.publishMessage.text.style.fontSize = 22;
+        this.publishMessage.visible = false;
 
-
+        this.addChild(this.publishMessage);
         this.addChild(this.buttonMenu);
         this.addChild(this.publishLevel);
         this.addChild(this.buttonFive);
