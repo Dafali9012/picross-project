@@ -36,14 +36,14 @@ export default class MainMenuScreen extends PIXI.Container {
         this.gleam.position.set(this.title.x-this.gleam.width, this.title.y);
         this.gleam.mask = this.gleamMask;
         
-        this.buttonPlay = new Button(data.textureSheet, "PLAY", ()=>{
+        this.buttonPlay = new Button(this.textureSheet.textures["button"], 2, "PLAY", ()=>{
             ScreenManager.changeScreen("PuzzleModeScreen");
             BackgroundManager.changeColor("green");
         });
         this.buttonPlay.position.set(this.resolution.x/2, this.resolution.y/2);
         this.addChild(this.buttonPlay);
 
-        this.buttonBuild = new Button(data.textureSheet, "BUILD", () => {
+        this.buttonBuild = new Button(this.textureSheet.textures["button"], 2, "BUILD", () => {
             ScreenManager.changeScreen("LevelBuilderScreen").reset();
             BackgroundManager.changeColor("green");
         });

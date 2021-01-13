@@ -56,6 +56,12 @@
         },
         "add_color": {
             "frame": {"x": 96, "y": 32, "w": 16, "h": 16}
+        },
+        "long_button": {
+            "frame": {"x": 0, "y": 112, "w": 448, "h": 32}
+        },
+        "vertical_line": {
+            "frame": {"x": 96, "y": 48, "w": 32, "h": 32}
         }
     },
     "animations": {

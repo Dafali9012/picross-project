@@ -16,19 +16,19 @@ export default class PuzzleSizeScreen extends PIXI.Container {
         this.title.position.set((this.resolution.x-this.title.width)/2, (this.resolution.y/2-this.title.height)/2);
         this.addChild(this.title);
 
-        this.buttonFive = new Button(this.textureSheet, "5x5", ()=>this.randomGame(5));
+        this.buttonFive = new Button(this.textureSheet.textures["button"], 2, "5x5", ()=>this.randomGame(5));
         this.buttonFive.position.set(this.resolution.x/2, this.resolution.y/2);
         this.addChild(this.buttonFive);
 
-        this.buttonTen = new Button(this.textureSheet, "10x10", ()=>this.randomGame(10));
+        this.buttonTen = new Button(this.textureSheet.textures["button"], 2, "10x10", ()=>this.randomGame(10));
         this.buttonTen.position.set(this.resolution.x/2, this.buttonFive.y + this.buttonTen.height);
         this.addChild(this.buttonTen);
 
-        this.buttonFifteen = new Button(this.textureSheet, "15x15", ()=>this.randomGame(15));
+        this.buttonFifteen = new Button(this.textureSheet.textures["button"], 2, "15x15", ()=>this.randomGame(15));
         this.buttonFifteen.position.set(this.resolution.x/2, this.buttonTen.y + this.buttonFifteen.height);
         this.addChild(this.buttonFifteen);
 
-        this.buttonBack = new Button(this.textureSheet, "BACK", ()=>ScreenManager.previousScreen());
+        this.buttonBack = new Button(this.textureSheet.textures["button"], 2, "BACK", ()=>ScreenManager.previousScreen());
         this.buttonBack.position.set(this.resolution.x/2, this.buttonFifteen.y + this.buttonBack.height);
         this.addChild(this.buttonBack);
     }
