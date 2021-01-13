@@ -44,11 +44,11 @@ export default class LevelBuilderScreen extends PIXI.Container {
         this.addChild(this.boxGrid);
         this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);
 
-        this.buttonMenu = new Button(this.textureSheet, "MENU", () => {
+        this.buttonMenu = new Button(this.textureSheet.textures["button"], 2, "MENU", () => {
             ScreenManager.changeScreen("MainMenuScreen");
             BackgroundManager.changeColor("blue");
         });
-        this.publishLevel = new Button(this.textureSheet, "PUBLISH", () => {
+        this.publishLevel = new Button(this.textureSheet.textures["button"], 2, "PUBLISH", () => {
             let data = 
             {
                 title: this.input.text,
@@ -64,19 +64,19 @@ export default class LevelBuilderScreen extends PIXI.Container {
             
             this.sendPuzzle(JSON.stringify(data)).then(()=>this.reset());
         });
-        this.buttonFive = new Button(this.textureSheet, "5x5", () => {
+        this.buttonFive = new Button(this.textureSheet.textures["button"], 2, "5x5", () => {
             this.boxGrid.scale.set(1);
             this.boxGrid.buildBuildGrid(5);
             this.boxGrid.scale.set((this.resolution.y-(this.title.height+this.input.height+128))/this.boxGrid.height);
             this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);
         });
-        this.buttonTen = new Button(this.textureSheet, "10x10", () => {
+        this.buttonTen = new Button(this.textureSheet.textures["button"], 2, "10x10", () => {
             this.boxGrid.scale.set(1);
             this.boxGrid.buildBuildGrid(10);
             this.boxGrid.scale.set((this.resolution.y-(this.title.height+this.input.height+128))/this.boxGrid.height);
             this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);
         });
-        this.buttonFifteen = new Button(this.textureSheet, "15x15", () => {
+        this.buttonFifteen = new Button(this.textureSheet.textures["button"], 2, "15x15", () => {
             this.boxGrid.scale.set(1);
             this.boxGrid.buildBuildGrid(15);
             this.boxGrid.scale.set((this.resolution.y-(this.title.height+this.input.height+128))/this.boxGrid.height);

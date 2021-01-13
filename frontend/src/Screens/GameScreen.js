@@ -25,14 +25,14 @@ export default class GameScreen extends PIXI.Container {
         this.title.alpha = 0;
         this.addChild(this.title);
 
-        this.buttonMenu = new Button(this.textureSheet, "MENU", () => {
+        this.buttonMenu = new Button(this.textureSheet.textures["button"], 2, "MENU", () => {
             this.title.alpha = 0;
             this.boxGrid.hideHighlight();
             document.removeEventListener("pointerup", this.isSolvedBound);
             ScreenManager.changeScreen("MainMenuScreen");
             BackgroundManager.changeColor("blue");
         });
-        this.refresh = new Button(this.textureSheet, "REFRESH", () => {
+        this.refresh = new Button(this.textureSheet.textures["button"], 2, "REFRESH", () => {
             this.title.alpha = 0;
             this.boxGrid.hideHighlight();
             document.removeEventListener("pointerup", this.isSolvedBound);

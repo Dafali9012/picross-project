@@ -1,9 +1,13 @@
-export default class Button extends PIXI.Container {
-    constructor(textureSheet, text, callback) {
+export default class Button extends PIXI.Sprite {
+    constructor(texture, scale, text, callback) {
         super();
-        this.textureSheet = textureSheet;
-        this.button = new PIXI.Sprite(this.textureSheet.textures["button"]);
-        this.button.anchor.set(0.5);
+        this.texture = texture;
+
+        this.interactive = true;
+        this.buttonMode = true;
+        
+        this.anchor.set(0.5);
+        
         this.text = new PIXI.Text(text, {
             fontFamily:"Verdana",
             fontSize:32, fill:0xFFFFFF,
@@ -12,33 +16,27 @@ export default class Button extends PIXI.Container {
             align:"center",
             lineJoin: "round"
         });
-        this.text.anchor.set(0.5);
-        this.addChild(this.button);
-        this.addChild(this.text);
-        this.interactive = true;
-        this.buttonMode = true;
-        this.text.scale.set(0.5);
 
-        this.button.scale.set(2);
+        this.text.anchor.set(0.5);
+        this.addChild(this.text);
+        this.text.scale.set(0.25);
+
+        this.scale.set(scale);
 
         this.on("mousedown", () => {
-            this.button.scale.set(1.8);
-            this.text.scale.set(0.45);
+            this.scale.set(scale*0.9);
         });
 
         this.on("mouseup", () => {
-            this.button.scale.set(2);
-            this.text.scale.set(0.5);
+            this.scale.set(scale);
         });
 
         this.on("mouseout", () => {
-            this.button.scale.set(2);
-            this.text.scale.set(0.5);
+            this.scale.set(scale);
         });
 
         this.on("mouseover", () => {
-            this.button.scale.set(2.10);
-            this.text.scale.set(0.525);
+            this.scale.set(scale*1.05);
         });
 
         this.on("click", () => {
