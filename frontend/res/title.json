@@ -26,12 +26,19 @@
         },
         "puzzles_2": {
             "frame": {"x":0, "y":32, "w": 160, "h": 32}
+        },
+        "build_1": {
+            "frame": {"x":0, "y":192, "w": 112, "h": 32}
+        },
+        "build_2": {
+            "frame": {"x":0, "y":224, "w": 112, "h": 32}
         }
     },
     "animations": {
         "picross_bounce": ["picross_1", "picross_2"],
         "mode_bounce": ["mode_1", "mode_2"],
         "size_bounce": ["size_1", "size_2"],
-        "puzzles_bounce": ["puzzles_1", "puzzles_2"]
+        "puzzles_bounce": ["puzzles_1", "puzzles_2"],
+        "build_bounce": ["build_1", "build_2"]
     }
 }
