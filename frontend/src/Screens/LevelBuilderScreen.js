@@ -12,7 +12,7 @@ export default class LevelBuilderScreen extends PIXI.Container {
         this.resolution = data.resolution;
         this.textureSheet = data.textureSheet;
 
-        this.title = new PIXI.AnimatedSprite(data.title.animations["mode_bounce"]);
+        this.title = new PIXI.AnimatedSprite(data.title.animations["build_bounce"]);
         this.title.animationSpeed = 0.04;
         this.title.play();
         this.title.scale.set(2);
