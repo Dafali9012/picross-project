@@ -3,6 +3,7 @@ import BoxGrid from "../BoxGrid.js";
 import ColorPicker from "../utils/ColorPicker.js"
 import ScreenManager from "../utils/ScreenManager.js";
 import BackgroundManager from "../utils/BackgroundManager.js";
+import Notification from "../Notification.js";
 
 export default class LevelBuilderScreen extends PIXI.Container {
     constructor(data) {
@@ -26,15 +27,14 @@ export default class LevelBuilderScreen extends PIXI.Container {
                 fontSize: '20px',
                 padding: '10px',
                 width: '260px',
-                color: '#F0F0F0'
+                color: '#000000',
+                textAlign: "left"
             },
             box: {
-                default: {fill: 0x01BCE7, rounded: 12, stroke: {color: 0xffffff, width: 4}},
-                focused: {fill: 0x01BCE7, rounded: 8, stroke: {color: 0xffffff, width: 6}},
-                disabled: {fill: 0x01BCE7, rounded: 12}
+                default: {fill: 0xFFFFFF, rounded: 12, stroke: {color: 0xf0f0f0, width: 4}},
             }
         })
-        this.input.placeholder = 'Enter your puzzle name ...'
+        this.input.placeholder = 'Enter puzzle name'
 	    this.input.position.set((this.resolution.x-this.input.width)/2, this.resolution.y - this.input.height - 32);
         this.addChild(this.input)
         
@@ -49,20 +49,33 @@ export default class LevelBuilderScreen extends PIXI.Container {
             BackgroundManager.changeColor("blue");
         });
         this.publishLevel = new Button(this.textureSheet.textures["button"], 2, "PUBLISH", () => {
-            let data = 
-            {
-                title: this.input.text,
-                json:
+            if(this.input.text=="") {
+                if(this.notification) this.removeChild(this.notification);
+                this.notification = new Notification("Title required!");
+                this.notification.position.set(this.publishLevel.x - this.publishLevel.width/2 - this.notification.width - 8, this.publishLevel.y-this.notification.height/2);
+                this.addChild(this.notification);
+            } else {
+                let data = 
                 {
-                    meta: {
-                        title: this.input.text,
-                        dimensions:this.boxGrid.boxMap.length
-                    },
-                    data:this.convertMap(this.boxGrid.boxMap)
+                    title: this.input.text,
+                    json:
+                    {
+                        meta: {
+                            title: this.input.text,
+                            dimensions:this.boxGrid.boxMap.length
+                        },
+                        data:this.convertMap(this.boxGrid.boxMap)
+                    }
                 }
+                
+                this.sendPuzzle(JSON.stringify(data)).then(()=>{
+                    this.reset();
+                    if(this.notification) this.removeChild(this.notification);
+                    this.notification = new Notification("Publish'd!");
+                    this.notification.position.set(this.publishLevel.x - this.publishLevel.width/2 - this.notification.width - 8, this.publishLevel.y-this.notification.height/2);
+                    this.addChild(this.notification);
+                });
             }
-            
-            this.sendPuzzle(JSON.stringify(data)).then(()=>this.reset());
         });
         this.buttonFive = new Button(this.textureSheet.textures["button"], 2, "5x5", () => {
             this.boxGrid.scale.set(1);
@@ -119,9 +132,13 @@ export default class LevelBuilderScreen extends PIXI.Container {
 
     reset() {
         this.input.text = "";
+        this.boxGrid.scale.set(1);
         this.boxGrid.buildBuildGrid(5);
+        this.boxGrid.scale.set((this.resolution.y-(this.title.height+this.input.height+128))/this.boxGrid.height);
         this.boxGrid.position.set((this.resolution.x-this.boxGrid.width)/2, (this.resolution.y-this.boxGrid.height)/2);
     }
 
-    update(delta) {}
+    update(delta) {
+        if(this.notification) this.notification.update();
+    }
 }

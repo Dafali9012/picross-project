@@ -27,22 +27,12 @@ export default class GameScreen extends PIXI.Container {
 
         this.buttonMenu = new Button(this.textureSheet.textures["button"], 2, "MENU", () => {
             this.title.alpha = 0;
-            this.boxGrid.hideHighlight();
             document.removeEventListener("pointerup", this.isSolvedBound);
             ScreenManager.changeScreen("MainMenuScreen");
             BackgroundManager.changeColor("blue");
         });
-        this.refresh = new Button(this.textureSheet.textures["button"], 2, "REFRESH", () => {
-            this.title.alpha = 0;
-            this.boxGrid.hideHighlight();
-            document.removeEventListener("pointerup", this.isSolvedBound);
-            ScreenManager.changeScreen("GameScreen").randomPuzzle(this.boxGrid.boxMap.length);
-
-        });
         this.buttonMenu.position.set(this.resolution.x-this.buttonMenu.width, this.resolution.y-this.buttonMenu.height);
-        this.refresh.position.set(this.resolution.x-this.refresh.width, this.resolution.y-2*this.refresh.height);
         this.addChild(this.buttonMenu);
-        this.addChild(this.refresh);
 
         this.interactive = true;
     }
@@ -50,11 +40,15 @@ export default class GameScreen extends PIXI.Container {
     randomPuzzle(size) {
         this.title.text = "Complete!";
         this.buildPuzzle(()=>this.boxGrid.buildGridRandom(size));
+
+        this.addResetButton(false);
     }
 
     fixedPuzzle(json) {
         this.title.text = json.meta.title;
         this.buildPuzzle(()=>this.boxGrid.buildGrid(json));
+
+        this.addResetButton(true, json);
     }
 
     buildPuzzle(puzzleCallback) {
@@ -69,6 +63,21 @@ export default class GameScreen extends PIXI.Container {
 
         document.removeEventListener("pointerup", this.isSolvedBound);
         document.addEventListener("pointerup", this.isSolvedBound);
+    }
+
+    addResetButton(reset, json) {
+        this.removeChild(this.refresh);
+        this.refresh = new Button(this.textureSheet.textures["button"], 2, reset?"RESET":"RE-ROLL", () => {
+            if(reset) {
+                this.title.alpha = 0;
+                ScreenManager.changeScreen("GameScreen").fixedPuzzle(json);
+            } else {
+                this.title.alpha = 0;
+                ScreenManager.changeScreen("GameScreen").randomPuzzle(this.boxGrid.boxMap.length);
+            }
+        });
+        this.refresh.position.set(this.resolution.x-this.refresh.width, this.resolution.y-2*this.refresh.height);
+        this.addChild(this.refresh);
     }
 
     isSolved() {
